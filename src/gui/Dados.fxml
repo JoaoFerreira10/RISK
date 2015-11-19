@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="dados1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="329.0" prefWidth="600.0" stylesheets="@../../bin/gui/dados.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DadosController">
+   <children>
+      <MenuBar prefHeight="29.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <ImageView fitHeight="306.0" fitWidth="600.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../bin/gui/menu.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="selecao" layoutX="48.0" layoutY="48.0" prefHeight="200.0" prefWidth="501.0">
+         <children>
+            <Label layoutX="53.0" layoutY="9.0" text="Jogador 1" />
+            <Label fx:id="vermelho" layoutX="53.0" layoutY="100.0" prefHeight="21.0" prefWidth="57.0" />
+            <Label layoutX="166.0" layoutY="9.0" text="Jogador 2" />
+            <Label layoutX="288.0" layoutY="8.0" text="Jogador 3" />
+            <Label layoutX="406.0" layoutY="8.0" text="Jogador 4" />
+            <Label fx:id="verde" layoutX="167.0" layoutY="100.0" prefHeight="21.0" prefWidth="57.0" />
+            <Label fx:id="azul" layoutX="288.0" layoutY="100.0" prefHeight="21.0" prefWidth="57.0" />
+            <Label fx:id="amarelo" layoutX="406.0" layoutY="100.0" prefHeight="21.0" prefWidth="57.0" />
+            <Label layoutX="253.0" layoutY="152.0" prefHeight="17.0" prefWidth="101.0" text="Primeiro a jogar:" />
+            <Label fx:id="lblV" layoutX="361.0" layoutY="150.0" prefHeight="21.0" prefWidth="108.0" />
+            <ImageView fitHeight="51.0" fitWidth="39.0" layoutX="62.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../bin/gui/vermelho.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="51.0" fitWidth="52.0" layoutX="177.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../bin/gui/verde.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="51.0" fitWidth="52.0" layoutX="300.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../bin/gui/azul.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="51.0" fitWidth="52.0" layoutX="418.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../bin/gui/amarelo.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="dado" fitHeight="50.0" fitWidth="50.0" layoutX="53.0" layoutY="137.0" visible="false">
+               <image>
+                  <Image url="@../../bin/gui/dice.gif" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="dado2" fitHeight="50.0" fitWidth="50.0" layoutX="53.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../bin/gui/dice2.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Button fx:id="avancar" disable="true" layoutX="425.0" layoutY="258.0" mnemonicParsing="false" onAction="#goToBoard" text="Avançar" />
+      <Button fx:id="dados" layoutX="73.0" layoutY="258.0" mnemonicParsing="false" onAction="#goLancarDados" text="Lançar dados" />
+   </children>
+</AnchorPane>
