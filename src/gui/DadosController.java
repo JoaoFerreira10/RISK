@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 import logica.Coordenador;
 
 public class DadosController {
-		
+	
 	
 	@FXML
 	public void goExit(ActionEvent av){
@@ -110,7 +110,10 @@ public class DadosController {
 	    else if (test[2].getValue()==maxValueInMap){
 	    	lblV.setText(test[2].toString());}
 	    
-	    
+	    System.out.println("label final:"+lblV.getText());
+	    Singleton.getInstance().setPrimeiroJogar(lblV.getText());   //guardar o valor do vencedor para usar depois no jogo
+	   
+	   
 	       dados.setDisable(true);
 	       avancar.setDisable(false);
 	    
@@ -123,7 +126,15 @@ public class DadosController {
 	    	   
 	    	
 	}
+	public String label;
 	
+	public void setLabel(String label) {
+        this.label = label;
+     }
+
+	public String getLabel() {
+        return label;
+     }
 	
 	private static int showRandomInteger(int aStart, int aEnd, Random aRandom){
 	    if (aStart > aEnd) {

@@ -1,5 +1,8 @@
 package gui;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,12 +12,14 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 
-public class Controller implements EventHandler<ActionEvent>{
+public class BoardController implements EventHandler<ActionEvent>{
 
 	Stage primaryStage;
 	
 	@FXML
 	private Label cl;
+	
+	
 	
 	@Override
 	public void handle(ActionEvent ev) {
@@ -30,13 +35,15 @@ public class Controller implements EventHandler<ActionEvent>{
 		cl.setStyle("-fx-background-color: "+color +";");
 	}
 
-
+	
 
 	
 	public void buttonClicked (Button b){
 		System.out.println(cl.getText());
-		cl.setText("aaaa");
-		
+		String str1 = Singleton.getInstance().getPrimeiroJogar();   // vai buscar o valor guardado
+		cl.setText(str1);
+		 System.out.println("String: "+str1);
+		labeltext("red");
 		Integer value=Integer.parseInt(b.getText());
 		System.out.println("ok...");
 		b.setStyle("-fx-background-color: blue;");

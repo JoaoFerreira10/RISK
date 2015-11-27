@@ -1,6 +1,6 @@
 package logica;
 
-import gui.Controller;
+import gui.BoardController;
 
 public class Coordenador {
 	

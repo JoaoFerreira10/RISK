@@ -22,9 +22,6 @@ Territorio t7=new Territorio("e7", "0");
 //Asia
 
 
-
-
-
 	public TabuleiroLogica(){
 	
 		t1.addAdjacente(t2);

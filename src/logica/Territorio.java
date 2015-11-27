@@ -25,6 +25,8 @@ public class Territorio {
 		adjacentes.add(territorio);
 	}
 	
+	
+	
 	public ArrayList<Territorio> getAdjacentes(){
 		return adjacentes;
 	}
