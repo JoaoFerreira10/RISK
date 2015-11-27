@@ -29,7 +29,7 @@
       </MenuBar>
       <ImageView fitHeight="306.0" fitWidth="600.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../bin/gui/menu.jpg" />
+            <Image url="@../../imgs/menu.jpg" />
          </image>
       </ImageView>
       <AnchorPane fx:id="selecao" layoutX="48.0" layoutY="48.0" prefHeight="200.0" prefWidth="501.0">
@@ -46,32 +46,32 @@
             <Label fx:id="lblV" layoutX="361.0" layoutY="150.0" prefHeight="21.0" prefWidth="108.0" />
             <ImageView fitHeight="51.0" fitWidth="39.0" layoutX="62.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../bin/gui/vermelho.png" />
+                  <Image url="@../../imgs/vermelho.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="51.0" fitWidth="52.0" layoutX="177.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../bin/gui/verde.png" />
+                  <Image url="@../../imgs/verde.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="51.0" fitWidth="52.0" layoutX="300.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../bin/gui/azul.png" />
+                  <Image url="@../../imgs/azul.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="51.0" fitWidth="52.0" layoutX="418.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../bin/gui/amarelo.png" />
+                  <Image url="@../../imgs/amarelo.png" />
                </image>
             </ImageView>
             <ImageView fx:id="dado" fitHeight="50.0" fitWidth="50.0" layoutX="53.0" layoutY="137.0" visible="false">
                <image>
-                  <Image url="@../../bin/gui/dice.gif" />
+                  <Image url="@../../imgs/dice.gif" />
                </image>
             </ImageView>
             <ImageView fx:id="dado2" fitHeight="50.0" fitWidth="50.0" layoutX="53.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../bin/gui/dice2.png" />
+                  <Image url="@../../imgs/dice2.png" />
                </image>
             </ImageView>
          </children>

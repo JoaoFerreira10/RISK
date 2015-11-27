@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 
-
+/*
 public class Tabuleiro extends Application {
 	@Override
 	public void start(Stage primaryStage) {
@@ -30,4 +30,4 @@ public class Tabuleiro extends Application {
 	
 
 
-}
+}*/

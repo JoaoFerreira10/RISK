@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import logica.Coordenador;
 
 public class DadosController {
 		
@@ -146,7 +147,6 @@ public class DadosController {
 	  @FXML
 		public void goToBoard(ActionEvent av) throws IOException{
 			
-		    
 			Parent tabuleiro= FXMLLoader.load(getClass().getResource("Tabuleiro.fxml"));
 			Scene tabuleiro_scene= new Scene(tabuleiro);
 			Stage app_stage= (Stage) ( (Node) av.getSource()).getScene().getWindow();

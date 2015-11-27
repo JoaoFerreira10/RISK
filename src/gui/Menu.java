@@ -20,7 +20,7 @@ public class Menu extends Application {
 	public void start(Stage primaryStage) throws Exception {		
 		
 		try {
-			Parent root  = FXMLLoader.load(Tabuleiro.class.getResource("Menu.fxml"));
+			Parent root  = FXMLLoader.load(getClass().getResource("Menu.fxml"));
 			Scene scene = new Scene(root,600,325);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("RISK");
@@ -31,13 +31,12 @@ public class Menu extends Application {
 			e.printStackTrace();
 		}
 		
-		
-		//
 	}
 	
 	public static void main(String[] args) {
 		launch();
 		}	
+	
 	static ContainerController myContainer;
 	private static AgentContainer container;
 		

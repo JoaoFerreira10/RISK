@@ -10,7 +10,7 @@
    <children>
       <ImageView fitHeight="307.0" fitWidth="600.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@menu.jpg" />
+            <Image url="@../../imgs/menu.jpg" />
          </image>
       </ImageView>
       <MenuBar prefHeight="29.0" prefWidth="600.0">
