@@ -106,9 +106,9 @@ public class DadosController {
 	    log("MAX"+maxValueInMap);
 	    
 	    if(test[3].getValue()==maxValueInMap){
-	    	lblV.setText(test[3].toString());}
+	    	lblV.setText(test[3].getKey().toString());}
 	    else if (test[2].getValue()==maxValueInMap){
-	    	lblV.setText(test[2].toString());}
+	    	lblV.setText(test[2].getKey().toString());}
 	    
 	    System.out.println("label final:"+lblV.getText());
 	    Singleton.getInstance().setPrimeiroJogar(lblV.getText());   //guardar o valor do vencedor para usar depois no jogo

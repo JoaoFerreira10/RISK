@@ -7,9 +7,11 @@
 
 
 #terr {
--fx-background-radius: 100px;
--fx-pref-width: 10px;
--fx-pref-height: 10px;
+-fx-background-radius: 50px;
+-fx-pref-width: 30px;
+-fx-pref-height: 30px;
+-fx-background-color: white;
+
 }
 
 #map{
@@ -22,4 +24,5 @@
 -fx-background-radius: 50px;
 -fx-pref-width: 30px;
 -fx-pref-height: 30px;
+-fx-text-align:center;
 }

@@ -38,9 +38,7 @@ public class Menu extends Application {
 		}	
 	
 	
-	
-	
-	
+
 	
 	static ContainerController myContainer;
 	private static AgentContainer container;

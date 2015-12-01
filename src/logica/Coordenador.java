@@ -1,12 +1,20 @@
 package logica;
 
-import gui.BoardController;
 
 public class Coordenador {
 	
-	public Coordenador(){
-
+	String primeiro;
+	TabuleiroLogica tabulerio=new TabuleiroLogica();
+	
+	public Coordenador(String primeiro){
+			this.primeiro=primeiro;
+			System.out.println(primeiro);
+					
+	}
+	
+	public String getCor(){
 		
+		return primeiro;
 	}
 
 }
