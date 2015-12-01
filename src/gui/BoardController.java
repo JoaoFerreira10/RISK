@@ -43,7 +43,19 @@ public class BoardController implements EventHandler<ActionEvent>{
 		String str1 = Singleton.getInstance().getPrimeiroJogar();   // vai buscar o valor guardado
 		cl.setText(str1);
 		 System.out.println("String: "+str1);
-		labeltext("red");
+		 if(str1.contains("vermelho")){
+			 labeltext("red");
+		 } 
+		 else if(str1.contains("azul")){
+			 labeltext("blue");
+		 }
+		 else if(str1.contains("verde")){
+			 labeltext("green");
+		 }
+		 else if(str1.contains("amarelo")){
+			 labeltext("yellow");
+		 }
+		
 		Integer value=Integer.parseInt(b.getText());
 		System.out.println("ok...");
 		b.setStyle("-fx-background-color: blue;");
