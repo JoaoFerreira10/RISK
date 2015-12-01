@@ -9,7 +9,9 @@ public class Main {
 
 		System.out.println("sad");
 		Menu m=new Menu();
+		System.out.println("s");
 		m.main(args);
+		System.out.println("dasdas");
 	}
 
 }
