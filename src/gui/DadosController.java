@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Random;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,12 +17,15 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import logica.Coordenador;
+
 
 public class DadosController {
+	
+
 	
 	
 	@FXML
@@ -31,6 +33,9 @@ public class DadosController {
 		Stage stage= (Stage) ( (Node) av.getSource()).getScene().getWindow();
 	    stage.close();
 	}
+	
+	//@FXML
+	//private ChoiceBox agente1, agente2, agente3, agente4;
 	
 	@FXML private Label vermelho;
 	@FXML
@@ -43,6 +48,18 @@ public class DadosController {
 	private Label lblV;
 	@FXML private Button dados, avancar;
 	@FXML private ImageView dado, dado2;
+	
+	
+	
+	
+	@FXML
+	public void selecionarAgente(ActionEvent av){
+		
+		ChoiceBox cb= (ChoiceBox<?>)av.getSource();		
+		
+		if(cb.getId().equals("agent1"))
+			System.out.println(cb.getValue());
+	}
 	
 	
 	@FXML
