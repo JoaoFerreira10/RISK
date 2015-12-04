@@ -30,7 +30,7 @@ public abstract class AgenteRisk extends Agent {
 		this.numPecas += numPecas;
 	}
 	
-	public void removerPecas(int numPecas){
+	public void colocarPecas(int numPecas){
 		this.numPecas-=numPecas;
 	}
 	

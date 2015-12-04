@@ -4,17 +4,16 @@ import java.util.ArrayList;
 
 public class Territorio {
 
-	private String nome, valor, ocupante;
-	private boolean ocupado;
-	
-	
+	private String nome, ocupante;
+	private int pecas;
+	private boolean ocupado;		
 	private ArrayList <Territorio> adjacentes= new ArrayList<Territorio>();
 	
 
 
-	public Territorio(String nome, String valor, boolean ocupado){		
+	public Territorio(String nome, int pecas, boolean ocupado){		
 		this.nome=nome;
-		this.valor=valor;
+		this.pecas=pecas;
 		this.ocupado=ocupado;
 	}
 	
@@ -30,15 +29,9 @@ public class Territorio {
 		return nome;
 	}
 	
-	public String getValor(){
-		return valor;
-	}
-	
 	public void addAdjacente(Territorio territorio){
 		adjacentes.add(territorio);
 	}
-	
-	
 	
 	public ArrayList<Territorio> getAdjacentes(){
 		return adjacentes;
@@ -50,5 +43,13 @@ public class Territorio {
 
 	public void setOcupante(String ocupante) {
 		this.ocupante = ocupante;
+	}
+	
+	public int getpecas() {
+		return pecas;
+	}
+
+	public void addpecas(int pecas) {
+		this.pecas = +pecas;
 	}
 }

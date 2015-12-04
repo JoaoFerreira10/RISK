@@ -33,6 +33,7 @@ public class AgenteAleatorio extends AgenteRisk {
 		territorios.add(t);
 	}
 		
+	
 	public void receiveSoldiers(int numSoldiers) {
 	/*	ArrayList<String> playerTerritories = b.getPlayerTerritories(myAgent.getLocalName());
 		// Can't place soldiers without territories

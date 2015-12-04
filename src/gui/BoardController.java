@@ -33,35 +33,34 @@ public class BoardController implements EventHandler<ActionEvent>{
 	 */	
 	public void criarAgentes(String primeiro, String agente1, String agente2, String agente3, String agente4){
 		
-		System.out.println("entrou em criaragentes");
+		AgenteRisk vermelho, verde, azul, amarelo;
 		
 		//agente vermelho
-		/*if(agente1.equals("Aleatorio")){
+		if(agente1.equals("Aleatorio")){
 			System.out.println("entrou no if");
-			AgenteAleatorio vermelho= new AgenteAleatorio("red",0);
-			escolherTerritorios(vermelho, vermelho, vermelho, vermelho);
+			 vermelho= new AgenteAleatorio("red",10);
 		}else if(agente1.equals("Atacante")){
-			AgenteAtacante vermelho = new AgenteAtacante("red",0);
+			 vermelho = new AgenteAtacante("red",0);
 		}else{
-			AgenteDefensivo vermelho = new AgenteDefensivo("red", 0);
+			 vermelho = new AgenteDefensivo("red", 0);
 		}
 		
 		//agente verde
 		if(agente2.equals("Aleatorio")){
-			AgenteAleatorio verde= new AgenteAleatorio("green",0);
+			 verde= new AgenteAleatorio("green",0);
 		}else if(agente2.equals("Atacante")){
-			AgenteAtacante verde = new AgenteAtacante("green",0);
-		}else if(agente2.equals("Defensivo")){
-			AgenteDefensivo verde = new AgenteDefensivo("green", 0);
+			 verde = new AgenteAtacante("green",0);
+		}else{
+			 verde = new AgenteDefensivo("green", 0);
 		}
 		
 		//Azul
 		if(agente3.equals("Aleatorio")){
-			AgenteAleatorio azul = new AgenteAleatorio("blue",0);
+			 azul = new AgenteAleatorio("blue",0);
 		}else if(agente3.equals("Atacante")){
-			AgenteAtacante azul = new AgenteAtacante("blue",0);
-		}else if(agente3.equals("Defensivo")){
-			AgenteDefensivo azul = new AgenteDefensivo("blue",0);
+			 azul = new AgenteAtacante("blue",0);
+		}else{
+			 azul = new AgenteDefensivo("blue",0);
 		}
 		
 		//Amarelo
@@ -71,15 +70,10 @@ public class BoardController implements EventHandler<ActionEvent>{
 			 amarelo  = new AgenteAtacante("yellow",0);
 		}else{
 			 amarelo  = new AgenteDefensivo("yellow",0);
-		}*/
-		
-		
-		AgenteAleatorio vermelho= new AgenteAleatorio("red",10);
-		AgenteAleatorio verde= new AgenteAleatorio("green",10);
-		AgenteAleatorio azul = new AgenteAleatorio("blue",10);
-		AgenteAleatorio amarelo = new AgenteAleatorio("yellow",10);
-		
+		}
+				
 		escolherTerritorios(vermelho, verde, azul, amarelo);
+		
 	}
 	
 	
@@ -95,14 +89,10 @@ public class BoardController implements EventHandler<ActionEvent>{
 		agentes[0]=a1;
 		agentes[1]=a2;
 		agentes[2]=a3;
-		agentes[3]=a4;
-		
-		System.out.println("agentes instanciados");
-		System.out.println("territorios-->"+tabuleiro.getNumTerritorios());
+		agentes[3]=a4;		
 		
 	outerloop:
-		do{		
-			
+		do{					
 				for(AgenteRisk a : agentes){
 					
 					if(a instanceof AgenteAleatorio){
@@ -111,8 +101,10 @@ public class BoardController implements EventHandler<ActionEvent>{
 								int x= ((AgenteAleatorio) a).escolherTerritorio();
 								
 								if(tabuleiro.territorioOcupado(x)==false){
-									System.out.println(x);
-									preencherTabuleiro(tabuleiro.getTerritorio(x), a.getCor());
+									preencherTabuleiro(tabuleiro.getTerritorio(x).getNome(), a.getCor());
+									a.colocarPecas(1);
+									tabuleiro.getTerritorio(x).addpecas(1);
+									colocarPecaTabuleiro(tabuleiro.getTerritorio(x).getNome(), 1);
 									tabuleiro.ocuparTerritorio(x, a.getName());
 									territoriosOcupados++;
 									break;
@@ -124,12 +116,65 @@ public class BoardController implements EventHandler<ActionEvent>{
 						}
 				}
 		}while(true);
+						
+	
+	}
+	
+	
+	public void distribuirExercito(AgenteRisk a1, AgenteRisk a2, AgenteRisk a3, AgenteRisk a4){
+		
 		
 		
 	}
 	
 	
 	
+	
+	
+	public void colocarPecaTabuleiro(String territorio, Integer pecas){
+		
+		if(territorio.equals("e1"))
+			e1.setText(pecas.toString());
+		else if(territorio.equals("e2"))
+			e2.setText(pecas.toString());
+		else if(territorio.equals("e3"))
+			e3.setText(pecas.toString());
+		else if(territorio.equals("e4"))
+			e4.setText(pecas.toString());
+		else if(territorio.equals("e5"))
+			e5.setText(pecas.toString());
+		else if(territorio.equals("e6"))
+			e6.setText(pecas.toString());
+		else if(territorio.equals("e7"))
+			e7.setText(pecas.toString());
+		else if(territorio.equals("a1"))
+			a1.setText(pecas.toString());
+		else if(territorio.equals("a2"))
+			a2.setText(pecas.toString());
+		else if(territorio.equals("a3"))
+			a3.setText(pecas.toString());
+		else if(territorio.equals("a4"))
+			a4.setText(pecas.toString());
+		else if(territorio.equals("a5"))
+			a5.setText(pecas.toString());
+		else if(territorio.equals("a6"))
+			a6.setText(pecas.toString());
+		else if(territorio.equals("a7"))
+			a7.setText(pecas.toString());
+		else if(territorio.equals("a8"))
+			a8.setText(pecas.toString());
+		else if(territorio.equals("a9"))
+			a9.setText(pecas.toString());
+		else if(territorio.equals("a10"))
+			a10.setText(pecas.toString());
+		else if(territorio.equals("a11"))
+			a11.setText(pecas.toString());
+		else if(territorio.equals("a12"))
+			a12.setText(pecas.toString());
+		
+	}
+		
+		
 	public void preencherTabuleiro(String territorio, String cor){		
 		//Europa
 		if(territorio.equals("e1"))

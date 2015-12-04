@@ -1,10 +1,6 @@
 package logica;
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.LinkedHashMap;
 
-import gui.*;
-import javafx.scene.control.Button;
 
 public class TabuleiroLogica {
 	
@@ -12,27 +8,27 @@ public class TabuleiroLogica {
 private ArrayList <Territorio> territorios= new ArrayList<Territorio>();
 
 //Europa
-Territorio t1=new Territorio("e1", "0", false);
-Territorio t2=new Territorio("e2", "0", false);
-Territorio t3=new Territorio("e3", "0", false);
-Territorio t4=new Territorio("e4", "0", false);
-Territorio t5=new Territorio("e5", "0", false);
-Territorio t6=new Territorio("e6", "0", false);
-Territorio t7=new Territorio("e7", "0", false);
+Territorio t1=new Territorio("e1", 0, false);
+Territorio t2=new Territorio("e2", 0, false);
+Territorio t3=new Territorio("e3", 0, false);
+Territorio t4=new Territorio("e4", 0, false);
+Territorio t5=new Territorio("e5", 0, false);
+Territorio t6=new Territorio("e6", 0, false);
+Territorio t7=new Territorio("e7", 0, false);
 
 //Asia
-Territorio t8=new Territorio("a1", "0", false);
-Territorio t9=new Territorio("a2", "0", false);
-Territorio t10=new Territorio("a3", "0", false);
-Territorio t11=new Territorio("a4", "0", false);
-Territorio t12=new Territorio("a5", "0", false);
-Territorio t13=new Territorio("a6", "0", false);
-Territorio t14=new Territorio("a7", "0", false);
-Territorio t15=new Territorio("a8", "0", false);
-Territorio t16=new Territorio("a9", "0", false);
-Territorio t17=new Territorio("a10", "0", false);
-Territorio t18=new Territorio("a11", "0", false);
-Territorio t19=new Territorio("a12", "0", false);
+Territorio t8=new Territorio("a1", 0, false);
+Territorio t9=new Territorio("a2", 0, false);
+Territorio t10=new Territorio("a3", 0, false);
+Territorio t11=new Territorio("a4", 0, false);
+Territorio t12=new Territorio("a5", 0, false);
+Territorio t13=new Territorio("a6", 0, false);
+Territorio t14=new Territorio("a7", 0, false);
+Territorio t15=new Territorio("a8", 0, false);
+Territorio t16=new Territorio("a9", 0, false);
+Territorio t17=new Territorio("a10", 0, false);
+Territorio t18=new Territorio("a11", 0, false);
+Territorio t19=new Territorio("a12", 0, false);
 
 
 	public TabuleiroLogica(){
@@ -68,28 +64,36 @@ Territorio t19=new Territorio("a12", "0", false);
 		territorios.add(t17);
 		territorios.add(t18);
 		territorios.add(t19);
-		
-		
+			
 	}
 	
-	public String getTerritorio(int x){
+	public Territorio getTerritorio(int x){
 		
-		return territorios.get(x).getNome();
-	}
+		return territorios.get(x);
+	}	
 	
 	public boolean territorioOcupado(int x){
 		return territorios.get(x).isOcupado();
 	}
 	
-	public void ocuparTerritorio(int x, String name){
+	public void ocuparTerritorio(int x, String agente){
 		territorios.get(x).setOcupado(true);
-		territorios.get(x).setOcupante(name);
+		territorios.get(x).setOcupante(agente);
 	}
 	
+	public ArrayList<Integer> getTerritoriosPorAgente(String agente){
+		
+		ArrayList<Integer> x= new ArrayList<Integer>();
+
+			for(int i=0;i< territorios.size();i++){
+				if(territorios.get(i).getNome().equals(agente))
+					x.add(i);					
+			}					
+		return x;		
+	}	
 	
 	public int getNumTerritorios(){
 		return territorios.size();
 	}
-
 
 }
