@@ -25,7 +25,7 @@ public class AgenteAleatorio extends AgenteRisk {
 	
 	public int escolherTerritorio(){
 		
-		return (int) (Math.random()*(42-1)+1);	
+		return (int) (Math.random()*19);	
 	}
 	
 	public void addTerritorio(Territorio t){

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Territorio {
 
-	private String nome, valor;
+	private String nome, valor, ocupante;
 	private boolean ocupado;
 	
 	
@@ -44,4 +44,11 @@ public class Territorio {
 		return adjacentes;
 	}
 
+	public String getOcupante() {
+		return ocupante;
+	}
+
+	public void setOcupante(String ocupante) {
+		this.ocupante = ocupante;
+	}
 }
