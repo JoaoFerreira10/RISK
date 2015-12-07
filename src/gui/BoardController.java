@@ -19,14 +19,15 @@ public class BoardController implements EventHandler<ActionEvent>{
 	TabuleiroLogica tabuleiro = new TabuleiroLogica();
 	AgenteRisk amarelo, vermelho, azul, verde;
 	
-	@FXML
+	@FXML//Territorios
 	private Label e1, e2, e3, e4, e5, e6, e7, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12;
 
 	
 	//botao jogar
 	public void iniciarJogo(ActionEvent ev){
-		criarAgentes("a","Aleatorio", "Aleatorio", "Aleatorio","Aleatorio");			
+		criarAgentes(primeiro, "Atacante", "Atacante", "Aleatorio","Aleatorio");			
 	}
+	
 	
 	/*
 	 * Método que instancia os 4 agentes
@@ -35,45 +36,44 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 		AgenteRisk vermelho, verde, azul, amarelo;
 		
-		//agente vermelho
+		//Vermelho
 		if(agente1.equals("Aleatorio")){
-			System.out.println("entrou no if");
 			 vermelho= new AgenteAleatorio("red",10);
 		}else if(agente1.equals("Atacante")){
-			 vermelho = new AgenteAtacante("red",0);
+			 vermelho = new AgenteAtacante("red",10);
 		}else{
 			 vermelho = new AgenteDefensivo("red", 0);
 		}
 		
-		//agente verde
+		//Verde
 		if(agente2.equals("Aleatorio")){
-			 verde= new AgenteAleatorio("green",0);
+			 verde= new AgenteAleatorio("green",10);
 		}else if(agente2.equals("Atacante")){
-			 verde = new AgenteAtacante("green",0);
+			 verde = new AgenteAtacante("green",10);
 		}else{
 			 verde = new AgenteDefensivo("green", 0);
 		}
 		
 		//Azul
 		if(agente3.equals("Aleatorio")){
-			 azul = new AgenteAleatorio("blue",0);
+			 azul = new AgenteAleatorio("blue",10);
 		}else if(agente3.equals("Atacante")){
-			 azul = new AgenteAtacante("blue",0);
+			 azul = new AgenteAtacante("blue",10);
 		}else{
-			 azul = new AgenteDefensivo("blue",0);
+			 azul = new AgenteDefensivo("blue",10);
 		}
 		
 		//Amarelo
 		if(agente4.equals("Aleatorio")){
-			 amarelo = new AgenteAleatorio("yellow",0);
+			 amarelo = new AgenteAleatorio("yellow",50);
 		}else if(agente4.equals("Atacante")){
-			 amarelo  = new AgenteAtacante("yellow",0);
+			 amarelo  = new AgenteAtacante("yellow",10);
 		}else{
-			 amarelo  = new AgenteDefensivo("yellow",0);
+			 amarelo  = new AgenteDefensivo("yellow",10);
 		}
 				
 		escolherTerritorios(vermelho, verde, azul, amarelo);
-		
+
 	}
 	
 	
@@ -102,35 +102,92 @@ public class BoardController implements EventHandler<ActionEvent>{
 								
 								if(tabuleiro.territorioOcupado(x)==false){
 									preencherTabuleiro(tabuleiro.getTerritorio(x).getNome(), a.getCor());
-									a.colocarPecas(1);
+									a.colocarExercitos(1);
 									tabuleiro.getTerritorio(x).addpecas(1);
 									colocarPecaTabuleiro(tabuleiro.getTerritorio(x).getNome(), 1);
-									tabuleiro.ocuparTerritorio(x, a.getName());
+									tabuleiro.ocuparTerritorio(x, a.getCor());
 									territoriosOcupados++;
 									break;
 								}
-						}				
+						}
+							
+					}
+					
+					if(a instanceof AgenteAtacante){
+						
+						while(true){
+							int x= ((AgenteAtacante) a).escolherTerritorio(tabuleiro);
+
+							if(tabuleiro.territorioOcupado(x)==false){
+								preencherTabuleiro(tabuleiro.getTerritorio(x).getNome(), a.getCor());
+								a.colocarExercitos(1);
+								tabuleiro.getTerritorio(x).addpecas(1);
+								colocarPecaTabuleiro(tabuleiro.getTerritorio(x).getNome(), tabuleiro.getTerritorio(x).getpecas());
+								tabuleiro.ocuparTerritorio(x, a.getCor());
+								territoriosOcupados++;
+								break;
+							}
+
+						}
+						
 					}
 						if(territoriosOcupados==tabuleiro.getNumTerritorios()){
 							break outerloop;
 						}
 				}
 		}while(true);
+				
+		System.out.println("finish");
+		distribuirExercitos(agentes);
+		
+	}
+	
+	
+	public void distribuirExercitos(AgenteRisk[] agentes){
+				
+		int totalExercitos=0;
+		
+		for( AgenteRisk a: agentes){
+			totalExercitos+=a.getNumExercitos();
+		}
+
+outerloop:
+do{
+		for( AgenteRisk a: agentes){
 						
-	
+			if(a instanceof AgenteAtacante){
+			int x=((AgenteAtacante) a).distribuirExercito(tabuleiro, 1);
+			tabuleiro.getTerritorio(x).addpecas(1);
+
+				colocarPecaTabuleiro(tabuleiro.getTerritorio(x).getNome(),
+						tabuleiro.getTerritorio(x).getpecas());
+				totalExercitos--;
+		}
+			
+			if(a instanceof AgenteAleatorio){
+			int x=((AgenteAleatorio) a).distribuirExercito(tabuleiro, 1);
+
+			tabuleiro.getTerritorio(x).addpecas(1);
+
+				colocarPecaTabuleiro(tabuleiro.getTerritorio(x).getNome(),
+						tabuleiro.getTerritorio(x).getpecas());	
+				totalExercitos--;
+		}
+			
+			if(totalExercitos==0){
+				break outerloop;
+			}
+		} 
+}while(true);	
+		
+		System.out.println("exercito"+totalExercitos);
 	}
 	
 	
-	public void distribuirExercito(AgenteRisk a1, AgenteRisk a2, AgenteRisk a3, AgenteRisk a4){
-		
-		
-		
-	}
 	
-	
-	
-	
-	
+	/*
+	 * Método que altera o número de exercitos na label
+	 */	
 	public void colocarPecaTabuleiro(String territorio, Integer pecas){
 		
 		if(territorio.equals("e1"))
@@ -174,7 +231,10 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 	}
 		
-		
+	
+	/*
+	 * Método que altera a cor da label
+	 */
 	public void preencherTabuleiro(String territorio, String cor){		
 		//Europa
 		if(territorio.equals("e1"))

@@ -9,12 +9,12 @@ public abstract class AgenteRisk extends Agent {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String cor;
-	private int numPecas;
+	private int numExercitos;
 	
 	
-	public AgenteRisk(String cor, int pecas){
+	public AgenteRisk(String cor, int Exercitos){
 		this.cor=cor;
-		this.numPecas=pecas;
+		this.numExercitos=Exercitos;
 		
 	}
 
@@ -22,16 +22,16 @@ public abstract class AgenteRisk extends Agent {
 		return cor;
 	}
 
-	public int getNumPecas() {
-		return numPecas;
+	public int getNumExercitos() {
+		return numExercitos;
 	}
 
-	public void addPecas(int numPecas) {
-		this.numPecas += numPecas;
+	public void addExercitos(int numExercitos) {
+		this.numExercitos += numExercitos;
 	}
 	
-	public void colocarPecas(int numPecas){
-		this.numPecas-=numPecas;
+	public void colocarExercitos(int numExercitos){
+		this.numExercitos-=numExercitos;
 	}
 	
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import jade.core.Agent;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+import logica.TabuleiroLogica;
 import logica.Territorio;
 
 public class AgenteAleatorio extends AgenteRisk {
@@ -15,7 +16,7 @@ public class AgenteAleatorio extends AgenteRisk {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Territorio> territorios = new ArrayList<Territorio>();
+	//private ArrayList<Territorio> territorios = new ArrayList<Territorio>();
 	
 	
 	public AgenteAleatorio(String cor, int pecas) {
@@ -30,9 +31,27 @@ public class AgenteAleatorio extends AgenteRisk {
 	
 	public void addTerritorio(Territorio t){
 		
-		territorios.add(t);
+		//territorios.add(t);
 	}
+	
+	/*
+	 * Neste método escolhe um territorio aleatorio da lista de territórios do agente
+	 */
+	public int distribuirExercito(TabuleiroLogica tabuleiro, int numExercitos){
 		
+		if(getNumExercitos()-numExercitos<0 || getNumExercitos()==0){
+			return 0;
+		}
+		
+		colocarExercitos(numExercitos);
+		
+		int x = tabuleiro.getTerritoriosPorAgente(this.getCor()).size();
+		int y = (int) (Math.random()*x);
+		
+		return tabuleiro.getTerritoriosPorAgente(this.getCor()).get(y);
+	}
+	
+	
 	
 	public void receiveSoldiers(int numSoldiers) {
 	/*	ArrayList<String> playerTerritories = b.getPlayerTerritories(myAgent.getLocalName());

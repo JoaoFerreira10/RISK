@@ -31,19 +31,92 @@ Territorio t18=new Territorio("a11", 0, false);
 Territorio t19=new Territorio("a12", 0, false);
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 	public TabuleiroLogica(){
 	
+		//Europa
 		t1.addAdjacente(t2);
 		t1.addAdjacente(t3);
 		t1.addAdjacente(t4);
-		t2.addAdjacente(t3);
+		t2.addAdjacente(t5);
 		t2.addAdjacente(t4);
+		t2.addAdjacente(t6);
+		t2.addAdjacente(t7);
 		t3.addAdjacente(t4);
-		t3.addAdjacente(t5);
+		t3.addAdjacente(t1);
+		t3.addAdjacente(t6);
 		t4.addAdjacente(t6);
-		t4.addAdjacente(t7);
+		t4.addAdjacente(t3);
+		t4.addAdjacente(t2);
+		t4.addAdjacente(t13);
+		t4.addAdjacente(t14);
+		t4.addAdjacente(t17);
 		
-				
+		t5.addAdjacente(t1);
+		t5.addAdjacente(t2);
+		t5.addAdjacente(t6);
+		t5.addAdjacente(t7);
+		t6.addAdjacente(t1);
+		t6.addAdjacente(t2);
+		t6.addAdjacente(t3);
+		t6.addAdjacente(t4);
+		t6.addAdjacente(t5);
+		t7.addAdjacente(t5);
+		t7.addAdjacente(t6);	
+		t7.addAdjacente(t2);
+		
+		//Asia
+		t8.addAdjacente(t11);
+		t8.addAdjacente(t12);
+		t8.addAdjacente(t13);
+		t8.addAdjacente(t15);
+		t8.addAdjacente(t16);
+		t8.addAdjacente(t17);
+		t8.addAdjacente(t18);
+		t9.addAdjacente(t10);
+		t9.addAdjacente(t11);
+		t9.addAdjacente(t15);
+		t9.addAdjacente(t19);
+		t10.addAdjacente(t9);
+		t10.addAdjacente(t11);
+		t10.addAdjacente(t12);
+		t11.addAdjacente(t9);
+		t11.addAdjacente(t8);
+		t11.addAdjacente(t10);
+		t11.addAdjacente(t12);
+		t11.addAdjacente(t15);
+		t12.addAdjacente(t8);
+		t12.addAdjacente(t10);
+		t12.addAdjacente(t11);
+		t12.addAdjacente(t13);
+		t12.addAdjacente(t17);
+		t13.addAdjacente(t8);
+		t13.addAdjacente(t12);
+		t13.addAdjacente(t17);
+		t13.addAdjacente(t4);
+		t14.addAdjacente(t3);
+		t14.addAdjacente(t4);
+		t14.addAdjacente(t16);
+		t14.addAdjacente(t17);
+		t15.addAdjacente(t8);
+		t15.addAdjacente(t9);
+		t15.addAdjacente(t11);
+		t15.addAdjacente(t19);
+		t16.addAdjacente(t14);
+		t16.addAdjacente(t8);
+		t16.addAdjacente(t17);
+		t16.addAdjacente(t18);
 		
 		territorios.add(t1);
 		territorios.add(t2);
@@ -86,9 +159,11 @@ Territorio t19=new Territorio("a12", 0, false);
 		ArrayList<Integer> x= new ArrayList<Integer>();
 
 			for(int i=0;i< territorios.size();i++){
-				if(territorios.get(i).getNome().equals(agente))
-					x.add(i);					
-			}					
+				if(territorios.get(i).getOcupante()!=null){
+				if(territorios.get(i).getOcupante().equals(agente))
+					x.add(i);
+				}
+			}				
 		return x;		
 	}	
 	

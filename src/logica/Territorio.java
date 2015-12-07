@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Territorio {
 
-	private String nome, ocupante;
-	private int pecas;
+	private String nome, ocupante=null;
+	private int pecas=0;
 	private boolean ocupado;		
 	private ArrayList <Territorio> adjacentes= new ArrayList<Territorio>();
 	
@@ -50,6 +50,6 @@ public class Territorio {
 	}
 
 	public void addpecas(int pecas) {
-		this.pecas = +pecas;
+		this.pecas += pecas;
 	}
 }

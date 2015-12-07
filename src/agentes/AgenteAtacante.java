@@ -1,5 +1,11 @@
 package agentes;
 
+
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
+import logica.TabuleiroLogica;
+import logica.Territorio;
+
 public class AgenteAtacante extends AgenteRisk {
 
 	/**
@@ -9,7 +15,58 @@ public class AgenteAtacante extends AgenteRisk {
 
 	public AgenteAtacante(String cor, int pecas) {
 		super(cor, pecas);
-		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public int escolherTerritorio(TabuleiroLogica tabuleiro){
+				
+		// Na primeira jogada, escolhe um terreno aleatorio
+		if(tabuleiro.getTerritoriosPorAgente(this.getCor()).size()==0){
+
+			return (int) (Math.random()*19);		
+		}
+				
+		
+		for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(this.getCor()).size(); i++) {
+			int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getAdjacentes().size();
+			
+			if(y2!=0){			
+				for (int j = 0; j <y2; j++) {
+					Territorio escolhido= tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(
+							this.getCor()).get(i)).getAdjacentes().get(j);
+					
+					for(int z=0; z<tabuleiro.getNumTerritorios();z++){
+						
+						if(escolhido.getNome().equals(tabuleiro.getTerritorio(z).getNome())&& !tabuleiro.getTerritorio(z).isOcupado()){
+							return z;
+
+						}
+					}
+					
+				}
+			}
+		}
+		
+		return (int) (Math.random()*19);
+		
+	}
+	
+	/*
+	 * Escolhe um territorio aleatorio da lista de territórios do agente e retorna o indice do 
+	 * territorio a colocar o exercito
+	 */
+	public int distribuirExercito(TabuleiroLogica tabuleiro, int numExercitos){
+		
+		/*if(getNumExercitos()-numExercitos<0 || getNumExercitos()==0){
+			return 0;
+		}*/
+		
+		colocarExercitos(numExercitos);
+		
+		int x = tabuleiro.getTerritoriosPorAgente(this.getCor()).size();
+		int y = (int) (Math.random()*x);
+		
+		return tabuleiro.getTerritoriosPorAgente(this.getCor()).get(y);
 	}
 
 }
