@@ -65,7 +65,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 		//Amarelo
 		if(agente4.equals("Aleatorio")){
-			 amarelo = new AgenteAleatorio("yellow",50);
+			 amarelo = new AgenteAleatorio("yellow",10);
 		}else if(agente4.equals("Atacante")){
 			 amarelo  = new AgenteAtacante("yellow",10);
 		}else{
@@ -156,15 +156,19 @@ do{
 		for( AgenteRisk a: agentes){
 						
 			if(a instanceof AgenteAtacante){
-			int x=((AgenteAtacante) a).distribuirExercito(tabuleiro, 1);
-			tabuleiro.getTerritorio(x).addpecas(1);
-
-				colocarPecaTabuleiro(tabuleiro.getTerritorio(x).getNome(),
-						tabuleiro.getTerritorio(x).getpecas());
-				totalExercitos--;
+				if(a.getNumExercitos()!=0){
+				int x=((AgenteAtacante) a).distribuirExercito(tabuleiro, 1);
+				tabuleiro.getTerritorio(x).addpecas(1);
+	
+					colocarPecaTabuleiro(tabuleiro.getTerritorio(x).getNome(),
+							tabuleiro.getTerritorio(x).getpecas());
+					totalExercitos--;
+				}
+				
 		}
 			
 			if(a instanceof AgenteAleatorio){
+				if(a.getNumExercitos()!=0){
 			int x=((AgenteAleatorio) a).distribuirExercito(tabuleiro, 1);
 
 			tabuleiro.getTerritorio(x).addpecas(1);
@@ -172,6 +176,7 @@ do{
 				colocarPecaTabuleiro(tabuleiro.getTerritorio(x).getNome(),
 						tabuleiro.getTerritorio(x).getpecas());	
 				totalExercitos--;
+				}
 		}
 			
 			if(totalExercitos==0){
