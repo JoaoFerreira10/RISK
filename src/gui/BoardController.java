@@ -16,13 +16,8 @@ public class BoardController implements EventHandler<ActionEvent>{
 
 	//Stage primaryStage;
 	String primeiro = Singleton.getInstance().getPrimeiroJogar(); 
-	String agente1 = Singleton.getInstance().getVermelho(); 
-	String agente2 = Singleton.getInstance().getVerde(); 
-	String agente3 = Singleton.getInstance().getAzul(); 
-	String agente4 = Singleton.getInstance().getAmarelo(); 
 	TabuleiroLogica tabuleiro = new TabuleiroLogica();
 	AgenteRisk amarelo, vermelho, azul, verde;
-
 	
 	@FXML//Territorios
 	private Label e1, e2, e3, e4, e5, e6, e7, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12;
@@ -30,8 +25,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 	
 	//botao jogar
 	public void iniciarJogo(ActionEvent ev){
-
-		criarAgentes(primeiro,agente1, agente2, agente3,agente4);
+		criarAgentes(primeiro, "Atacante", "Atacante", "Aleatorio","Aleatorio");			
 	}
 	
 	
@@ -40,7 +34,6 @@ public class BoardController implements EventHandler<ActionEvent>{
 	 */	
 	public void criarAgentes(String primeiro, String agente1, String agente2, String agente3, String agente4){
 		
-
 		AgenteRisk vermelho, verde, azul, amarelo;
 		
 		//Vermelho
