@@ -77,7 +77,7 @@ public class DadosController implements Initializable{
 	}
 	
 	ObservableList<String> list = FXCollections.observableArrayList(
-			"Aleatório","Atacante","Defensivo"
+			"Aleatorio","Atacante","Defensivo"
 			);
 	
 	

@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 http://userPC:7778/acc
+=======
+http://192.168.2.194:7778/acc
+>>>>>>> 5226a46b401dc17abe45d30df24fb65bf3ed8b5a
