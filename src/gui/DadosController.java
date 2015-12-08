@@ -1,6 +1,7 @@
 package gui;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,22 +11,34 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Random;
+import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 
-public class DadosController {
+public class DadosController implements Initializable{
 	
-
+	@Override
+	public void initialize(URL url, ResourceBundle rb){
+		comboVermelho.setItems(list);
+		comboVerde.setItems(list);
+		comboAmarelo.setItems(list);
+		comboAzul.setItems(list);
+	}
 	
 	
 	@FXML
@@ -49,17 +62,23 @@ public class DadosController {
 	@FXML private Button dados, avancar;
 	@FXML private ImageView dado, dado2;
 	
-	
+	@FXML private ComboBox<String> comboVermelho, comboVerde, comboAmarelo, comboAzul;
 	
 	
 	@FXML
-	public void selecionarAgente(ActionEvent av){
+	public void selecionarAgente(){
+	
+		Singleton.getInstance().setVermelho(comboVermelho.getValue());
+		Singleton.getInstance().setVerde(comboVerde.getValue());
+		Singleton.getInstance().setAzul(comboAzul.getValue());
+		Singleton.getInstance().setAmarelo(comboAmarelo.getValue());
 		
-		ChoiceBox cb= (ChoiceBox<?>)av.getSource();		
 		
-		if(cb.getId().equals("agent1"))
-			System.out.println(cb.getValue());
 	}
+	
+	ObservableList<String> list = FXCollections.observableArrayList(
+			"Aleatório","Atacante","Defensivo"
+			);
 	
 	
 	@FXML

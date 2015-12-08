@@ -75,27 +75,19 @@
                   <Image url="@../../imgs/dice2.png" />
                </image>
             </ImageView>
-            <ChoiceBox value="Agente Aleatório" fx:id="agente1" layoutX="28.0" layoutY="130.0" prefHeight="27.0" prefWidth="101.0">
-                <String fx:value="Agente Aleatório" />
-	            <String fx:value="Agente Atacante" />
-	            <String fx:value="Agente Defensivo" />
-            </ChoiceBox>
-            <ChoiceBox value="Agente Aleatório" fx:id="agente2" layoutX="146.0" layoutY="130.0" prefHeight="27.0" prefWidth="101.0">
-                <String fx:value="Agente Aleatório" />
-	            <String fx:value="Agente Atacante" />
-	            <String fx:value="Agente Defensivo" />
-            </ChoiceBox>
-            <ChoiceBox value="Agente Aleatório" fx:id="agente3" layoutX="269.0" layoutY="130.0" prefHeight="27.0" prefWidth="101.0">
-                <String fx:value="Agente Aleatório" />
-	            <String fx:value="Agente Atacante" />
-	            <String fx:value="Agente Defensivo" />
-            </ChoiceBox>
-           <ChoiceBox value="Agente Aleatório" fx:id="agente4" layoutX="388.0" layoutY="130.0" prefHeight="27.0" prefWidth="101.0">
-                <String fx:value="Agente Aleatório" />
-	            <String fx:value="Agente Atacante" />
-	            <String fx:value="Agente Defensivo" />
-	        </ChoiceBox>
+            
+           
+            
+           
             <Text layoutX="28.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecione os tipos de agente:" />
+            <ComboBox fx:id="comboVermelho" layoutX="28.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3" />
+            <ComboBox fx:id="comboVerde" layoutX="163.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3" />
+            <ComboBox fx:id="comboAzul" layoutX="277.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3" />
+            <ComboBox fx:id="comboAmarelo" layoutX="384.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3" />
+            
+            
+           
+            
          </children>
       </AnchorPane>
       <Button fx:id="avancar" disable="true" layoutX="440.0" layoutY="286.0" mnemonicParsing="false" onAction="#goToBoard" text="Avançar" />
