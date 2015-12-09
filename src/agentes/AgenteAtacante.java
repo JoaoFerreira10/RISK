@@ -3,6 +3,9 @@ package agentes;
 
 import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
+import agentes.AgenteAleatorio.agenteTeste;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
 import logica.TabuleiroLogica;
 import logica.Territorio;
 
@@ -23,7 +26,7 @@ public class AgenteAtacante extends AgenteRisk {
 		// Na primeira jogada, escolhe um terreno aleatorio
 		if(tabuleiro.getTerritoriosPorAgente(this.getCor()).size()==0){
 
-			return (int) (Math.random()*19);		
+			return (int) (Math.random()*29);		
 		}
 				
 		
@@ -47,7 +50,7 @@ public class AgenteAtacante extends AgenteRisk {
 			}
 		}
 		
-		return (int) (Math.random()*19);
+		return (int) (Math.random()*29);
 		
 	}
 	
@@ -67,6 +70,23 @@ public class AgenteAtacante extends AgenteRisk {
 		int y = (int) (Math.random()*x);
 		
 		return tabuleiro.getTerritoriosPorAgente(this.getCor()).get(y);
+	}
+	
+	protected void setup() {
+		System.out.println("atacante " + getCor());
+		
+		
+		//agenteTeste n = new agenteTeste(this);
+	//	addBehaviour(n);
+		// Registration with the DF 
+		DFAgentDescription dfd = new DFAgentDescription();
+		ServiceDescription sd = new ServiceDescription();   
+		
+		sd.setType("Atacante"); 
+		sd.setName(getName());
+		dfd.setName(getAID());
+		dfd.addServices(sd);			
+
 	}
 
 }

@@ -12,7 +12,7 @@ import logica.Territorio;
 
 public class AgenteAleatorio extends AgenteRisk {
 	
-
+				
 	/**
 	 * 
 	 */
@@ -27,7 +27,7 @@ public class AgenteAleatorio extends AgenteRisk {
 	
 	public int escolherTerritorio(){
 		
-		return (int) (Math.random()*19);	
+		return (int) (Math.random()*29);	
 	}
 	
 	public void addTerritorio(Territorio t){
@@ -73,43 +73,43 @@ public class AgenteAleatorio extends AgenteRisk {
 	}
 	
 	protected void setup() {
-		System.out.println("entrou no setup");
+
+		System.out.println("aleatorio " + getCor());
+		
+		agenteTeste n = new agenteTeste(this);
+	//	addBehaviour(n);
 		// Registration with the DF 
 		DFAgentDescription dfd = new DFAgentDescription();
 		ServiceDescription sd = new ServiceDescription();   
 		
-		sd.setType("CentralAgent"); 
+		sd.setType("Aleatorio"); 
 		sd.setName(getName());
 		dfd.setName(getAID());
 		dfd.addServices(sd);			
 
 	}
 	
-	
-	public void abc(){
-		System.out.println("entrou abc-----");
-		agenteTeste aa= new agenteTeste(this);
-		addBehaviour(aa);
-	}
-	
+
 	public class agenteTeste extends SimpleBehaviour{
-		
-		 public agenteTeste(Agent a) {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public agenteTeste(Agent a){
 			super(a);
 		}
-
+		
 		@Override
-		public void action() {
-			System.out.println("hola! entrou em agenteTeste");
-			
+		public void action(){
+			System.out.println("entrou no agente behaviour");
 		}
-
+		
 		@Override
-		public boolean done() {
-			// TODO Auto-generated method stub
+		public boolean done(){
 			return false;
 		}
-				
+
 	}
 	
 }

@@ -38,6 +38,9 @@ public class DadosController implements Initializable{
 		comboVerde.setItems(list);
 		comboAmarelo.setItems(list);
 		comboAzul.setItems(list);
+		
+		dados.setDisable(true);
+		
 	}
 	
 	
@@ -68,12 +71,19 @@ public class DadosController implements Initializable{
 	@FXML
 	public void selecionarAgente(){
 	
+	/*	comboVermelho.setValue("Aleatório");
+		comboVerde.setValue("Aleatório");
+		comboAmarelo.setValue("Aleatório");
+		comboAzul.setValue("Aleatório");*/
+		
 		Singleton.getInstance().setVermelho(comboVermelho.getValue());
 		Singleton.getInstance().setVerde(comboVerde.getValue());
 		Singleton.getInstance().setAzul(comboAzul.getValue());
 		Singleton.getInstance().setAmarelo(comboAmarelo.getValue());
 		
-		
+		if(comboVermelho.getValue()!=null && comboVerde.getValue()!=null && comboAzul.getValue()!=null && 
+				comboAmarelo.getValue()!=null)   // so deixa lançar dados após todos os tipos de agente serem selecionados
+		dados.setDisable(false);
 	}
 	
 	ObservableList<String> list = FXCollections.observableArrayList(

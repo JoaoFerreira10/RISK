@@ -5,6 +5,13 @@ import agentes.AgenteAleatorio.agenteTeste;
 import agentes.AgenteAtacante;
 import agentes.AgenteDefensivo;
 import agentes.AgenteRisk;
+
+import jade.core.Profile;
+import jade.core.ProfileImpl;
+import jade.core.Runtime;
+import jade.wrapper.AgentContainer;
+import jade.wrapper.AgentController;
+import jade.wrapper.ContainerController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,16 +24,25 @@ public class BoardController implements EventHandler<ActionEvent>{
 
 	//Stage primaryStage;
 	String primeiro = Singleton.getInstance().getPrimeiroJogar(); 
+	String agente1 = Singleton.getInstance().getVermelho(); 
+	String agente2 = Singleton.getInstance().getVerde(); 
+	String agente3 = Singleton.getInstance().getAzul(); 
+	String agente4 = Singleton.getInstance().getAmarelo(); 
 	TabuleiroLogica tabuleiro = new TabuleiroLogica();
 	AgenteRisk amarelo, vermelho, azul, verde;
 	
 	@FXML//Territorios
-	private Label e1, e2, e3, e4, e5, e6, e7, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12;
+	private Label e1, e2, e3, e4, e5, e6, e7, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, o1, o2, o3, o4,
+	af1, af2, af3, af4, af5, af6;
 
 	
 	//botao jogar
 	public void iniciarJogo(ActionEvent ev){
-		criarAgentes(primeiro, "Atacante", "Atacante", "Aleatorio","Aleatorio");			
+
+		criarAgentes(primeiro,agente1, agente2, agente3,agente4);
+	
+		//setupJADE(agentes);
+
 	}
 	
 	
@@ -124,7 +140,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 								preencherTabuleiro(tabuleiro.getTerritorio(x).getNome(), a.getCor());
 								a.colocarExercitos(1);
 								tabuleiro.getTerritorio(x).addpecas(1);
-								colocarPecaTabuleiro(tabuleiro.getTerritorio(x).getNome(), tabuleiro.getTerritorio(x).getpecas());
+								colocarPecaTabuleiro(tabuleiro.getTerritorio(x).getNome(), 1);
 								tabuleiro.ocuparTerritorio(x, a.getCor());
 								territoriosOcupados++;
 								break;
@@ -142,6 +158,11 @@ public class BoardController implements EventHandler<ActionEvent>{
 		System.out.println("finish");
 		distribuirExercitos(agentes);
 		
+		setupJADE(agentes); // JADE
+		
+		
+		// fun�ao jogar , que cria os 4 agentes no RMA --- for(int i=0;i<map.getNumTrucks();i++){
+		
 	}
 	
 	
@@ -153,8 +174,8 @@ public class BoardController implements EventHandler<ActionEvent>{
 			totalExercitos+=a.getNumExercitos();
 		}
 
-outerloop:
-do{
+	outerloop:
+	do{
 		for( AgenteRisk a: agentes){
 						
 			if(a instanceof AgenteAtacante){
@@ -235,6 +256,26 @@ do{
 			a11.setText(pecas.toString());
 		else if(territorio.equals("a12"))
 			a12.setText(pecas.toString());
+		else if(territorio.equals("o1"))
+			o1.setText(pecas.toString());
+		else if(territorio.equals("o2"))
+			o2.setText(pecas.toString());
+		else if(territorio.equals("o3"))
+			o3.setText(pecas.toString());
+		else if(territorio.equals("o4"))
+			o4.setText(pecas.toString());
+		else if(territorio.equals("af1"))
+			af1.setText(pecas.toString());
+		else if(territorio.equals("af2"))
+			af2.setText(pecas.toString());
+		else if(territorio.equals("af3"))
+			af3.setText(pecas.toString());
+		else if(territorio.equals("af4"))
+			af4.setText(pecas.toString());
+		else if(territorio.equals("af5"))
+			af5.setText(pecas.toString());
+		else if(territorio.equals("af6"))
+			af6.setText(pecas.toString());
 		
 	}
 		
@@ -282,6 +323,26 @@ do{
 			a11.setStyle("-fx-background-color: "+ cor+";");
 		else if(territorio.equals("a12"))
 			a12.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("o1"))
+			o1.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("o2"))
+			o2.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("o3"))
+			o3.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("o4"))
+			o4.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("af1"))
+			af1.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("af2"))
+			af2.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("af3"))
+			af3.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("af4"))
+			af4.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("af5"))
+			af5.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("af6"))
+			af6.setStyle("-fx-background-color: "+ cor+";");
 	}	
 	
 	
@@ -322,5 +383,48 @@ do{
 		b.setText(value.toString());
 		//System.out.println(value);
 	}*/
+	
+	
+	static ContainerController myContainer;
+	private static AgentContainer container;
+		
+	private static void setupJADE(AgenteRisk[] agentes) {
+			Profile profile=new ProfileImpl("localhost", 1099,
+			Profile.PLATFORM_ID);
+			
+			profile.setParameter(Profile.PLATFORM_ID, "MyMainPlatform");
+			profile.setParameter("gui", "ture");
+			
+		
+			AgentController agent;
+			
+			container=Runtime.instance().createMainContainer(profile);
+
+			
+			        try
+			        {
+			            container.start();
+			            container.createNewAgent("rma", "jade.tools.rma.rma",null).start();
+
+			          //para cada agente verifica se � aleatorio, atacante, ... e adiciona � RMA cada agente	
+			            	for(int i=0;i<agentes.length;i++){		 	
+			    			
+			            		if(agentes[i] instanceof AgenteAleatorio){
+			    				agent = container.acceptNewAgent("aleatorio "+agentes[i].getCor(), agentes[i]);
+			    				agent.start();		
+			    			}
+				    			if(agentes[i] instanceof AgenteAtacante){
+				    				agent = container.acceptNewAgent("atacante "+agentes[i].getCor(), agentes[i]);
+				    				agent.start();		
+				    			}
+			            	}		
+			        }
+
+			        catch(Exception ex)
+
+			        {
+
+			        }	
+	}
 	
 }
