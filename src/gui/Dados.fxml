@@ -80,10 +80,10 @@
             
            
             <Text layoutX="28.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecione os tipos de agente:" />
-            <ComboBox fx:id="comboVermelho" layoutX="28.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3" />
-            <ComboBox fx:id="comboVerde" layoutX="163.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3" />
-            <ComboBox fx:id="comboAzul" layoutX="277.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3" />
-            <ComboBox fx:id="comboAmarelo" layoutX="384.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3" />
+            <ComboBox fx:id="comboVermelho" layoutX="28.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3"/>
+            <ComboBox fx:id="comboVerde" layoutX="163.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3"/>
+            <ComboBox fx:id="comboAzul" layoutX="277.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3"/>
+            <ComboBox fx:id="comboAmarelo" layoutX="384.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3"/>
             
             
            

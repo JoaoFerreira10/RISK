@@ -1,6 +1,7 @@
 package gui;
 
 import jade.wrapper.AgentContainer;
+import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import agentes.AgenteAleatorio;
 import jade.core.Profile;
@@ -25,7 +26,7 @@ public class Menu extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("RISK");
 			primaryStage.show();
-			setupJADE();
+			//setupJADE();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -40,7 +41,7 @@ public class Menu extends Application {
 	
 
 	
-	static ContainerController myContainer;
+	/*static ContainerController myContainer;
 	private static AgentContainer container;
 		
 	private static void setupJADE() {
@@ -51,6 +52,7 @@ public class Menu extends Application {
 			profile.setParameter("gui", "ture");
 			
 			AgenteAleatorio randomAg;
+			AgentController aleatorio;
 			
 			container=Runtime.instance().createMainContainer(profile);
 
@@ -62,8 +64,9 @@ public class Menu extends Application {
 			            container.createNewAgent("rma", "jade.tools.rma.rma",null).start();
 
 			            randomAg = new AgenteAleatorio("Verde", 30);
-			            randomAg = (AgenteAleatorio) container.acceptNewAgent("randomAgent", randomAg);
-			            
+			            aleatorio = container.acceptNewAgent("aleatorio", randomAg);
+			            //randomAg = (AgenteAleatorio) container.acceptNewAgent("randomAgent", randomAg);
+			            aleatorio.start();
 			        }
 
 			        catch(Exception ex)
@@ -71,7 +74,7 @@ public class Menu extends Application {
 			        {
 
 			        }	
-	}
+	}*/
 	
 	
 	

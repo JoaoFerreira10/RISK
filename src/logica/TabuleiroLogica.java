@@ -30,16 +30,21 @@ Territorio t17=new Territorio("a10", 0, false);
 Territorio t18=new Territorio("a11", 0, false);
 Territorio t19=new Territorio("a12", 0, false);
 
+//Oceania
 
+Territorio o1=new Territorio("o1", 0, false);
+Territorio o2=new Territorio("o2", 0, false);
+Territorio o3=new Territorio("o3", 0, false);
+Territorio o4=new Territorio("o4", 0, false);
 
+//Africa
 
-
-
-
-
-
-
-
+Territorio af1=new Territorio("af1", 0, false);
+Territorio af2=new Territorio("af2", 0, false);
+Territorio af3=new Territorio("af3", 0, false);
+Territorio af4=new Territorio("af4", 0, false);
+Territorio af5=new Territorio("af5", 0, false);
+Territorio af6=new Territorio("af6", 0, false);
 
 
 
@@ -117,6 +122,58 @@ Territorio t19=new Territorio("a12", 0, false);
 		t16.addAdjacente(t8);
 		t16.addAdjacente(t17);
 		t16.addAdjacente(t18);
+		t17.addAdjacente(t4);
+		t17.addAdjacente(t14);
+		t17.addAdjacente(t16);
+		t17.addAdjacente(t8);
+		t17.addAdjacente(t13);
+		t18.addAdjacente(o1);
+		t18.addAdjacente(t16);
+		t18.addAdjacente(t8);
+		t19.addAdjacente(t15);
+		t19.addAdjacente(t9);
+		t19.addAdjacente(t8);
+		
+		//Oceania
+		
+		o1.addAdjacente(o2);
+		o1.addAdjacente(t18);
+		o1.addAdjacente(o3);
+		o1.addAdjacente(o4);
+		o2.addAdjacente(o1);
+		o2.addAdjacente(o3);
+		o2.addAdjacente(o4);
+		o3.addAdjacente(o1);
+		o3.addAdjacente(o4);
+		o4.addAdjacente(o2);
+		o4.addAdjacente(o3);
+		
+		//Africa
+		
+		af1.addAdjacente(t1);
+		af1.addAdjacente(af2);
+		//af1.addAdjacente(as2);   //america do sul
+		af1.addAdjacente(af4);
+		af1.addAdjacente(af3);
+		af2.addAdjacente(t3);
+		af2.addAdjacente(t14);
+		af2.addAdjacente(af3);
+		af2.addAdjacente(af1);
+		af3.addAdjacente(t14);
+		af3.addAdjacente(af2);
+		af3.addAdjacente(af1);
+		af3.addAdjacente(af4);
+		af3.addAdjacente(af5);
+		af3.addAdjacente(af6);
+		af4.addAdjacente(af1);
+		af4.addAdjacente(af3);
+		af4.addAdjacente(af5);
+		af4.addAdjacente(af6);
+		af5.addAdjacente(af6);
+		af5.addAdjacente(af4);
+		af5.addAdjacente(af3);
+		af6.addAdjacente(af5);
+		af6.addAdjacente(af3);
 		
 		territorios.add(t1);
 		territorios.add(t2);
@@ -137,6 +194,16 @@ Territorio t19=new Territorio("a12", 0, false);
 		territorios.add(t17);
 		territorios.add(t18);
 		territorios.add(t19);
+		territorios.add(o1);
+		territorios.add(o2);
+		territorios.add(o3);
+		territorios.add(o4);
+		territorios.add(af1);
+		territorios.add(af2);
+		territorios.add(af3);
+		territorios.add(af4);
+		territorios.add(af5);
+		territorios.add(af6);
 			
 	}
 	
