@@ -3,6 +3,7 @@ package gui;
 import agentes.AgenteAleatorio;
 import agentes.AgenteAtacante;
 import agentes.AgenteDefensivo;
+import agentes.AgenteNovo;
 import agentes.AgenteRisk;
 
 import jade.core.Profile;
@@ -55,7 +56,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 		//Vermelho
 		if(agente1.equals("Aleatorio")){
-			 vermelho= new AgenteAleatorio("red",10);
+			 vermelho= new AgenteAleatorio("red",10, tabuleiro, this);
 		}else if(agente1.equals("Atacante")){
 			 vermelho = new AgenteAtacante("red",10);
 		}else{
@@ -64,7 +65,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 		//Verde
 		if(agente2.equals("Aleatorio")){
-			 verde= new AgenteAleatorio("green",10);
+			 verde= new AgenteAleatorio("green",10, tabuleiro, this);
 		}else if(agente2.equals("Atacante")){
 			 verde = new AgenteAtacante("green",10);
 		}else{
@@ -73,7 +74,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 		//Azul
 		if(agente3.equals("Aleatorio")){
-			 azul = new AgenteAleatorio("blue",10);
+			 azul = new AgenteAleatorio("blue",10, tabuleiro, this);
 		}else if(agente3.equals("Atacante")){
 			 azul = new AgenteAtacante("blue",10);
 		}else{
@@ -82,7 +83,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 		//Amarelo
 		if(agente4.equals("Aleatorio")){
-			 amarelo = new AgenteAleatorio("yellow",10);
+			 amarelo = new AgenteAleatorio("yellow",10, tabuleiro, this);
 		}else if(agente4.equals("Atacante")){
 			 amarelo  = new AgenteAtacante("yellow",10);
 		}else{
@@ -387,13 +388,14 @@ public class BoardController implements EventHandler<ActionEvent>{
 	static ContainerController myContainer;
 	private static AgentContainer container;
 		
-	private static void setupJADE(AgenteRisk[] agentes) {
+	//private static void setupJADE(AgenteRisk[] agentes, TabuleiroLogica t) {
+	public void setupJADE(AgenteRisk[] agentes) {
 			Profile profile=new ProfileImpl("localhost", 1099,
 			Profile.PLATFORM_ID);
 			
 			profile.setParameter(Profile.PLATFORM_ID, "MyMainPlatform");
 			profile.setParameter("gui", "ture");
-			
+	
 		
 			AgentController agent;
 			
@@ -416,7 +418,10 @@ public class BoardController implements EventHandler<ActionEvent>{
 				    				agent = container.acceptNewAgent("atacante "+agentes[i].getCor(), agentes[i]);
 				    				agent.start();		
 				    			}
-			            	}		
+			            	}
+			            	
+			            //	agent = container.acceptNewAgent("agenteNovo", new AgenteNovo("xx",2,tabuleiro, this));
+			            //	agent.start();
 			        }
 
 			        catch(Exception ex)

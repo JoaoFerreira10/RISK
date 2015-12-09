@@ -3,6 +3,7 @@ package agentes;
 
 import java.util.ArrayList;
 
+import gui.BoardController;
 import jade.core.Agent;
 import jade.core.behaviours.SimpleBehaviour;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -19,9 +20,13 @@ public class AgenteAleatorio extends AgenteRisk {
 	private static final long serialVersionUID = 1L;
 	//private ArrayList<Territorio> territorios = new ArrayList<Territorio>();
 	
+	TabuleiroLogica tabuleiro;
+	BoardController board;
 	
-	public AgenteAleatorio(String cor, int pecas) {
+	public AgenteAleatorio(String cor, int pecas, TabuleiroLogica t, BoardController b) {
 		super(cor, pecas);
+		tabuleiro= t;
+		board = b;
 	}
 
 	
@@ -46,8 +51,10 @@ public class AgenteAleatorio extends AgenteRisk {
 		
 		colocarExercitos(numExercitos);
 		
-		int x = tabuleiro.getTerritoriosPorAgente(this.getCor()).size();
-		int y = (int) (Math.random()*x);
+		int x = tabuleiro.getTerritoriosPorAgente(this.getCor()).size();   // vai ver que territorios tem um agente
+		int y = (int) (Math.random()*x);   // escolhe um territorio aleatorio
+		
+		
 		
 		return tabuleiro.getTerritoriosPorAgente(this.getCor()).get(y);
 	}
@@ -75,8 +82,13 @@ public class AgenteAleatorio extends AgenteRisk {
 	protected void setup() {
 		System.out.println("aleatorio " + getCor());
 		
+		for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(getCor()).size(); i++) {
+			int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(getCor()).get(i)).getAdjacentes().size();
+			System.out.println("territorios adj do " + getCor() + " : " + y2);
+			}
+		
 		agenteTeste n = new agenteTeste(this);
-	//	addBehaviour(n);
+		//addBehaviour(n);
 		// Registration with the DF 
 		DFAgentDescription dfd = new DFAgentDescription();
 		ServiceDescription sd = new ServiceDescription();   
@@ -94,13 +106,24 @@ public class AgenteAleatorio extends AgenteRisk {
 		 */
 		private static final long serialVersionUID = 1L;
 
+		private TabuleiroLogica x;
 		public agenteTeste(Agent a){
 			super(a);
+			//x=tabuleiro;
+			//this.x=tab;
+		
 		}
 		
 		@Override
 		public void action(){
 			System.out.println("entrou no agente behaviour");
+		//	int num;
+		//	num= x.getNumTerritorios();
+		//	System.out.println("territorios num:" + num);
+			/*for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(getCor()).size(); i++) {
+				int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(getCor()).get(i)).getAdjacentes().size();
+				System.out.println("territorios adj:" + y2);
+				}*/
 		}
 		
 		@Override
