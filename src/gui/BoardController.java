@@ -3,10 +3,9 @@ package gui;
 import java.util.Iterator;
 
 import agentes.AgenteAleatorio;
-import agentes.AgenteAleatorio.agenteTeste;
+import agentes.AgenteAleatorio.testBehaviour;
 import agentes.AgenteAtacante;
 import agentes.AgenteDefensivo;
-import agentes.AgenteNovo;
 import agentes.AgenteRisk;
 import agentes.agenteX;
 import jade.core.Profile;
@@ -60,7 +59,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 		//Vermelho
 		if(agente1.equals("Aleatorio")){
-			 vermelho= new AgenteAleatorio("red",10, tabuleiro, this);
+			 vermelho= new AgenteAleatorio("red", 10, tabuleiro, this);
 		}else if(agente1.equals("Atacante")){
 			 vermelho = new AgenteAtacante("red",10);
 		}else{
@@ -394,14 +393,13 @@ public class BoardController implements EventHandler<ActionEvent>{
 	static ContainerController myContainer;
 	private static AgentContainer container;
 		
-	//private static void setupJADE(AgenteRisk[] agentes, TabuleiroLogica t) {
-	public void setupJADE(AgenteRisk[] agentes) {
+	private static void setupJADE(AgenteRisk[] agentes) {
 			Profile profile=new ProfileImpl("localhost", 1099,
 			Profile.PLATFORM_ID);
 			
 			profile.setParameter(Profile.PLATFORM_ID, "MyMainPlatform");
 			profile.setParameter("gui", "ture");
-	
+			
 		
 			AgentController agent;
 			
@@ -425,8 +423,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 				    				agent = container.acceptNewAgent(agentes[i].getCor() + "-" + agentes[i].getType(), agentes[i]);
 				    				//agent.start();
 				    			}
-
-		
+				    			
 			            	}	
 			            	
 			            	for (AgenteRisk x : agentes) {
@@ -435,7 +432,6 @@ public class BoardController implements EventHandler<ActionEvent>{
 			        
 			            	//agent= container.acceptNewAgent("so para teste", new agenteX("luis", 2, t));
 			            	//agent.start();
-
 			        }
 
 			        catch(Exception ex)

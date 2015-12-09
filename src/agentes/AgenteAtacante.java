@@ -30,7 +30,7 @@ public class AgenteAtacante extends AgenteRisk {
 			return (int) (Math.random()*29);		
 		}
 				
-		//depois escolhe territorios adjacentes
+		
 		for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(this.getCor()).size(); i++) {
 			int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getAdjacentes().size();
 			

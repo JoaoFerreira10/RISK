@@ -21,10 +21,11 @@ public class AgenteAleatorio extends AgenteRisk {
 	TabuleiroLogica tabuleiro;
 	BoardController board;
 	
+	
 	public AgenteAleatorio(String cor, int pecas, TabuleiroLogica t, BoardController b) {
 		super(cor, pecas);
-		tabuleiro= t;
-		board = b;
+		this.tabuleiro = t;
+		this.board = b;
 	}
 	
 	public String getType() {
@@ -53,10 +54,8 @@ public class AgenteAleatorio extends AgenteRisk {
 		
 		colocarExercitos(numExercitos);
 		
-		int x = tabuleiro.getTerritoriosPorAgente(this.getCor()).size();   // vai ver que territorios tem um agente
-		int y = (int) (Math.random()*x);   // escolhe um territorio aleatorio
-		
-		
+		int x = tabuleiro.getTerritoriosPorAgente(this.getCor()).size();
+		int y = (int) (Math.random()*x);
 		
 		return tabuleiro.getTerritoriosPorAgente(this.getCor()).get(y);
 	}
@@ -90,15 +89,24 @@ public class AgenteAleatorio extends AgenteRisk {
 		//System.out.println("nome: "+ getAID().getLocalName());
 
 		
-
-		for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(getCor()).size(); i++) {
-			int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(getCor()).get(i)).getAdjacentes().size();
-			System.out.println("territorios adj do " + getCor() + " : " + y2);
-			}
+		//ACLMessage msg = new ACLMessage( ACLMessage.INFORM );
+	    //sg.setContent("pong" );
+	    
+		//agenteTeste n = new agenteTeste(this);
+	//	addBehaviour(n);
 		
-		agenteTeste n = new agenteTeste(this);
-		//addBehaviour(n);
-
+		//testBehaviour t = new testBehaviour(this);
+		//addBehaviour(t);
+		
+		
+		/*
+		for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(getCor()).size(); i++) {
+		   int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(getCor()).get(i)).getAdjacentes().size();
+		   System.out.println("territorios adj do " + getCor() + " : " + y2);
+		}
+		*/
+		
+		
 		// Registration with the DF 
 		DFAgentDescription dfd = new DFAgentDescription();
 		ServiceDescription sd = new ServiceDescription();   
@@ -111,31 +119,36 @@ public class AgenteAleatorio extends AgenteRisk {
 	}
 	
 
-	public class agenteTeste extends SimpleBehaviour{
+	public class testBehaviour extends SimpleBehaviour{
 		/**
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-
-
-		
-		public agenteTeste(Agent a){
+		int n=0;
+		TabuleiroLogica x;
+		public testBehaviour(Agent a){
 			super(a);
-
+			//x=b;
 		}
 		
 		@Override
 		public void action(){
+			System.out.println("entrou action");
+	        /* ACLMessage msg = blockingReceive();
 
-			System.out.println("entrou no agente behaviour");
-		//	int num;
-		//	num= x.getNumTerritorios();
-		//	System.out.println("territorios num:" + num);
-			/*for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(getCor()).size(); i++) {
-				int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(getCor()).get(i)).getAdjacentes().size();
-				System.out.println("territorios adj:" + y2);
-				}*/
-
+	         if(msg.getPerformative() == ACLMessage.INFORM) {
+	            System.out.println(++n +" : recebi " + msg.getContent());
+	            // cria resposta
+	            ACLMessage reply = msg.createReply();
+	            // preenche conte�do da mensagem
+	            if(msg.getContent().equals("ping"))
+	               reply.setContent("pong");
+	            else reply.setContent("ping");
+	            // envia mensagem
+	            send(reply);
+	         }*/
+			
+			
 		}
 		
 		@Override
