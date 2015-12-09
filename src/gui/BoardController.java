@@ -1,5 +1,7 @@
 package gui;
 
+import java.util.Iterator;
+
 import agentes.AgenteAleatorio;
 import agentes.AgenteAleatorio.agenteTeste;
 import agentes.AgenteAtacante;
@@ -38,9 +40,11 @@ public class BoardController implements EventHandler<ActionEvent>{
 	
 	//botao jogar
 	public void iniciarJogo(ActionEvent ev){
-
+		
 		criarAgentes(primeiro,agente1, agente2, agente3,agente4);
-	
+		
+		
+		
 		//setupJADE(agentes);
 
 	}
@@ -410,16 +414,21 @@ public class BoardController implements EventHandler<ActionEvent>{
 			          //para cada agente verifica se � aleatorio, atacante, ... e adiciona � RMA cada agente	
 			            	for(int i=0;i<agentes.length;i++){		 	
 			    			
+			            		
 			            		if(agentes[i] instanceof AgenteAleatorio){
-			    				agent = container.acceptNewAgent(agentes[i].getCor(), agentes[i]);	
-			    				agent.start();		
+			    				agent = container.acceptNewAgent(agentes[i].getCor() + "-" + agentes[i].getType(), agentes[i]);	
+			    				//agent.start();
 			            		}
 				    			if(agentes[i] instanceof AgenteAtacante){
-				    				agent = container.acceptNewAgent(agentes[i].getCor(), agentes[i]);
-				    				agent.start();		
+				    				agent = container.acceptNewAgent(agentes[i].getCor() + "-" + agentes[i].getType(), agentes[i]);
+				    				//agent.start();
 				    			}
+				    			
 			            	}	
 			            	
+			            	for (AgenteRisk x : agentes) {
+			            		container.getAgent(x.getCor()+"-"+x.getType()).start();
+			            	}
 			        
 			            	//agent= container.acceptNewAgent("so para teste", new agenteX("luis", 2, t));
 			            	//agent.start();

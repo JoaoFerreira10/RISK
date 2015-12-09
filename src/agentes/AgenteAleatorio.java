@@ -21,6 +21,10 @@ public class AgenteAleatorio extends AgenteRisk {
 	public AgenteAleatorio(String cor, int pecas) {
 		super(cor, pecas);
 	}
+	
+	public String getType() {
+		return "Aleatorio";
+	}
 
 	
 	public int escolherTerritorio(){

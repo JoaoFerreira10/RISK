@@ -35,11 +35,15 @@ public class DadosController implements Initializable{
 	@Override
 	public void initialize(URL url, ResourceBundle rb){
 		comboVermelho.setItems(list);
+		comboVermelho.getSelectionModel().select(0);
 		comboVerde.setItems(list);
+		comboVerde.getSelectionModel().select(0);
 		comboAmarelo.setItems(list);
+		comboAmarelo.getSelectionModel().select(0);
 		comboAzul.setItems(list);
+		comboAzul.getSelectionModel().select(0);
 		
-		dados.setDisable(true);
+		//dados.setDisable(true);
 		
 	}
 	
@@ -76,10 +80,12 @@ public class DadosController implements Initializable{
 		comboAmarelo.setValue("Aleatório");
 		comboAzul.setValue("Aleatório");*/
 		
+		/*
 		Singleton.getInstance().setVermelho(comboVermelho.getValue());
 		Singleton.getInstance().setVerde(comboVerde.getValue());
 		Singleton.getInstance().setAzul(comboAzul.getValue());
 		Singleton.getInstance().setAmarelo(comboAmarelo.getValue());
+		*/
 		
 		if(comboVermelho.getValue()!=null && comboVerde.getValue()!=null && comboAzul.getValue()!=null && 
 				comboAmarelo.getValue()!=null)   // so deixa lançar dados após todos os tipos de agente serem selecionados
@@ -203,6 +209,12 @@ public class DadosController implements Initializable{
 	  
 	  @FXML
 		public void goToBoard(ActionEvent av) throws IOException{
+		  
+		  
+		  	Singleton.getInstance().setVermelho(comboVermelho.getValue());
+			Singleton.getInstance().setVerde(comboVerde.getValue());
+			Singleton.getInstance().setAzul(comboAzul.getValue());
+			Singleton.getInstance().setAmarelo(comboAmarelo.getValue());
 			
 			Parent tabuleiro= FXMLLoader.load(getClass().getResource("Tabuleiro.fxml"));
 			Scene tabuleiro_scene= new Scene(tabuleiro);

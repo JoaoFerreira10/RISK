@@ -17,6 +17,10 @@ public abstract class AgenteRisk extends Agent {
 		this.numExercitos=Exercitos;
 		
 	}
+	
+	public String getType() {
+		return "none";
+	}
 
 	public String getCor() {
 		return cor;
