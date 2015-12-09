@@ -416,18 +416,18 @@ public class BoardController implements EventHandler<ActionEvent>{
 			    			
 			            		
 			            		if(agentes[i] instanceof AgenteAleatorio){
-			    				agent = container.acceptNewAgent(agentes[i].getCor() + "-" + agentes[i].getType(), agentes[i]);	
+			    				agent = container.acceptNewAgent(agentes[i].getId(), agentes[i]);	
 			    				//agent.start();
 			            		}
 				    			if(agentes[i] instanceof AgenteAtacante){
-				    				agent = container.acceptNewAgent(agentes[i].getCor() + "-" + agentes[i].getType(), agentes[i]);
+				    				agent = container.acceptNewAgent(agentes[i].getId(), agentes[i]);
 				    				//agent.start();
 				    			}
 				    			
 			            	}	
 			            	
 			            	for (AgenteRisk x : agentes) {
-			            		container.getAgent(x.getCor()+"-"+x.getType()).start();
+			            		container.getAgent(x.getId()).start();
 			            	}
 			        
 			            	//agent= container.acceptNewAgent("so para teste", new agenteX("luis", 2, t));
