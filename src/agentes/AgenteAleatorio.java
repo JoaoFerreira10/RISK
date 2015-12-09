@@ -4,6 +4,7 @@ package agentes;
 import java.util.ArrayList;
 
 import jade.core.Agent;
+import jade.core.behaviours.SimpleBehaviour;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import logica.TabuleiroLogica;
@@ -72,6 +73,7 @@ public class AgenteAleatorio extends AgenteRisk {
 	}
 	
 	protected void setup() {
+		System.out.println("entrou no setup");
 		// Registration with the DF 
 		DFAgentDescription dfd = new DFAgentDescription();
 		ServiceDescription sd = new ServiceDescription();   
@@ -81,6 +83,33 @@ public class AgenteAleatorio extends AgenteRisk {
 		dfd.setName(getAID());
 		dfd.addServices(sd);			
 
+	}
+	
+	
+	public void abc(){
+		System.out.println("entrou abc-----");
+		agenteTeste aa= new agenteTeste(this);
+		addBehaviour(aa);
+	}
+	
+	public class agenteTeste extends SimpleBehaviour{
+		
+		 public agenteTeste(Agent a) {
+			super(a);
+		}
+
+		@Override
+		public void action() {
+			System.out.println("hola! entrou em agenteTeste");
+			
+		}
+
+		@Override
+		public boolean done() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+				
 	}
 	
 }

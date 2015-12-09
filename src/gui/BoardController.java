@@ -1,6 +1,7 @@
 package gui;
 
 import agentes.AgenteAleatorio;
+import agentes.AgenteAleatorio.agenteTeste;
 import agentes.AgenteAtacante;
 import agentes.AgenteDefensivo;
 import agentes.AgenteRisk;
@@ -101,6 +102,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 								int x= ((AgenteAleatorio) a).escolherTerritorio();
 								
 								if(tabuleiro.territorioOcupado(x)==false){
+									new PingPong();
 									preencherTabuleiro(tabuleiro.getTerritorio(x).getNome(), a.getCor());
 									a.colocarExercitos(1);
 									tabuleiro.getTerritorio(x).addpecas(1);
