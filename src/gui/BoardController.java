@@ -5,7 +5,7 @@ import agentes.AgenteAleatorio.agenteTeste;
 import agentes.AgenteAtacante;
 import agentes.AgenteDefensivo;
 import agentes.AgenteRisk;
-
+import agentes.agenteX;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
@@ -155,7 +155,8 @@ public class BoardController implements EventHandler<ActionEvent>{
 				}
 		}while(true);
 				
-		System.out.println("finish");
+		System.out.println("Territorios acupados.");
+		
 		distribuirExercitos(agentes);
 		
 		setupJADE(agentes); // JADE
@@ -410,14 +411,18 @@ public class BoardController implements EventHandler<ActionEvent>{
 			            	for(int i=0;i<agentes.length;i++){		 	
 			    			
 			            		if(agentes[i] instanceof AgenteAleatorio){
-			    				agent = container.acceptNewAgent("aleatorio "+agentes[i].getCor(), agentes[i]);
+			    				agent = container.acceptNewAgent(agentes[i].getCor(), agentes[i]);	
 			    				agent.start();		
-			    			}
+			            		}
 				    			if(agentes[i] instanceof AgenteAtacante){
-				    				agent = container.acceptNewAgent("atacante "+agentes[i].getCor(), agentes[i]);
+				    				agent = container.acceptNewAgent(agentes[i].getCor(), agentes[i]);
 				    				agent.start();		
 				    			}
-			            	}		
+			            	}	
+			            	
+			        
+			            	//agent= container.acceptNewAgent("so para teste", new agenteX("luis", 2, t));
+			            	//agent.start();
 			        }
 
 			        catch(Exception ex)

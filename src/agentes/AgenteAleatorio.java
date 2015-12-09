@@ -7,15 +7,13 @@ import jade.core.Agent;
 import jade.core.behaviours.SimpleBehaviour;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.lang.acl.ACLMessage;
 import logica.TabuleiroLogica;
 import logica.Territorio;
 
 public class AgenteAleatorio extends AgenteRisk {
 	
 				
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	//private ArrayList<Territorio> territorios = new ArrayList<Territorio>();
 	
@@ -52,8 +50,7 @@ public class AgenteAleatorio extends AgenteRisk {
 		return tabuleiro.getTerritoriosPorAgente(this.getCor()).get(y);
 	}
 	
-	
-	
+		
 	public void receiveSoldiers(int numSoldiers) {
 	/*	ArrayList<String> playerTerritories = b.getPlayerTerritories(myAgent.getLocalName());
 		// Can't place soldiers without territories
@@ -72,12 +69,22 @@ public class AgenteAleatorio extends AgenteRisk {
 		return action;*/
 	}
 	
+	
+	
+	
 	protected void setup() {
+	//	Object[] args = getArguments();
 
 		System.out.println("aleatorio " + getCor());
+		//System.out.println("nome: "+ getAID().getLocalName());
+
 		
-		agenteTeste n = new agenteTeste(this);
+		//ACLMessage msg = new ACLMessage( ACLMessage.INFORM );
+	    //sg.setContent("pong" );
+	    
+		//agenteTeste n = new agenteTeste(this);
 	//	addBehaviour(n);
+		
 		// Registration with the DF 
 		DFAgentDescription dfd = new DFAgentDescription();
 		ServiceDescription sd = new ServiceDescription();   
@@ -95,14 +102,29 @@ public class AgenteAleatorio extends AgenteRisk {
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-
+		int n=0;
+		TabuleiroLogica x;
 		public agenteTeste(Agent a){
 			super(a);
+			//x=b;
 		}
 		
 		@Override
 		public void action(){
-			System.out.println("entrou no agente behaviour");
+			System.out.println("entrou action");
+	        /* ACLMessage msg = blockingReceive();
+
+	         if(msg.getPerformative() == ACLMessage.INFORM) {
+	            System.out.println(++n +" : recebi " + msg.getContent());
+	            // cria resposta
+	            ACLMessage reply = msg.createReply();
+	            // preenche conte�do da mensagem
+	            if(msg.getContent().equals("ping"))
+	               reply.setContent("pong");
+	            else reply.setContent("ping");
+	            // envia mensagem
+	            send(reply);
+	         }*/
 		}
 		
 		@Override
