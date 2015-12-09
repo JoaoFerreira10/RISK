@@ -1,11 +1,14 @@
 package gui;
 
+import java.util.Iterator;
+
 import agentes.AgenteAleatorio;
+import agentes.AgenteAleatorio.agenteTeste;
 import agentes.AgenteAtacante;
 import agentes.AgenteDefensivo;
 import agentes.AgenteNovo;
 import agentes.AgenteRisk;
-
+import agentes.agenteX;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
@@ -30,7 +33,6 @@ public class BoardController implements EventHandler<ActionEvent>{
 	String agente4 = Singleton.getInstance().getAmarelo(); 
 	TabuleiroLogica tabuleiro = new TabuleiroLogica();
 	AgenteRisk amarelo, vermelho, azul, verde;
-
 	
 	@FXML//Territorios
 	private Label e1, e2, e3, e4, e5, e6, e7, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, o1, o2, o3, o4,
@@ -39,10 +41,13 @@ public class BoardController implements EventHandler<ActionEvent>{
 	
 	//botao jogar
 	public void iniciarJogo(ActionEvent ev){
-
+		
 		criarAgentes(primeiro,agente1, agente2, agente3,agente4);
-	
+		
+		
+		
 		//setupJADE(agentes);
+
 	}
 	
 	
@@ -51,7 +56,6 @@ public class BoardController implements EventHandler<ActionEvent>{
 	 */	
 	public void criarAgentes(String primeiro, String agente1, String agente2, String agente3, String agente4){
 		
-
 		AgenteRisk vermelho, verde, azul, amarelo;
 		
 		//Vermelho
@@ -119,6 +123,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 								int x= ((AgenteAleatorio) a).escolherTerritorio();
 								
 								if(tabuleiro.territorioOcupado(x)==false){
+									new PingPong();
 									preencherTabuleiro(tabuleiro.getTerritorio(x).getNome(), a.getCor());
 									a.colocarExercitos(1);
 									tabuleiro.getTerritorio(x).addpecas(1);
@@ -155,13 +160,14 @@ public class BoardController implements EventHandler<ActionEvent>{
 				}
 		}while(true);
 				
-		System.out.println("finish");
+		System.out.println("Territorios acupados.");
+		
 		distribuirExercitos(agentes);
 		
 		setupJADE(agentes); // JADE
 		
 		
-		// funçao jogar , que cria os 4 agentes no RMA --- for(int i=0;i<map.getNumTrucks();i++){
+		// funï¿½ao jogar , que cria os 4 agentes no RMA --- for(int i=0;i<map.getNumTrucks();i++){
 		
 	}
 	
@@ -407,21 +413,29 @@ public class BoardController implements EventHandler<ActionEvent>{
 			            container.start();
 			            container.createNewAgent("rma", "jade.tools.rma.rma",null).start();
 
-			          //para cada agente verifica se é aleatorio, atacante, ... e adiciona á RMA cada agente	
+			          //para cada agente verifica se ï¿½ aleatorio, atacante, ... e adiciona ï¿½ RMA cada agente	
 			            	for(int i=0;i<agentes.length;i++){		 	
 			    			
+			            		
 			            		if(agentes[i] instanceof AgenteAleatorio){
-			    				agent = container.acceptNewAgent("aleatorio "+agentes[i].getCor(), agentes[i]);
-			    				agent.start();		
-			    			}
+			    				agent = container.acceptNewAgent(agentes[i].getCor() + "-" + agentes[i].getType(), agentes[i]);	
+			    				//agent.start();
+			            		}
 				    			if(agentes[i] instanceof AgenteAtacante){
-				    				agent = container.acceptNewAgent("atacante "+agentes[i].getCor(), agentes[i]);
-				    				agent.start();		
+				    				agent = container.acceptNewAgent(agentes[i].getCor() + "-" + agentes[i].getType(), agentes[i]);
+				    				//agent.start();
 				    			}
-			            	}
+
+		
+			            	}	
 			            	
-			            //	agent = container.acceptNewAgent("agenteNovo", new AgenteNovo("xx",2,tabuleiro, this));
-			            //	agent.start();
+			            	for (AgenteRisk x : agentes) {
+			            		container.getAgent(x.getCor()+"-"+x.getType()).start();
+			            	}
+			        
+			            	//agent= container.acceptNewAgent("so para teste", new agenteX("luis", 2, t));
+			            	//agent.start();
+
 			        }
 
 			        catch(Exception ex)

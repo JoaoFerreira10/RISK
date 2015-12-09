@@ -1,9 +1,6 @@
 package agentes;
 
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
-import agentes.AgenteAleatorio.agenteTeste;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import logica.TabuleiroLogica;
@@ -18,6 +15,10 @@ public class AgenteAtacante extends AgenteRisk {
 
 	public AgenteAtacante(String cor, int pecas) {
 		super(cor, pecas);
+	}
+	
+	public String getType() {
+		return "Atacante";
 	}
 	
 	

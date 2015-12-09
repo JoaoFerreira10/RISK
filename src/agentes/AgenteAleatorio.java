@@ -8,15 +8,13 @@ import jade.core.Agent;
 import jade.core.behaviours.SimpleBehaviour;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.lang.acl.ACLMessage;
 import logica.TabuleiroLogica;
 import logica.Territorio;
 
 public class AgenteAleatorio extends AgenteRisk {
 	
 				
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	//private ArrayList<Territorio> territorios = new ArrayList<Territorio>();
 	
@@ -27,6 +25,10 @@ public class AgenteAleatorio extends AgenteRisk {
 		super(cor, pecas);
 		tabuleiro= t;
 		board = b;
+	}
+	
+	public String getType() {
+		return "Aleatorio";
 	}
 
 	
@@ -59,8 +61,7 @@ public class AgenteAleatorio extends AgenteRisk {
 		return tabuleiro.getTerritoriosPorAgente(this.getCor()).get(y);
 	}
 	
-	
-	
+		
 	public void receiveSoldiers(int numSoldiers) {
 	/*	ArrayList<String> playerTerritories = b.getPlayerTerritories(myAgent.getLocalName());
 		// Can't place soldiers without territories
@@ -79,9 +80,17 @@ public class AgenteAleatorio extends AgenteRisk {
 		return action;*/
 	}
 	
+	
+	
+	
 	protected void setup() {
+	//	Object[] args = getArguments();
+
 		System.out.println("aleatorio " + getCor());
+		//System.out.println("nome: "+ getAID().getLocalName());
+
 		
+
 		for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(getCor()).size(); i++) {
 			int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(getCor()).get(i)).getAdjacentes().size();
 			System.out.println("territorios adj do " + getCor() + " : " + y2);
@@ -89,6 +98,7 @@ public class AgenteAleatorio extends AgenteRisk {
 		
 		agenteTeste n = new agenteTeste(this);
 		//addBehaviour(n);
+
 		// Registration with the DF 
 		DFAgentDescription dfd = new DFAgentDescription();
 		ServiceDescription sd = new ServiceDescription();   
@@ -100,22 +110,23 @@ public class AgenteAleatorio extends AgenteRisk {
 
 	}
 	
+
 	public class agenteTeste extends SimpleBehaviour{
 		/**
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
 
-		private TabuleiroLogica x;
+
+		
 		public agenteTeste(Agent a){
 			super(a);
-			//x=tabuleiro;
-			//this.x=tab;
-		
+
 		}
 		
 		@Override
 		public void action(){
+
 			System.out.println("entrou no agente behaviour");
 		//	int num;
 		//	num= x.getNumTerritorios();
@@ -124,12 +135,14 @@ public class AgenteAleatorio extends AgenteRisk {
 				int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(getCor()).get(i)).getAdjacentes().size();
 				System.out.println("territorios adj:" + y2);
 				}*/
+
 		}
 		
 		@Override
 		public boolean done(){
 			return false;
 		}
+
 	}
 	
 }

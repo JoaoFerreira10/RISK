@@ -11,6 +11,10 @@ public class AgenteDefensivo extends AgenteRisk {
 		super(cor, pecas);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public String getType() {
+		return "Defensivo";
+	}
 
 
 

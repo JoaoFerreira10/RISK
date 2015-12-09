@@ -11,6 +11,7 @@ import jade.domain.FIPAException;
 // classe do agente
 public class PingPong extends Agent {
 
+
    // classe do behaviour
    class PingPongBehaviour extends SimpleBehaviour {
       private int n = 0;
@@ -22,6 +23,7 @@ public class PingPong extends Agent {
 
       // m�todo action
       public void action() {
+    	  System.out.println("entrou em behaviour");
          ACLMessage msg = blockingReceive();
          if(msg.getPerformative() == ACLMessage.INFORM) {
             System.out.println(++n + " " + getLocalName() + ": recebi " + msg.getContent());
@@ -46,6 +48,7 @@ public class PingPong extends Agent {
 
    // m�todo setup
    protected void setup() {
+	   System.out.println("setup");
       String tipo = "";
       // obt�m argumentos
       Object[] args = getArguments();
