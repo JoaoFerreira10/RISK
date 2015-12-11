@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import gui.BoardController;
 import gui.Singleton;
+import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.SimpleBehaviour;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -67,26 +68,11 @@ public class AgenteAleatorio extends AgenteRisk {
 	//	Object[] args = getArguments();
 
 		System.out.println("aleatorio " + getCor());
-		//System.out.println("nome: "+ getAID().getLocalName());
 
-		
-		//ACLMessage msg = new ACLMessage( ACLMessage.INFORM );
-	    //sg.setContent("pong" );
-	    
-		//agenteTeste n = new agenteTeste(this);
-	//	addBehaviour(n);
 		
 		testBehaviour t = new testBehaviour(this);
 		addBehaviour(t);
-		
-		
-		/*
-		for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(getCor()).size(); i++) {
-		   int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(getCor()).get(i)).getAdjacentes().size();
-		   System.out.println("territorios adj do " + getCor() + " : " + y2);
-		}
-		*/
-		
+				
 		
 		// Registration with the DF 
 		DFAgentDescription dfd = new DFAgentDescription();
@@ -111,6 +97,17 @@ public class AgenteAleatorio extends AgenteRisk {
 		return false;
 	}
 	
+	
+//	private void sendMessage() {
+//		   AID r = new AID ("red-Aleatorio@MyMainPlatform", AID.ISGUID);
+//		   
+//		   r.addAddresses("http://localhost:7778/acc");
+//		   ACLMessage aclMessage = new ACLMessage(ACLMessage.REQUEST);
+//		   aclMessage.addReceiver(r);
+//		   aclMessage.setContent("ping");
+//		   this.send(aclMessage);
+//		}
+	
 
 	public class testBehaviour extends SimpleBehaviour{
 		/**
@@ -127,34 +124,36 @@ public class AgenteAleatorio extends AgenteRisk {
 		@Override
 		public void action(){
 
-	        /* ACLMessage msg = blockingReceive();
 
-	         if(msg.getPerformative() == ACLMessage.INFORM) {
-	            System.out.println(++n +" : recebi " + msg.getContent());
-	            // cria resposta
-	            ACLMessage reply = msg.createReply();
-	            // preenche conte�do da mensagem
-	            if(msg.getContent().equals("ping"))
-	               reply.setContent("pong");
-	            else reply.setContent("ping");
-	            // envia mensagem
-	            send(reply);
-	         }*/
-			
-			
 
-			if (Singleton.getInstance().getPrimeiroJogar().equals(getCor()) 
+		if (Singleton.getInstance().getPrimeiroJogar().equals(getCor()) 
 					&& Singleton.getInstance().getState() == Singleton.GAME_START) {
 				
-				play();
+				//sendMessage();
 				
+				System.out.println("entrou em behaviour-1"+getLocalName()+"------ "+getAID().getName());
+		
 				Singleton.getInstance().setState(Singleton.GAME_RUNNING);
 			}
+			else{
+	         
 			
 
-			//ACLMessage msg = blockingReceive();
+			ACLMessage msg = receive();
 			
+			if(msg!=null){
+				
+				System.out.println(getCor()+" recebeu--> "+msg.getContent()+" de -->" +msg.getSender());
+				ACLMessage reply = msg.createReply();
+				reply.setContent("pong");
+				send(reply);
+				System.out.println(getCor() +" envia -->" +reply.getContent());
+				
+			}else{
+				System.out.println("nao recebeu");
+			}
 			
+			}	
 		}
 		
 		@Override
