@@ -134,6 +134,7 @@ public class AgenteAleatorio extends AgenteRisk {
 		@Override
 		public void action(){
 			System.out.println("entrou action");
+			
 	        /* ACLMessage msg = blockingReceive();
 
 	         if(msg.getPerformative() == ACLMessage.INFORM) {
