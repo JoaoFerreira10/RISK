@@ -4,6 +4,7 @@ package agentes;
 import java.util.ArrayList;
 
 import gui.BoardController;
+import gui.Singleton;
 import jade.core.Agent;
 import jade.core.behaviours.SimpleBehaviour;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -11,6 +12,8 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 import logica.TabuleiroLogica;
 import logica.Territorio;
+
+import static gui.Singleton.*;
 
 public class AgenteAleatorio extends AgenteRisk {
 	
@@ -60,28 +63,6 @@ public class AgenteAleatorio extends AgenteRisk {
 		return tabuleiro.getTerritoriosPorAgente(this.getCor()).get(y);
 	}
 	
-		
-	public void receiveSoldiers(int numSoldiers) {
-	/*	ArrayList<String> playerTerritories = b.getPlayerTerritories(myAgent.getLocalName());
-		// Can't place soldiers without territories
-		if(playerTerritories.size() == 0) {
-			return new ReceiveAction();
-		}
-		
-		int index, size = playerTerritories.size();
-		ReceiveAction action = new ReceiveAction();
-
-		// Choose a random territory for each soldier received.
-		for (int i = 0; i < numSoldiers; i++) {
-			index = r.nextInt(size);
-			action.addSoldiersTerritory(1, playerTerritories.get(index));
-		}
-		return action;*/
-	}
-	
-	
-	
-	
 	protected void setup() {
 	//	Object[] args = getArguments();
 
@@ -95,8 +76,8 @@ public class AgenteAleatorio extends AgenteRisk {
 		//agenteTeste n = new agenteTeste(this);
 	//	addBehaviour(n);
 		
-		//testBehaviour t = new testBehaviour(this);
-		//addBehaviour(t);
+		testBehaviour t = new testBehaviour(this);
+		addBehaviour(t);
 		
 		
 		/*
@@ -118,6 +99,18 @@ public class AgenteAleatorio extends AgenteRisk {
 
 	}
 	
+	public  ArrayList<Territorio> getTerritories() {
+		return tabuleiro.getObjetoTerritorio(getCor());
+	}
+	
+	public boolean play() {
+		
+		
+		System.out.println(getTerritories().get(0).getNome() + " - " + getTerritories().get(0).getpecas());
+		
+		return false;
+	}
+	
 
 	public class testBehaviour extends SimpleBehaviour{
 		/**
@@ -133,8 +126,7 @@ public class AgenteAleatorio extends AgenteRisk {
 		
 		@Override
 		public void action(){
-			System.out.println("entrou action");
-			
+
 	        /* ACLMessage msg = blockingReceive();
 
 	         if(msg.getPerformative() == ACLMessage.INFORM) {
@@ -148,6 +140,19 @@ public class AgenteAleatorio extends AgenteRisk {
 	            // envia mensagem
 	            send(reply);
 	         }*/
+			
+			
+
+			if (Singleton.getInstance().getPrimeiroJogar().equals(getCor()) 
+					&& Singleton.getInstance().getState() == Singleton.GAME_START) {
+				
+				play();
+				
+				Singleton.getInstance().setState(Singleton.GAME_RUNNING);
+			}
+			
+
+			//ACLMessage msg = blockingReceive();
 			
 			
 		}

@@ -57,13 +57,13 @@ public class DadosController implements Initializable{
 	//@FXML
 	//private ChoiceBox agente1, agente2, agente3, agente4;
 	
-	@FXML private Label vermelho;
+	@FXML private Label red;
 	@FXML
-	private Label verde;
+	private Label green;
 	@FXML
-	private Label azul;
+	private Label blue;
 	@FXML
-	private Label amarelo;
+	private Label yellow;
 	@FXML
 	private Label lblV;
 	@FXML private Button dados, avancar;
@@ -113,17 +113,17 @@ public class DadosController implements Initializable{
 	    Integer value3= showRandomInteger(START, END, random);
 	    Integer value4= showRandomInteger(START, END, random);
 	    
-	    vermelho.setText(value1.toString());
-	    verde.setText(value2.toString());
-	    azul.setText(value3.toString());
-	    amarelo.setText(value4.toString());
+	    red.setText(value1.toString());
+	    green.setText(value2.toString());
+	    blue.setText(value3.toString());
+	    yellow.setText(value4.toString());
 	      
 	    
 	    Hashtable<String, Integer> numbers  = new Hashtable<String, Integer>();
-	    numbers.put(vermelho.getId(), value1);
-	    numbers.put(verde.getId(), value2);
-	    numbers.put(azul.getId(), value3);
-	    numbers.put(amarelo.getId(), value4);
+	    numbers.put(red.getId(), value1);
+	    numbers.put(green.getId(), value2);
+	    numbers.put(blue.getId(), value3);
+	    numbers.put(yellow.getId(), value4);
 	    
 	    log("Done.");
 	    

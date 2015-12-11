@@ -3,6 +3,14 @@ package gui;
 
 
 public class Singleton {
+	public static final int GAME_START = 0;
+	public static final int GAME_RUNNING = 1;
+	public static final int GAME_END = 2;
+	
+	public Singleton() {
+		this.state = GAME_START;
+	}
+	
     private static Singleton instance = new Singleton();
     public static Singleton getInstance(){
         return instance;
@@ -10,11 +18,18 @@ public class Singleton {
 
     private String primeiroJogar;   // variavel a ser usada entre controladores
     private String vermelho, verde, amarelo, azul;
-   
+    private int state;
+    
 
-  
+    public int getState() {
+		return state;
+	}
 
-    public String getVerde() {
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	public String getVerde() {
 		return verde;
 	}
 

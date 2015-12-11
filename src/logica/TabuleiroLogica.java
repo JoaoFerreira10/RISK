@@ -234,6 +234,20 @@ Territorio af6=new Territorio("af6", 0, false);
 		return x;		
 	}	
 	
+	
+	public ArrayList<Territorio> getObjetoTerritorio(String agente){
+		
+		ArrayList<Territorio> x= new ArrayList<Territorio>();
+		
+		for(int i=0;i<territorios.size();i++){
+			if(territorios.get(i).getOcupante()!=null){
+			if(territorios.get(i).getOcupante().equals(agente))
+				x.add(territorios.get(i));
+			}			
+		}
+		return x;
+	}
+	
 	public int getNumTerritorios(){
 		return territorios.size();
 	}
