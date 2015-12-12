@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import logica.TabuleiroLogica;
 
 
+
 public class BoardController implements EventHandler<ActionEvent>{
 
 	//Stage primaryStage;
@@ -93,6 +94,8 @@ public class BoardController implements EventHandler<ActionEvent>{
 				
 		escolherTerritorios(vermelho, verde, azul, amarelo);
 
+		
+		
 	}
 	
 	
@@ -102,6 +105,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 	 */	
 	public void escolherTerritorios(AgenteRisk a1, AgenteRisk a2, AgenteRisk a3, AgenteRisk a4){
 
+		
 		int territoriosOcupados=0;
 		
 		AgenteRisk[] agentes= new AgenteRisk[4];
@@ -127,6 +131,8 @@ public class BoardController implements EventHandler<ActionEvent>{
 									colocarPecaTabuleiro(tabuleiro.getTerritorio(x).getNome(), 1);
 									tabuleiro.ocuparTerritorio(x, a.getCor());
 									territoriosOcupados++;
+									
+									
 									break;
 								}
 						}
@@ -172,7 +178,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 	
 	
 	public void distribuirExercitos(AgenteRisk[] agentes){
-				
+				System.out.println("ENTROUUUUUUUUUUUUUUU");
 		int totalExercitos=0;
 		
 		for( AgenteRisk a: agentes){

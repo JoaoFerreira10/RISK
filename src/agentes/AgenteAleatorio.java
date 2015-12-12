@@ -93,19 +93,23 @@ public class AgenteAleatorio extends AgenteRisk {
 	public String selecionarAtaque() {
 		String escolhido = null;
 		String t=null;
+		
 		for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(this.getCor()).size(); i++) {
-			int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getAdjacentes().size();
 			
+			int random = tabuleiro.getTerritoriosPorAgente(this.getCor()).size();
 			
+			int z = (int) (Math.random()*random);   // escolhe um territorio aleatoriamente dos teus territorios
+			int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getAdjacentes().size();
 			
+		
 			int y = (int) (Math.random()*y2);
 			
-			if(!tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getAdjacentes().get(y).getOcupante().equals(getCor()))
+			if(!tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getAdjacentes().get(y).getOcupante().equals(getCor()))
 			{
 			
 			
-			escolhido = tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getAdjacentes().get(y).getNome();
-			t=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getNome();
+			escolhido = tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getAdjacentes().get(y).getNome();
+			t=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getNome();
 			
 			
 			return "ATAQUE:"+escolhido+"-"+t;
@@ -122,13 +126,7 @@ public class AgenteAleatorio extends AgenteRisk {
 		return tabuleiro.getObjetoTerritorio(getCor());
 	}
 	
-	public boolean play() {
-		
-		
-		System.out.println(getTerritories().get(0).getNome() + " - " + getTerritories().get(0).getpecas());
-		
-		return false;
-	}
+
 	
 	
 //	private void sendMessage() {
@@ -157,45 +155,40 @@ public class AgenteAleatorio extends AgenteRisk {
 		@Override
 		public void action(){
 
-
+if(Singleton.getInstance().getPrimeiroJogar().equals(getCor())){
+	
+	System.out.println("\n******Ronda**********\n");
+}
 
 		if (Singleton.getInstance().getPrimeiroJogar().equals(getCor()) 
 					&& Singleton.getInstance().getState() == Singleton.GAME_START) {
-				
-				//sendMessage();
-			/*String ss = selecionarAtaque();
-			System.out.println("escolhido:  "+ss);*/
-				
-				//System.out.println("entrou em behaviour-1"+getLocalName()+"------ "+getAID().getName());
-		
+						
 				Singleton.getInstance().setState(Singleton.GAME_RUNNING);
 			}
 			else{
-	         
-			
 
 			ACLMessage msg = blockingReceive();
-			if(msg.getContent().contains("ataque efetuado")){
-				ACLMessage reply = msg.createReply();
-				reply.setContent(getCor());  // envia territorio que vai atacar
-				send(reply);
-				System.out.println(getCor() +": Passo a vez.");
-				
-				
-			}else if(msg.getContent().contains("permissao para jogar")){
-				
-				//System.out.println(getCor()+ ": recebi--> "+msg.getContent()+" de --> " +msg.getSender().getName());
-				System.out.println(getCor()+": permissao recebida");
-				
-				ACLMessage reply = msg.createReply();
-				reply.setContent(selecionarAtaque());  // envia territorio que vai atacar
-				send(reply);
-				System.out.println(getCor() +": envio --> vou atacar o territorio " +reply.getContent());
-				
-			}else{
-				System.out.println("nao recebeu");
-			}
 			
+				if(msg.getContent().contains("ataque efetuado")){
+					ACLMessage reply = msg.createReply();
+					reply.setContent(getCor());  // envia territorio que vai atacar
+					send(reply);
+					System.out.println(getCor() +": Passo a vez.");
+					
+					
+				}else if(msg.getContent().contains("permissao para jogar")){
+					
+					System.out.println(getCor()+": permissao recebida");
+					
+					ACLMessage reply = msg.createReply();
+					reply.setContent(selecionarAtaque());  // envia territorio que vai atacar
+					send(reply);
+					System.out.println(getCor() +": envio --> vou atacar o territorio " +reply.getContent());   // ataque - defesa
+					
+				}else{
+					System.out.println("nao recebeu");
+				}
+				
 			}	
 		}
 		

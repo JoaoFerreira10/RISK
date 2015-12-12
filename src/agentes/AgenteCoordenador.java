@@ -12,7 +12,12 @@ import jade.core.Agent;
 import jade.core.behaviours.SimpleBehaviour;
 import jade.core.behaviours.TickerBehaviour;
 import jade.lang.acl.ACLMessage;
+import javafx.application.Platform;
 import logica.TabuleiroLogica;
+
+
+
+
 
 public class AgenteCoordenador extends Agent{
 
@@ -43,10 +48,11 @@ public class AgenteCoordenador extends Agent{
 		   ACLMessage aclMessage = new ACLMessage(ACLMessage.REQUEST);
 		   aclMessage.addReceiver(r);
 		   aclMessage.setContent(id+" tem permissao para jogar");
-		   
+		   System.out.println("\n");
 		   System.out.println("coordenador: agente "+aclMessage.getContent());
 		   this.send(aclMessage);
 		}
+	
 	
 	private void receiveOrderAtack(){
 		ACLMessage msg = blockingReceive();
@@ -60,7 +66,7 @@ public class AgenteCoordenador extends Agent{
 		String ataque = parts[0]; // e1
 		String serAtacado = parts[1]; // e2
 		
-		System.out.println("aquaque: "+ataque + "ser atacado: "+serAtacado);
+		System.out.println("ataque: "+ataque + " || defesa: "+serAtacado);
 		if(msg.getContent().contains("ATAQUE")){
 	
 
@@ -77,12 +83,19 @@ public class AgenteCoordenador extends Agent{
 		
 	}
 	
-	private void doAtack(TabuleiroLogica tabuleiro, BoardController b, String atacar, String serAtacado){
+	int soldadosAtaque = 0, soldadosDefesa = 0;
+	private void doAtack(TabuleiroLogica tabuleiro, BoardController b, String atacar, String defender){
 		
 		ArrayList<Integer> dadosAtaque = new ArrayList<Integer>();
-		ArrayList<Integer> dadosAtacado = new ArrayList<Integer>();
-		int soldadosAtaque = 0, soldadosAtacado = 0, ataqueMaisAlto=0, atacadoMaisAlto=0;
-		String agente = null;
+		ArrayList<Integer> dadosDefesa = new ArrayList<Integer>();
+		
+		int ataqueMaisAlto=0, defesaMaisAlto=0, idTerritorioAtaque=0, idTerritorioDefensivo=0;
+		
+		String nomeAtacante = null;
+		String nomeDefensivo = null;
+		String vencedor = null;
+		
+		//do{
 		
 		for (int i = 0; i < tabuleiro.getNumTerritorios(); i++) {
 			
@@ -90,45 +103,153 @@ public class AgenteCoordenador extends Agent{
 		
 			if(territorio.equals(atacar)){
 				soldadosAtaque= tabuleiro.getTerritorio(i).getpecas();
-				dadosAtaque= dadosAtaque(soldadosAtaque);
-				//System.out.println("valor mais alto ataque: "+dadosAtaque.get(0));
-				agente = tabuleiro.getTerritorio(i).getOcupante();
+				System.out.println("SOLDADOS ATAQUE+++++++++++++: "+soldadosAtaque);
+
+				idTerritorioAtaque=i;
 				
-			}else if(territorio.equals(serAtacado)){
-				soldadosAtacado = tabuleiro.getTerritorio(i).getpecas();
-				dadosAtacado= dadosSerAtacado(soldadosAtacado);
+				
+				nomeAtacante = tabuleiro.getTerritorio(i).getOcupante();
+				
+			}else if(territorio.equals(defender)){
+				soldadosDefesa = tabuleiro.getTerritorio(i).getpecas();
+				System.out.println("SOLDADOS DEFESA+++++++++++++: "+soldadosDefesa);
+				
+				idTerritorioDefensivo=i;
+				
+				nomeDefensivo = tabuleiro.getTerritorio(i).getOcupante();
 				//System.out.println("valor mais alto atacado: "+dadosAtacado.get(0));
-			}
-				
+			}	
 		//b.preencherTabuleiro(serAtacado, agente);   // ganha o agente que ataca	
 		}
 		
 		
-		ataqueMaisAlto = dadosAtaque.get(0);
-		 atacadoMaisAlto = dadosAtacado.get(0);
-		
-		if(ataqueMaisAlto>atacadoMaisAlto){
-			System.out.println("ENTROU AQUI---------"+soldadosAtacado);
-			soldadosAtacado--;
-			System.out.println("soldados atacado"+soldadosAtacado);
-			System.out.println(serAtacado+"--------"+soldadosAtacado);
-			//b.colocarPecaTabuleiro(serAtacado, 0);
-			b.preencherTabuleiro(serAtacado, agente);
-		}
-		else if (atacadoMaisAlto>ataqueMaisAlto){
-			soldadosAtaque--;
-			System.out.println("soldados ataque"+soldadosAtaque);
-			//b.colocarPecaTabuleiro(atacar, 0);
-			b.preencherTabuleiro(serAtacado, agente);
-		}
-		
-		System.out.println("valor mais alto ataque: "+dadosAtaque.get(0));
-		System.out.println("valor mais alto atacado: "+dadosAtacado.get(0));
-		
+		outerloop:
+			do{
 				
-		System.out.println("ataque " +atacar +" soldados: " + soldadosAtaque + " || atacado "+serAtacado+ " soldados atacado: " + soldadosAtacado);
-		System.out.println("agente vitorioso!: "+agente);
+			
+			dadosAtaque= dadosAtaque(soldadosAtaque);
+			dadosDefesa= dadosSerAtacado(soldadosDefesa);
+		 
+			int a = dadosAtaque.size();
+			int aa = dadosDefesa.size();
+			int menorDados;
+			
+			if(a<aa)
+				menorDados = a;
+			else
+				menorDados = aa;
+			
+			for(int i=0; i< menorDados; i++){
+				
+			
+			
+			
+			ataqueMaisAlto = dadosAtaque.get(i);
+		 defesaMaisAlto = dadosDefesa.get(i);
+		
+		if(ataqueMaisAlto>defesaMaisAlto){
+
+			tabuleiro.getTerritorio(idTerritorioDefensivo).removerpecas(1);
+			
+			soldadosDefesa--;
+			System.out.println("PERDEU O DEFENSOR: "+soldadosDefesa);
+			Platform.runLater(new Runnable() {
+			    @Override
+			    public void run() {
+			    	b.colocarPecaTabuleiro(defender, soldadosDefesa);
+			    	
+			    }
+			});
+			
+			
+			//b.preencherTabuleiro(atacar, nomeAtacante);
+		}
+		
+		else if (defesaMaisAlto>ataqueMaisAlto){
+			
+			tabuleiro.getTerritorio(idTerritorioAtaque).removerpecas(1);
+			
+			soldadosAtaque--;
+			
+			System.out.println("PERDEU O ATACANTES: "+soldadosAtaque);
+			Platform.runLater(new Runnable() {
+			    @Override
+			    public void run() {
+			    	b.colocarPecaTabuleiro(atacar, soldadosAtaque);
+			    	
+			    }
+			});
+			
+			//if(soldadosAtaque==0)
+			//b.preencherTabuleiro(defender, nomeDefensivo);
+			
+		}
+			if(tabuleiro.getTerritorio(idTerritorioAtaque).getpecas()==0 || 
+					tabuleiro.getTerritorio(idTerritorioDefensivo).getpecas()==0 )
+			{
+				
+				if(tabuleiro.getTerritorio(idTerritorioAtaque).getpecas()==0){
+					vencedor = nomeDefensivo;
+					tabuleiro.getTerritorio(idTerritorioAtaque).setOcupante(vencedor);
+					
+					b.preencherTabuleiro(atacar, vencedor);
+					System.out.println("TERRITORIO DEFESA+++++++++: "+defender);
+					
+					// ** NOVO *** 
+					
+					tabuleiro.getTerritorio(idTerritorioAtaque).addpecas(1);     // ao ganhar poe uma peça no territorio que ficou vazio **NOVO 
+					soldadosAtaque++;
+					
+					tabuleiro.getTerritorio(idTerritorioDefensivo).removerpecas(1);     // e retira uma peça do territorio que ganhou **NOVO
+					soldadosDefesa--;
+					Platform.runLater(new Runnable() {
+					    @Override
+					    public void run() {
+					    	b.colocarPecaTabuleiro(atacar, soldadosAtaque);
+					    	
+					    	b.colocarPecaTabuleiro(defender, soldadosDefesa);   // tira peça do outro territorio ** NOVO
+					    }
+					});
+					}
+				
+				else if (tabuleiro.getTerritorio(idTerritorioDefensivo).getpecas()==0){
+					vencedor = nomeAtacante;
+					tabuleiro.getTerritorio(idTerritorioDefensivo).setOcupante(vencedor);
+					
+					b.preencherTabuleiro(defender, vencedor);
+					System.out.println("TERRITORIO ATAQQQ+++++++++: "+atacar);
+					
+					// ** NOVO *** 
+					
+					tabuleiro.getTerritorio(idTerritorioDefensivo).addpecas(1);
+					soldadosDefesa++;
+					
+					tabuleiro.getTerritorio(idTerritorioAtaque).removerpecas(1);     // e retira uma peça do territorio que ganhou **NOVO
+					soldadosAtaque--;
+					
+					Platform.runLater(new Runnable() {
+					    @Override
+					    public void run() {
+					    	b.colocarPecaTabuleiro(defender, soldadosDefesa);   // retira um soldado do vencedor e poe no novo territorio
+					    	b.colocarPecaTabuleiro(atacar, soldadosAtaque);
+					    }
+					});
+					}
+				
+				
+				break outerloop;
+			}
+		
+			}
+			
+			}while(true);
+		
+		
+		System.out.println("VENCEDOR!!!! ++++++++++++: "+vencedor);
+		
 	}
+	
+	
 	
 	public ArrayList<Integer> dadosAtaque(int numSoldados){
 		ArrayList<Integer> dadosAtaque = new ArrayList<Integer>();
@@ -147,7 +268,7 @@ public class AgenteCoordenador extends Agent{
 			System.out.println("dados ataque: "+dadosAtaque);
 			
 		}
-		else {
+		else if(numSoldados>=3){
 			int x = (int) (Math.random()*6)+1;
 			int y = (int) (Math.random()*6)+1;
 			int z = (int) (Math.random()*6)+1;
@@ -163,24 +284,24 @@ public class AgenteCoordenador extends Agent{
 	}
 	
 	public ArrayList<Integer> dadosSerAtacado(int numSoldados){
-		ArrayList<Integer> dadosSerAtacado = new ArrayList<Integer>();
+		ArrayList<Integer> dadosDefesa = new ArrayList<Integer>();
 	
 		if(numSoldados==1){
 			int x = (int) (Math.random()*6)+1;
-			dadosSerAtacado.add(x);
-			System.out.println("dados atacado: "+dadosSerAtacado);
+			dadosDefesa.add(x);
+			System.out.println("dados defesa: "+dadosDefesa);
 			//return dadosSerAtacado;
 		}
-		else {
+		else if(numSoldados>=2){
 			int x = (int) (Math.random()*6)+1;
 			int y = (int) (Math.random()*6)+1;
-			dadosSerAtacado.add(x);
-			dadosSerAtacado.add(y);
-			Collections.sort(dadosSerAtacado, Collections.reverseOrder());
-			System.out.println("dados atacado: "+dadosSerAtacado);
+			dadosDefesa.add(x);
+			dadosDefesa.add(y);
+			Collections.sort(dadosDefesa, Collections.reverseOrder());
+			System.out.println("dados defesa: "+dadosDefesa);
 			
 		}
-		return dadosSerAtacado;
+		return dadosDefesa;
 			
 	}
 	
@@ -235,7 +356,7 @@ public class AgenteCoordenador extends Agent{
 		private static final long serialVersionUID = 1L;
 		private int a=0;
 		public testeCoordenador(Agent a) {
-			super(a, 500);
+			super(a, 5000);
 		}
 
 		/*@Override
