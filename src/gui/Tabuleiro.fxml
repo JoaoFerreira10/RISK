@@ -82,22 +82,22 @@
             
             <!-- America sul -->
             
-            <Label id="terr" fx:id="as1" layoutX="218.0" layoutY="384.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="as2" layoutX="331.0" layoutY="425.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="as3" layoutX="254.0" layoutY="451.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="as4" layoutX="259.0" layoutY="539.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+            <Label id="terr" fx:id="Colombia" layoutX="232.0" layoutY="369.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+            <Label id="terr" fx:id="Brasil" layoutX="331.0" layoutY="425.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+            <Label id="terr" fx:id="Peru" layoutX="247.0" layoutY="447.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+            <Label id="terr" fx:id="Argentina" layoutX="254.0" layoutY="538.0" prefHeight="31.0" prefWidth="27.0" text="0" />
             
             <!-- America norte -->
             
-            <Label id="terr" fx:id="an1" layoutX="56.0" layoutY="126.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="an2" layoutX="183.0" layoutY="124.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="an3" layoutX="411.0" layoutY="74.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="an4" layoutX="168.0" layoutY="177.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="an5" layoutX="247.0" layoutY="185.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="an6" layoutX="322.0" layoutY="193.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="an7" layoutX="174.0" layoutY="244.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="an8" layoutX="259.0" layoutY="255.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="an9" layoutX="203.0" layoutY="311.0" text="0" />
+            <Label id="terr" fx:id="Alasca" layoutX="56.0" layoutY="126.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+            <Label id="terr" fx:id="NorteCanada" layoutX="183.0" layoutY="124.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+            <Label id="terr" fx:id="Gronelandia" layoutX="411.0" layoutY="74.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+            <Label id="terr" fx:id="OesteCanada" layoutX="168.0" layoutY="177.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+            <Label id="terr" fx:id="SulCanada" layoutX="247.0" layoutY="185.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+            <Label id="terr" fx:id="EsteCanada" layoutX="322.0" layoutY="193.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+            <Label id="terr" fx:id="OesteEUA" layoutX="174.0" layoutY="244.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+            <Label id="terr" fx:id="EsteEUA" layoutX="259.0" layoutY="255.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+            <Label id="terr" fx:id="Mexico" layoutX="203.0" layoutY="311.0" text="0" />
             
             <Button fx:id="jogar" layoutX="27.0" layoutY="44.0" onAction="#iniciarJogo" text="Jogar" />
            
