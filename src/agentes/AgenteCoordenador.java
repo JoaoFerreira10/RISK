@@ -1,5 +1,8 @@
 package agentes;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import javax.swing.plaf.TableUI;
 
 import gui.BoardController;
@@ -47,13 +50,24 @@ public class AgenteCoordenador extends Agent{
 	
 	private void receiveOrderAtack(){
 		ACLMessage msg = blockingReceive();
+		String mensagem= msg.getContent().toString();   // ATAQUE: e1-e2
 		
+	
+
+		String mensagemFinal = mensagem.substring(7, mensagem.length());
+		
+		String[] parts = mensagemFinal.split("-");
+		String ataque = parts[0]; // e1
+		String serAtacado = parts[1]; // e2
+		
+		System.out.println("aquaque: "+ataque + "ser atacado: "+serAtacado);
 		if(msg.getContent().contains("ATAQUE")){
 	
+
 			ACLMessage reply = msg.createReply();
 			
 			//parser para decifrar mensagem com territorio e territorio pa atque
-			doAtack(tabuleiro,controlador,"e1","e2");
+			doAtack(tabuleiro,controlador,ataque,serAtacado);
 			reply.setContent("ataque efetuado");
 			send(reply);	
 			System.out.println("coordenador: " +reply.getContent());
@@ -64,21 +78,110 @@ public class AgenteCoordenador extends Agent{
 	}
 	
 	private void doAtack(TabuleiroLogica tabuleiro, BoardController b, String atacar, String serAtacado){
-		System.out.println("entrou aQUIIIQII");
+		
+		ArrayList<Integer> dadosAtaque = new ArrayList<Integer>();
+		ArrayList<Integer> dadosAtacado = new ArrayList<Integer>();
+		int soldadosAtaque = 0, soldadosAtacado = 0, ataqueMaisAlto=0, atacadoMaisAlto=0;
 		String agente = null;
+		
 		for (int i = 0; i < tabuleiro.getNumTerritorios(); i++) {
-		String territorio = tabuleiro.getTerritorio(i).getNome();
-		if(territorio.equals(atacar)){
-			int soldadosAtaque= tabuleiro.getTerritorio(i).getpecas();
-			agente = tabuleiro.getTerritorio(i).getOcupante();
-		}else if(territorio.equals(serAtacado)){
-			int soldadosAtacado = tabuleiro.getTerritorio(i).getpecas();
+			
+		String territorio = tabuleiro.getTerritorio(i).getNome();		
+		
+			if(territorio.equals(atacar)){
+				soldadosAtaque= tabuleiro.getTerritorio(i).getpecas();
+				dadosAtaque= dadosAtaque(soldadosAtaque);
+				//System.out.println("valor mais alto ataque: "+dadosAtaque.get(0));
+				agente = tabuleiro.getTerritorio(i).getOcupante();
+				
+			}else if(territorio.equals(serAtacado)){
+				soldadosAtacado = tabuleiro.getTerritorio(i).getpecas();
+				dadosAtacado= dadosSerAtacado(soldadosAtacado);
+				//System.out.println("valor mais alto atacado: "+dadosAtacado.get(0));
+			}
+				
+		//b.preencherTabuleiro(serAtacado, agente);   // ganha o agente que ataca	
+		}
+		
+		
+		ataqueMaisAlto = dadosAtaque.get(0);
+		 atacadoMaisAlto = dadosAtacado.get(0);
+		
+		if(ataqueMaisAlto>atacadoMaisAlto){
+			System.out.println("ENTROU AQUI---------"+soldadosAtacado);
+			soldadosAtacado--;
+			System.out.println("soldados atacado"+soldadosAtacado);
+			System.out.println(serAtacado+"--------"+soldadosAtacado);
+			//b.colocarPecaTabuleiro(serAtacado, 0);
+			b.preencherTabuleiro(serAtacado, agente);
+		}
+		else if (atacadoMaisAlto>ataqueMaisAlto){
+			soldadosAtaque--;
+			System.out.println("soldados ataque"+soldadosAtaque);
+			//b.colocarPecaTabuleiro(atacar, 0);
+			b.preencherTabuleiro(serAtacado, agente);
+		}
+		
+		System.out.println("valor mais alto ataque: "+dadosAtaque.get(0));
+		System.out.println("valor mais alto atacado: "+dadosAtacado.get(0));
+		
+				
+		System.out.println("ataque " +atacar +" soldados: " + soldadosAtaque + " || atacado "+serAtacado+ " soldados atacado: " + soldadosAtacado);
+		System.out.println("agente vitorioso!: "+agente);
+	}
+	
+	public ArrayList<Integer> dadosAtaque(int numSoldados){
+		ArrayList<Integer> dadosAtaque = new ArrayList<Integer>();
+	
+		if(numSoldados==1){
+			int x = (int) (Math.random()*6)+1;
+			dadosAtaque.add(x);
+			System.out.println("dados ataque: "+dadosAtaque);
+		}
+		else if(numSoldados==2){
+			int x = (int) (Math.random()*6)+1;
+			int y = (int) (Math.random()*6)+1;
+			dadosAtaque.add(x);
+			dadosAtaque.add(y);
+			Collections.sort(dadosAtaque, Collections.reverseOrder());
+			System.out.println("dados ataque: "+dadosAtaque);
 			
 		}
-		System.out.println("ser atacado: "+serAtacado + "atacar: "+agente);
-		b.preencherTabuleiro(serAtacado, agente);
-		
+		else {
+			int x = (int) (Math.random()*6)+1;
+			int y = (int) (Math.random()*6)+1;
+			int z = (int) (Math.random()*6)+1;
+			dadosAtaque.add(x);
+			dadosAtaque.add(y);
+			dadosAtaque.add(z);
+			Collections.sort(dadosAtaque, Collections.reverseOrder());
+			System.out.println("dados ataque: "+dadosAtaque);
 		}
+		
+		return dadosAtaque;
+			
+	}
+	
+	public ArrayList<Integer> dadosSerAtacado(int numSoldados){
+		ArrayList<Integer> dadosSerAtacado = new ArrayList<Integer>();
+	
+		if(numSoldados==1){
+			int x = (int) (Math.random()*6)+1;
+			dadosSerAtacado.add(x);
+			System.out.println("dados atacado: "+dadosSerAtacado);
+			//return dadosSerAtacado;
+		}
+		else {
+			int x = (int) (Math.random()*6)+1;
+			int y = (int) (Math.random()*6)+1;
+			dadosSerAtacado.add(x);
+			dadosSerAtacado.add(y);
+			Collections.sort(dadosSerAtacado, Collections.reverseOrder());
+			System.out.println("dados atacado: "+dadosSerAtacado);
+			
+		}
+		return dadosSerAtacado;
+			
 	}
 	
 	private void receiveMessage() {
@@ -132,7 +235,7 @@ public class AgenteCoordenador extends Agent{
 		private static final long serialVersionUID = 1L;
 		private int a=0;
 		public testeCoordenador(Agent a) {
-			super(a, 4000);
+			super(a, 3000);
 		}
 
 		/*@Override

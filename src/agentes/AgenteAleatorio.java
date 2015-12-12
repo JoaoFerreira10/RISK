@@ -95,7 +95,7 @@ public class AgenteAleatorio extends AgenteRisk {
 		String t=null;
 		for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(this.getCor()).size(); i++) {
 			int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getAdjacentes().size();
-			//int y3=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i));
+			
 			
 			
 			int y = (int) (Math.random()*y2);
@@ -106,7 +106,7 @@ public class AgenteAleatorio extends AgenteRisk {
 			
 			escolhido = tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getAdjacentes().get(y).getNome();
 			t=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getNome();
-			//System.out.println("Agente " + getCor()+" vai atacar: "+escolhido +" pelo territotio "+t);
+			
 			
 			return "ATAQUE:"+escolhido+"-"+t;
 			}
