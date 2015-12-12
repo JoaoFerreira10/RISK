@@ -20,7 +20,6 @@ public class AgenteAleatorio extends AgenteRisk {
 	
 				
 	private static final long serialVersionUID = 1L;
-	//private ArrayList<Territorio> territorios = new ArrayList<Territorio>();
 	
 	TabuleiroLogica tabuleiro;
 	BoardController board;
@@ -47,14 +46,15 @@ public class AgenteAleatorio extends AgenteRisk {
 		//territorios.add(t);
 	}
 	
+	
 	/*
 	 * Neste método escolhe um territorio aleatorio da lista de territórios do agente
 	 */
 	public int distribuirExercito(TabuleiroLogica tabuleiro, int numExercitos){
 		
-		if(getNumExercitos()-numExercitos<0 || getNumExercitos()==0){
-			return 0;
-		}
+			if(getNumExercitos()-numExercitos<0 || getNumExercitos()==0){
+				return 0;
+			}
 		
 		colocarExercitos(numExercitos);
 		
@@ -67,10 +67,8 @@ public class AgenteAleatorio extends AgenteRisk {
 
 	
 	protected void setup() {
-	//	Object[] args = getArguments();
 
 		System.out.println("aleatorio " + getCor());
-
 		
 		testBehaviour t = new testBehaviour(this);
 		addBehaviour(t);
@@ -85,14 +83,12 @@ public class AgenteAleatorio extends AgenteRisk {
 		dfd.setName(getAID());
 		dfd.addServices(sd);	
 		
-		//String escolhido;
-		
-		
 	}
 
 	public String selecionarAtaque() {
 		String escolhido = null;
 		String t=null;
+		
 		for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(this.getCor()).size(); i++) {
 			int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getAdjacentes().size();
 			
@@ -100,16 +96,14 @@ public class AgenteAleatorio extends AgenteRisk {
 			
 			int y = (int) (Math.random()*y2);
 			
-			if(!tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getAdjacentes().get(y).getOcupante().equals(getCor()))
-			{
-			
-			
-			escolhido = tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getAdjacentes().get(y).getNome();
-			t=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getNome();
-			
-			
-			return "ATAQUE:"+escolhido+"-"+t;
-			}
+				if(!tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getAdjacentes().get(y).getOcupante().equals(getCor())){
+				
+				
+					escolhido = tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getAdjacentes().get(y).getNome();
+					t=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getNome();
+								
+					return "ATAQUE:"+escolhido+"-"+t;
+				}
 			
 			
 		}
@@ -157,44 +151,32 @@ public class AgenteAleatorio extends AgenteRisk {
 		@Override
 		public void action(){
 
-
-
-		if (Singleton.getInstance().getPrimeiroJogar().equals(getCor()) 
-					&& Singleton.getInstance().getState() == Singleton.GAME_START) {
-				
-				//sendMessage();
-			/*String ss = selecionarAtaque();
-			System.out.println("escolhido:  "+ss);*/
-				
-				//System.out.println("entrou em behaviour-1"+getLocalName()+"------ "+getAID().getName());
-		
-				Singleton.getInstance().setState(Singleton.GAME_RUNNING);
-			}
-			else{
-	         
-			
-
-			ACLMessage msg = blockingReceive();
-			if(msg.getContent().contains("ataque efetuado")){
-				ACLMessage reply = msg.createReply();
-				reply.setContent(getCor());  // envia territorio que vai atacar
-				send(reply);
-				System.out.println(getCor() +": Passo a vez.");
-				
-				
-			}else if(msg.getContent().contains("permissao para jogar")){
-				
-				//System.out.println(getCor()+ ": recebi--> "+msg.getContent()+" de --> " +msg.getSender().getName());
-				System.out.println(getCor()+": permissao recebida");
-				
-				ACLMessage reply = msg.createReply();
-				reply.setContent(selecionarAtaque());  // envia territorio que vai atacar
-				send(reply);
-				System.out.println(getCor() +": envio --> vou atacar o territorio " +reply.getContent());
-				
-			}else{
-				System.out.println("nao recebeu");
-			}
+			if (Singleton.getInstance().getPrimeiroJogar().equals(getCor()) 
+						&& Singleton.getInstance().getState() == Singleton.GAME_START) {
+							
+					Singleton.getInstance().setState(Singleton.GAME_RUNNING);
+			}else{	
+	
+				ACLMessage msg = blockingReceive();
+				if(msg.getContent().contains("ataque efetuado")){
+					ACLMessage reply = msg.createReply();
+					reply.setContent(getCor());  // envia territorio que vai atacar
+					send(reply);
+					System.out.println(getCor() +": Passo a vez.");
+					
+					
+				}else if(msg.getContent().contains("permissao para jogar")){
+					
+					System.out.println(getCor()+": permissao recebida");
+					
+					ACLMessage reply = msg.createReply();
+					reply.setContent(selecionarAtaque()); // envia territorio que vai atacar
+					send(reply);
+					System.out.println(getCor() +": envio --> vou atacar o territorio " +reply.getContent());
+					
+				}else{
+					System.out.println("nao recebeu");
+				}
 			
 			}	
 		}

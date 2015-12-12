@@ -211,7 +211,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 				break outerloop;
 			}
 		} 
-}while(true);	
+	}while(true);	
 		
 		System.out.println("exercito"+totalExercitos);
 	}
@@ -223,6 +223,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 	 */	
 	public void colocarPecaTabuleiro(String territorio, Integer pecas){
 		
+		System.out.println("ENTROU EM COLOCARPECA--->" +territorio +" peca--> "+pecas.toString());
 		if(territorio.equals("e1"))
 			e1.setText(pecas.toString());
 		else if(territorio.equals("e2"))
@@ -307,6 +308,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 			Brasil.setText(pecas.toString());
 		else if(territorio.equals("Argentina"))
 			Argentina.setText(pecas.toString());
+
 	}
 		
 	
