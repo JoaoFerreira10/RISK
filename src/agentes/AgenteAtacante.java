@@ -27,7 +27,7 @@ public class AgenteAtacante extends AgenteRisk {
 		// Na primeira jogada, escolhe um terreno aleatorio
 		if(tabuleiro.getTerritoriosPorAgente(this.getCor()).size()==0){
 
-			return (int) (Math.random()*29);		
+			return (int) (Math.random()*42);		
 		}
 				
 		
@@ -51,7 +51,7 @@ public class AgenteAtacante extends AgenteRisk {
 			}
 		}
 		
-		return (int) (Math.random()*29);
+		return (int) (Math.random()*42);
 		
 	}
 	

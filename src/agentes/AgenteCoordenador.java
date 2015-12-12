@@ -42,7 +42,7 @@ public class AgenteCoordenador extends Agent{
 		   r.addAddresses("http://localhost:7778/acc");
 		   ACLMessage aclMessage = new ACLMessage(ACLMessage.REQUEST);
 		   aclMessage.addReceiver(r);
-		   aclMessage.setContent(id+" tem permissão para jogar");
+		   aclMessage.setContent(id+" tem permissao para jogar");
 		   
 		   System.out.println("coordenador: agente "+aclMessage.getContent());
 		   this.send(aclMessage);
@@ -235,7 +235,7 @@ public class AgenteCoordenador extends Agent{
 		private static final long serialVersionUID = 1L;
 		private int a=0;
 		public testeCoordenador(Agent a) {
-			super(a, 3000);
+			super(a, 500);
 		}
 
 		/*@Override

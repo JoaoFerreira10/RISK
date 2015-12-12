@@ -35,18 +35,16 @@ public class BoardController implements EventHandler<ActionEvent>{
 	
 	@FXML//Territorios
 	private Label e1, e2, e3, e4, e5, e6, e7, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, o1, o2, o3, o4,
-	af1, af2, af3, af4, af5, af6;
+	af1, af2, af3, af4, af5, af6, Gronelandia, Alasca, EsteCanada, NorteCanada, SulCanada, OesteCanada, OesteEUA, EsteEUA, Mexico,
+	Colombia, Brasil, Peru, Argentina;
 
 	
 	//botao jogar
 	public void iniciarJogo(ActionEvent ev){
 		
 		criarAgentes(primeiro,agente1, agente2, agente3,agente4);
-		
-		
-		
+			
 		//setupJADE(agentes);
-
 	}
 	
 	
@@ -59,36 +57,36 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 		//Vermelho
 		if(agente1.equals("Aleatorio")){
-			 vermelho= new AgenteAleatorio("red", 10, tabuleiro, this);
+			 vermelho= new AgenteAleatorio("red", 30, tabuleiro, this);
 		}else if(agente1.equals("Atacante")){
-			 vermelho = new AgenteAtacante("red",10);
+			 vermelho = new AgenteAtacante("red",30);
 		}else{
 			 vermelho = new AgenteDefensivo("red", 0);
 		}
 		
 		//Verde
 		if(agente2.equals("Aleatorio")){
-			 verde= new AgenteAleatorio("green",10, tabuleiro, this);
+			 verde= new AgenteAleatorio("green",30, tabuleiro, this);
 		}else if(agente2.equals("Atacante")){
-			 verde = new AgenteAtacante("green",10);
+			 verde = new AgenteAtacante("green",30);
 		}else{
 			 verde = new AgenteDefensivo("green", 0);
 		}
 		
 		//Azul
 		if(agente3.equals("Aleatorio")){
-			 azul = new AgenteAleatorio("blue",10, tabuleiro, this);
+			 azul = new AgenteAleatorio("blue",30, tabuleiro, this);
 		}else if(agente3.equals("Atacante")){
-			 azul = new AgenteAtacante("blue",10);
+			 azul = new AgenteAtacante("blue",30);
 		}else{
 			 azul = new AgenteDefensivo("blue",10);
 		}
 		
 		//Amarelo
 		if(agente4.equals("Aleatorio")){
-			 amarelo = new AgenteAleatorio("yellow",10, tabuleiro, this);
+			 amarelo = new AgenteAleatorio("yellow",30, tabuleiro, this);
 		}else if(agente4.equals("Atacante")){
-			 amarelo  = new AgenteAtacante("yellow",10);
+			 amarelo  = new AgenteAtacante("yellow",30);
 		}else{
 			 amarelo  = new AgenteDefensivo("yellow",10);
 		}
@@ -282,8 +280,33 @@ public class BoardController implements EventHandler<ActionEvent>{
 		else if(territorio.equals("af5"))
 			af5.setText(pecas.toString());
 		else if(territorio.equals("af6"))
-			af6.setText(pecas.toString());
-		
+			af6.setText(pecas.toString());		
+		else if(territorio.equals("Gronelandia"))
+			Gronelandia.setText(pecas.toString());
+		else if(territorio.equals("Alasca"))
+			Alasca.setText(pecas.toString());
+		else if(territorio.equals("NorteCanada"))
+			NorteCanada.setText(pecas.toString());
+		else if(territorio.equals("EsteCanada"))
+			EsteCanada.setText(pecas.toString());
+		else if(territorio.equals("SulCanada"))
+			SulCanada.setText(pecas.toString());
+		else if(territorio.equals("OesteCanada"))
+			OesteCanada.setText(pecas.toString());
+		else if(territorio.equals("EsteEUA"))
+			EsteEUA.setText(pecas.toString());
+		else if(territorio.equals("OesteEUA"))
+			OesteEUA.setText(pecas.toString());
+		else if(territorio.equals("Mexico"))
+			Mexico.setText(pecas.toString());
+		else if(territorio.equals("Colombia"))
+			Colombia.setText(pecas.toString());
+		else if(territorio.equals("Peru"))
+			Peru.setText(pecas.toString());
+		else if(territorio.equals("Brasil"))
+			Brasil.setText(pecas.toString());
+		else if(territorio.equals("Argentina"))
+			Argentina.setText(pecas.toString());
 	}
 		
 	
@@ -350,6 +373,32 @@ public class BoardController implements EventHandler<ActionEvent>{
 			af5.setStyle("-fx-background-color: "+ cor+";");
 		else if(territorio.equals("af6"))
 			af6.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("Alasca"))
+			Alasca.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("NorteCanada"))
+			NorteCanada.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("OesteCanada"))
+			OesteCanada.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("SulCanada"))
+			SulCanada.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("EsteCanada"))
+			EsteCanada.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("OesteEUA"))
+			OesteEUA.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("EsteEUA"))
+			EsteEUA.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("Mexico"))
+			Mexico.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("Gronelandia"))
+			Gronelandia.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("Colombia"))
+			Colombia.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("Peru"))
+			Peru.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("Brasil"))
+			Brasil.setStyle("-fx-background-color: "+ cor+";");
+		else if(territorio.equals("Argentina"))
+			Argentina.setStyle("-fx-background-color: "+ cor+";");
 	}	
 	
 	

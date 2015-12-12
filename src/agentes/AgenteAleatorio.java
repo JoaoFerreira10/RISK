@@ -39,7 +39,7 @@ public class AgenteAleatorio extends AgenteRisk {
 	
 	public int escolherTerritorio(){
 		
-		return (int) (Math.random()*29);	
+		return (int) (Math.random()*42);	
 	}
 	
 	public void addTerritorio(Territorio t){
@@ -182,10 +182,10 @@ public class AgenteAleatorio extends AgenteRisk {
 				System.out.println(getCor() +": Passo a vez.");
 				
 				
-			}else if(msg.getContent().contains("permissão para jogar")){
+			}else if(msg.getContent().contains("permissao para jogar")){
 				
 				//System.out.println(getCor()+ ": recebi--> "+msg.getContent()+" de --> " +msg.getSender().getName());
-				System.out.println(getCor()+": permissão recebida");
+				System.out.println(getCor()+": permissao recebida");
 				
 				ACLMessage reply = msg.createReply();
 				reply.setContent(selecionarAtaque());  // envia territorio que vai atacar

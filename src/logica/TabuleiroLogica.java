@@ -46,6 +46,27 @@ Territorio af4=new Territorio("af4", 0, false);
 Territorio af5=new Territorio("af5", 0, false);
 Territorio af6=new Territorio("af6", 0, false);
 
+//America do Norte 
+
+Territorio am1=new Territorio("Gronelandia", 0, false);
+Territorio am2=new Territorio("Alasca", 0, false);
+Territorio am3=new Territorio("NorteCanada", 0, false);
+Territorio am4=new Territorio("SulCanada", 0, false);
+Territorio am5=new Territorio("EsteCanada", 0, false);
+Territorio am6=new Territorio("OesteCanada", 0, false);
+Territorio am7=new Territorio("EsteEUA", 0, false);
+Territorio am8=new Territorio("OesteEUA", 0, false);
+Territorio am9=new Territorio("Mexico", 0, false);
+
+
+//America do Sul
+
+Territorio as1=new Territorio("Colombia", 0, false);
+Territorio as2=new Territorio("Brasil", 0, false);
+Territorio as3=new Territorio("Peru", 0, false);
+Territorio as4=new Territorio("Argentina", 0, false);
+
+
 
 
 	public TabuleiroLogica(){
@@ -80,6 +101,7 @@ Territorio af6=new Territorio("af6", 0, false);
 		t7.addAdjacente(t5);
 		t7.addAdjacente(t6);	
 		t7.addAdjacente(t2);
+		t7.addAdjacente(am1);
 		
 		//Asia
 		t8.addAdjacente(t11);
@@ -152,7 +174,7 @@ Territorio af6=new Territorio("af6", 0, false);
 		
 		af1.addAdjacente(t1);
 		af1.addAdjacente(af2);
-		//af1.addAdjacente(as2);   //america do sul
+		af1.addAdjacente(as2);   //america do sul
 		af1.addAdjacente(af4);
 		af1.addAdjacente(af3);
 		af2.addAdjacente(t3);
@@ -174,6 +196,59 @@ Territorio af6=new Territorio("af6", 0, false);
 		af5.addAdjacente(af3);
 		af6.addAdjacente(af5);
 		af6.addAdjacente(af3);
+		
+		//America Norte
+		
+		am1.addAdjacente(t7);
+		am1.addAdjacente(am3);
+		am1.addAdjacente(am5);
+		am1.addAdjacente(am4);
+		am2.addAdjacente(am3);
+		am2.addAdjacente(am5);
+		am3.addAdjacente(am2);
+		am3.addAdjacente(am1);
+		am3.addAdjacente(am4);
+		am3.addAdjacente(am6);
+		am4.addAdjacente(am3);
+		am4.addAdjacente(am5);
+		am4.addAdjacente(am6);
+		am4.addAdjacente(am1);
+		am4.addAdjacente(am7);
+		am4.addAdjacente(am8);
+		am5.addAdjacente(am1);
+		am5.addAdjacente(am4);
+		am5.addAdjacente(am7);
+		am6.addAdjacente(am2);
+		am6.addAdjacente(am4);
+		am6.addAdjacente(am3);
+		am6.addAdjacente(am8);
+		am7.addAdjacente(am8);
+		am7.addAdjacente(am5);
+		am7.addAdjacente(am9);
+		am7.addAdjacente(am4);
+		am8.addAdjacente(am7);
+		am8.addAdjacente(am9);
+		am8.addAdjacente(am5);
+		am8.addAdjacente(am4);
+		am9.addAdjacente(am7);
+		am9.addAdjacente(am8);
+		am9.addAdjacente(as1);
+		
+		//America do Sul
+		as1.addAdjacente(am9);
+		as1.addAdjacente(as2);
+		as1.addAdjacente(as3);
+		as2.addAdjacente(as1);
+		as2.addAdjacente(as3);
+		as2.addAdjacente(as4);
+		as2.addAdjacente(af1);
+		as3.addAdjacente(as1);
+		as3.addAdjacente(as2);
+		as3.addAdjacente(as4);
+		as4.addAdjacente(as2);
+		as4.addAdjacente(as3);
+		
+		
 		
 		territorios.add(t1);
 		territorios.add(t2);
@@ -204,7 +279,21 @@ Territorio af6=new Territorio("af6", 0, false);
 		territorios.add(af4);
 		territorios.add(af5);
 		territorios.add(af6);
-			
+		
+		territorios.add(am1);
+		territorios.add(am2);
+		territorios.add(am3);
+		territorios.add(am4);
+		territorios.add(am5);
+		territorios.add(am6);
+		territorios.add(am7);
+		territorios.add(am8);
+		territorios.add(am9);
+		territorios.add(as1);
+		territorios.add(as2);
+		territorios.add(as3);
+		territorios.add(as4);
+	
 	}
 	
 	public Territorio getTerritorio(int x){
