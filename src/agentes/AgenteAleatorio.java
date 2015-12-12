@@ -4,6 +4,8 @@ package agentes;
 import java.util.ArrayList;
 
 import gui.BoardController;
+import gui.Singleton;
+import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.SimpleBehaviour;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -11,6 +13,8 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 import logica.TabuleiroLogica;
 import logica.Territorio;
+
+import static gui.Singleton.*;
 
 public class AgenteAleatorio extends AgenteRisk {
 	
@@ -60,52 +64,17 @@ public class AgenteAleatorio extends AgenteRisk {
 		return tabuleiro.getTerritoriosPorAgente(this.getCor()).get(y);
 	}
 	
-		
-	public void receiveSoldiers(int numSoldiers) {
-	/*	ArrayList<String> playerTerritories = b.getPlayerTerritories(myAgent.getLocalName());
-		// Can't place soldiers without territories
-		if(playerTerritories.size() == 0) {
-			return new ReceiveAction();
-		}
-		
-		int index, size = playerTerritories.size();
-		ReceiveAction action = new ReceiveAction();
 
-		// Choose a random territory for each soldier received.
-		for (int i = 0; i < numSoldiers; i++) {
-			index = r.nextInt(size);
-			action.addSoldiersTerritory(1, playerTerritories.get(index));
-		}
-		return action;*/
-	}
-	
-	
-	
 	
 	protected void setup() {
 	//	Object[] args = getArguments();
 
 		System.out.println("aleatorio " + getCor());
-		//System.out.println("nome: "+ getAID().getLocalName());
 
 		
-		//ACLMessage msg = new ACLMessage( ACLMessage.INFORM );
-	    //sg.setContent("pong" );
-	    
-		//agenteTeste n = new agenteTeste(this);
-	//	addBehaviour(n);
-		
-		//testBehaviour t = new testBehaviour(this);
-		//addBehaviour(t);
-		
-		
-		/*
-		for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(getCor()).size(); i++) {
-		   int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(getCor()).get(i)).getAdjacentes().size();
-		   System.out.println("territorios adj do " + getCor() + " : " + y2);
-		}
-		*/
-		
+		testBehaviour t = new testBehaviour(this);
+		addBehaviour(t);
+				
 		
 		// Registration with the DF 
 		DFAgentDescription dfd = new DFAgentDescription();
@@ -114,9 +83,63 @@ public class AgenteAleatorio extends AgenteRisk {
 		sd.setType("Aleatorio"); 
 		sd.setName(getName());
 		dfd.setName(getAID());
-		dfd.addServices(sd);			
-
+		dfd.addServices(sd);	
+		
+		//String escolhido;
+		
+		
 	}
+
+	public String selecionarAtaque() {
+		String escolhido = null;
+		String t=null;
+		for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(this.getCor()).size(); i++) {
+			int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getAdjacentes().size();
+			//int y3=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i));
+			
+			
+			int y = (int) (Math.random()*y2);
+			
+			if(!tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getAdjacentes().get(y).getOcupante().equals(getCor()))
+			{
+			
+			
+			escolhido = tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getAdjacentes().get(y).getNome();
+			t=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(i)).getNome();
+			//System.out.println("Agente " + getCor()+" vai atacar: "+escolhido +" pelo territotio "+t);
+			
+			return "ATAQUE:"+escolhido+"-"+t;
+			}
+			
+			
+		}
+		return "ganhei o jogo";
+	}
+
+	
+	
+	public  ArrayList<Territorio> getTerritories() {
+		return tabuleiro.getObjetoTerritorio(getCor());
+	}
+	
+	public boolean play() {
+		
+		
+		System.out.println(getTerritories().get(0).getNome() + " - " + getTerritories().get(0).getpecas());
+		
+		return false;
+	}
+	
+	
+//	private void sendMessage() {
+//		   AID r = new AID ("red-Aleatorio@MyMainPlatform", AID.ISGUID);
+//		   
+//		   r.addAddresses("http://localhost:7778/acc");
+//		   ACLMessage aclMessage = new ACLMessage(ACLMessage.REQUEST);
+//		   aclMessage.addReceiver(r);
+//		   aclMessage.setContent("ping");
+//		   this.send(aclMessage);
+//		}
 	
 
 	public class testBehaviour extends SimpleBehaviour{
@@ -133,22 +156,47 @@ public class AgenteAleatorio extends AgenteRisk {
 		
 		@Override
 		public void action(){
-			System.out.println("entrou action");
-	        /* ACLMessage msg = blockingReceive();
 
-	         if(msg.getPerformative() == ACLMessage.INFORM) {
-	            System.out.println(++n +" : recebi " + msg.getContent());
-	            // cria resposta
-	            ACLMessage reply = msg.createReply();
-	            // preenche conteï¿½do da mensagem
-	            if(msg.getContent().equals("ping"))
-	               reply.setContent("pong");
-	            else reply.setContent("ping");
-	            // envia mensagem
-	            send(reply);
-	         }*/
+
+
+		if (Singleton.getInstance().getPrimeiroJogar().equals(getCor()) 
+					&& Singleton.getInstance().getState() == Singleton.GAME_START) {
+				
+				//sendMessage();
+			/*String ss = selecionarAtaque();
+			System.out.println("escolhido:  "+ss);*/
+				
+				//System.out.println("entrou em behaviour-1"+getLocalName()+"------ "+getAID().getName());
+		
+				Singleton.getInstance().setState(Singleton.GAME_RUNNING);
+			}
+			else{
+	         
 			
+
+			ACLMessage msg = blockingReceive();
+			if(msg.getContent().contains("ataque efetuado")){
+				ACLMessage reply = msg.createReply();
+				reply.setContent(getCor());  // envia territorio que vai atacar
+				send(reply);
+				System.out.println(getCor() +": Passo a vez.");
+				
+				
+			}else if(msg.getContent().contains("permissão para jogar")){
+				
+				//System.out.println(getCor()+ ": recebi--> "+msg.getContent()+" de --> " +msg.getSender().getName());
+				System.out.println(getCor()+": permissão recebida");
+				
+				ACLMessage reply = msg.createReply();
+				reply.setContent(selecionarAtaque());  // envia territorio que vai atacar
+				send(reply);
+				System.out.println(getCor() +": envio --> vou atacar o territorio " +reply.getContent());
+				
+			}else{
+				System.out.println("nao recebeu");
+			}
 			
+			}	
 		}
 		
 		@Override

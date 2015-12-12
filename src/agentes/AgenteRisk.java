@@ -26,6 +26,10 @@ public abstract class AgenteRisk extends Agent {
 		return cor;
 	}
 
+	public String getId() {
+		return this.getCor()+"-"+this.getType();
+	}
+
 	public int getNumExercitos() {
 		return numExercitos;
 	}

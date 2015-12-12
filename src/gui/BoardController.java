@@ -7,7 +7,7 @@ import agentes.AgenteAleatorio.testBehaviour;
 import agentes.AgenteAtacante;
 import agentes.AgenteDefensivo;
 import agentes.AgenteRisk;
-import agentes.agenteX;
+import agentes.AgenteCoordenador;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
@@ -163,7 +163,9 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 		distribuirExercitos(agentes);
 		
-		setupJADE(agentes); // JADE
+		
+		
+		setupJADE(agentes, new AgenteCoordenador(tabuleiro, this)); // JADE
 		
 		
 		// fun�ao jogar , que cria os 4 agentes no RMA --- for(int i=0;i<map.getNumTrucks();i++){
@@ -393,11 +395,12 @@ public class BoardController implements EventHandler<ActionEvent>{
 	static ContainerController myContainer;
 	private static AgentContainer container;
 		
-	private static void setupJADE(AgenteRisk[] agentes) {
+	private static void setupJADE(AgenteRisk[] agentes, AgenteCoordenador coordenador) {
+		
 			Profile profile=new ProfileImpl("localhost", 1099,
 			Profile.PLATFORM_ID);
 			
-			profile.setParameter(Profile.PLATFORM_ID, "MyMainPlatform");
+			profile.setParameter(Profile.PLATFORM_ID, "Risk");
 			profile.setParameter("gui", "ture");
 			
 		
@@ -416,22 +419,24 @@ public class BoardController implements EventHandler<ActionEvent>{
 			    			
 			            		
 			            		if(agentes[i] instanceof AgenteAleatorio){
-			    				agent = container.acceptNewAgent(agentes[i].getCor() + "-" + agentes[i].getType(), agentes[i]);	
+			    				agent = container.acceptNewAgent(agentes[i].getId(), agentes[i]);	
 			    				//agent.start();
 			            		}
 				    			if(agentes[i] instanceof AgenteAtacante){
-				    				agent = container.acceptNewAgent(agentes[i].getCor() + "-" + agentes[i].getType(), agentes[i]);
+				    				agent = container.acceptNewAgent(agentes[i].getId(), agentes[i]);
 				    				//agent.start();
 				    			}
 				    			
 			            	}	
+
 			            	
 			            	for (AgenteRisk x : agentes) {
-			            		container.getAgent(x.getCor()+"-"+x.getType()).start();
+			            		container.getAgent(x.getId()).start();
 			            	}
+			            	
+			            	agent=container.acceptNewAgent("coordenador", coordenador);
+			            		container.getAgent("coordenador").start();
 			        
-			            	//agent= container.acceptNewAgent("so para teste", new agenteX("luis", 2, t));
-			            	//agent.start();
 			        }
 
 			        catch(Exception ex)
