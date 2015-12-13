@@ -64,16 +64,16 @@ public class AgenteCoordenador extends Agent{
 		
 		String[] parts = mensagemFinal.split("-");
 		String ataque = parts[0]; // e1
-		String serAtacado = parts[1]; // e2
+		String defesa = parts[1]; // e2
 		
-		System.out.println("ataque: "+ataque + " || defesa: "+serAtacado);
+		System.out.println("ataque: "+ataque + " || defesa: "+defesa);
 		if(msg.getContent().contains("ATAQUE")){
 	
 
 			ACLMessage reply = msg.createReply();
 			
 			//parser para decifrar mensagem com territorio e territorio pa atque
-			doAtack(tabuleiro,controlador,ataque,serAtacado);
+			doAtack(tabuleiro,controlador,ataque,defesa);
 			reply.setContent("ataque efetuado");
 			send(reply);	
 			System.out.println("coordenador: " +reply.getContent());
@@ -83,16 +83,16 @@ public class AgenteCoordenador extends Agent{
 		
 	}
 	
-	int soldadosAtaque = 0, soldadosDefesa = 0;
-	private void doAtack(TabuleiroLogica tabuleiro, BoardController b, String atacar, String defender){
+	int soldadosDefensor = 0, soldadosAtacante = 0;
+	private void doAtack(TabuleiroLogica tabuleiro, BoardController b, String defensor, String atacante){
 		
-		ArrayList<Integer> dadosAtaque = new ArrayList<Integer>();
-		ArrayList<Integer> dadosDefesa = new ArrayList<Integer>();
+		ArrayList<Integer> dadosDefensor = new ArrayList<Integer>();
+		ArrayList<Integer> dadosAtacante = new ArrayList<Integer>();
 		
-		int ataqueMaisAlto=0, defesaMaisAlto=0, idTerritorioAtaque=0, idTerritorioDefensivo=0;
+		int ataqueMaisAlto=0, defesaMaisAlto=0, idTerritorioDefensor=0, idTerritorioAtacante=0;
 		
 		String nomeAtacante = null;
-		String nomeDefensivo = null;
+		String nomeDefensor = null;
 		String vencedor = null;
 		
 		//do{
@@ -101,23 +101,24 @@ public class AgenteCoordenador extends Agent{
 			
 		String territorio = tabuleiro.getTerritorio(i).getNome();		
 		
-			if(territorio.equals(atacar)){
-				soldadosAtaque= tabuleiro.getTerritorio(i).getpecas();
-				System.out.println("SOLDADOS ATAQUE+++++++++++++: "+soldadosAtaque);
+			if(territorio.equals(defensor)){
+				soldadosDefensor= tabuleiro.getTerritorio(i).getpecas();
+				System.out.println("SOLDADOS DEFENSOR+++++++++++++: "+soldadosDefensor);
 
-				idTerritorioAtaque=i;
+				idTerritorioDefensor=i;
 				
+				
+				nomeDefensor = tabuleiro.getTerritorio(i).getOcupante();
+				System.out.println("NOME DEFENSOR+++++++++++++++++: "+nomeDefensor);
+				
+			}else if(territorio.equals(atacante)){
+				soldadosAtacante = tabuleiro.getTerritorio(i).getpecas();
+				System.out.println("SOLDADOS ATACANTE+++++++++++++: "+soldadosAtacante);
+				
+				idTerritorioAtacante=i;
 				
 				nomeAtacante = tabuleiro.getTerritorio(i).getOcupante();
-				
-			}else if(territorio.equals(defender)){
-				soldadosDefesa = tabuleiro.getTerritorio(i).getpecas();
-				System.out.println("SOLDADOS DEFESA+++++++++++++: "+soldadosDefesa);
-				
-				idTerritorioDefensivo=i;
-				
-				nomeDefensivo = tabuleiro.getTerritorio(i).getOcupante();
-				//System.out.println("valor mais alto atacado: "+dadosAtacado.get(0));
+				System.out.println("NOME ATACANTE+++++++++++++++++: "+nomeAtacante);
 			}	
 		//b.preencherTabuleiro(serAtacado, agente);   // ganha o agente que ataca	
 		}
@@ -127,11 +128,11 @@ public class AgenteCoordenador extends Agent{
 			do{
 				
 			
-			dadosAtaque= dadosAtaque(soldadosAtaque);
-			dadosDefesa= dadosSerAtacado(soldadosDefesa);
+			dadosDefensor= dadosDefensor(soldadosDefensor); // no maximo 2 dados
+			dadosAtacante= dadosAtacante(soldadosAtacante);  // no maximo 3 dados
 		 
-			int a = dadosAtaque.size();
-			int aa = dadosDefesa.size();
+			int a = dadosAtacante.size();
+			int aa = dadosDefensor.size();
 			int menorDados;
 			
 			if(a<aa)
@@ -144,19 +145,20 @@ public class AgenteCoordenador extends Agent{
 			
 			
 			
-			ataqueMaisAlto = dadosAtaque.get(i);
-		 defesaMaisAlto = dadosDefesa.get(i);
+		 ataqueMaisAlto = dadosAtacante.get(i);
+		 defesaMaisAlto = dadosDefensor.get(i);
 		
 		if(ataqueMaisAlto>defesaMaisAlto){
-
-			tabuleiro.getTerritorio(idTerritorioDefensivo).removerpecas(1);
+			soldadosDefensor--;
 			
-			soldadosDefesa--;
-			System.out.println("PERDEU O DEFENSOR: "+soldadosDefesa);
+			tabuleiro.getTerritorio(idTerritorioDefensor).removerpecas(1);
+			
+			
+			System.out.println("PERDEU O DEFENSOR: "+soldadosDefensor);
 			Platform.runLater(new Runnable() {
 			    @Override
 			    public void run() {
-			    	b.colocarPecaTabuleiro(defender, soldadosDefesa);
+			    	b.colocarPecaTabuleiro(defensor, soldadosDefensor);
 			    	
 			    }
 			});
@@ -167,75 +169,173 @@ public class AgenteCoordenador extends Agent{
 		
 		else if (defesaMaisAlto>ataqueMaisAlto){
 			
-			tabuleiro.getTerritorio(idTerritorioAtaque).removerpecas(1);
 			
-			soldadosAtaque--;
 			
-			System.out.println("PERDEU O ATACANTES: "+soldadosAtaque);
+			System.out.println("ATACANTE FICOU COM UM TROPA E DESISTIU DO ATAQUE");
+			
+			
+			tabuleiro.getTerritorio(idTerritorioAtacante).removerpecas(1);
+			soldadosAtacante--;
+			
+			if(soldadosAtacante==1){
+			
+			System.out.println("PERDEU O ATACANTE, FICOU COM UM: "+soldadosAtacante + " TROPA");
 			Platform.runLater(new Runnable() {
 			    @Override
 			    public void run() {
-			    	b.colocarPecaTabuleiro(atacar, soldadosAtaque);
+			    	b.colocarPecaTabuleiro(atacante, soldadosAtacante);
 			    	
 			    }
 			});
-			
+			}
 			//if(soldadosAtaque==0)
 			//b.preencherTabuleiro(defender, nomeDefensivo);
 			
 		}
-			if(tabuleiro.getTerritorio(idTerritorioAtaque).getpecas()==0 || 
-					tabuleiro.getTerritorio(idTerritorioDefensivo).getpecas()==0 )
+			if(tabuleiro.getTerritorio(idTerritorioAtacante).getpecas()==1 || 
+					tabuleiro.getTerritorio(idTerritorioDefensor).getpecas()==0 )
 			{
 				
-				if(tabuleiro.getTerritorio(idTerritorioAtaque).getpecas()==0){
-					vencedor = nomeDefensivo;
-					tabuleiro.getTerritorio(idTerritorioAtaque).setOcupante(vencedor);
+				if(tabuleiro.getTerritorio(idTerritorioAtacante).getpecas()==0){
 					
-					b.preencherTabuleiro(atacar, vencedor);
-					System.out.println("TERRITORIO DEFESA+++++++++: "+defender);
+					
+					vencedor = nomeDefensor;
+					tabuleiro.getTerritorio(idTerritorioAtacante).setOcupante(vencedor);
+					
+					b.preencherTabuleiro(atacante, vencedor);
+			
 					
 					// ** NOVO *** 
 					
-					tabuleiro.getTerritorio(idTerritorioAtaque).addpecas(1);     // ao ganhar poe uma peça no territorio que ficou vazio **NOVO 
-					soldadosAtaque++;
+					if (tabuleiro.getTerritorio(idTerritorioDefensor).getpecas()==1){
+										System.out.println("SO TEM UMA PEÇA ---------------------");	
+								
+										
+						/*if(tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(nomeDefensor.getAdjacentes().get(y).getOcupante().equals(getCor()))
+										
+										// vai buscar os adjacentes iguais a ele
+										System.out.println(tabuleiro.getTerritorio(idTerritorioDefensor).getAdjacentes().get(idTerritorioDefensor).getNome());
+										int y2 = tabuleiro.getTerritorio(idTerritorioDefensor).getAdjacentes().size();
+										for (int j = 0; j <y2; j++){
+											
+											int pecas= tabuleiro.getTerritorio(y2).getpecas();
+											System.out.println("PECAAS DOS ADJACENTES"+pecas);
+										}*/
+											
+						
+											
+											}
 					
-					tabuleiro.getTerritorio(idTerritorioDefensivo).removerpecas(1);     // e retira uma peça do territorio que ganhou **NOVO
-					soldadosDefesa--;
+					
+					if (tabuleiro.getTerritorio(idTerritorioDefensor).getpecas()==2){
+						System.out.println("ENVIAR 1 TROPA!!");
+					tabuleiro.getTerritorio(idTerritorioAtacante).addpecas(1);     // ao ganhar poe uma peça no territorio que ficou vazio **NOVO 
+					soldadosAtacante++;
+					
+					tabuleiro.getTerritorio(idTerritorioDefensor).removerpecas(1);     // e retira uma peça do territorio que ganhou **NOVO
+					soldadosDefensor--;
 					Platform.runLater(new Runnable() {
 					    @Override
 					    public void run() {
-					    	b.colocarPecaTabuleiro(atacar, soldadosAtaque);
+					    	b.colocarPecaTabuleiro(defensor, soldadosDefensor);  // tira peça do territorio vencedor ** NOVO
 					    	
-					    	b.colocarPecaTabuleiro(defender, soldadosDefesa);   // tira peça do outro territorio ** NOVO
+					    	b.colocarPecaTabuleiro(atacante, soldadosAtacante);   
 					    }
 					});
+					
+					}
+					
+					else if (tabuleiro.getTerritorio(idTerritorioDefensor).getpecas()>2){
+						System.out.println("ENVIAR 2 TROPAS!!");
+						tabuleiro.getTerritorio(idTerritorioAtacante).addpecas(2);     // ao ganhar poe uma peça no territorio que ficou vazio **NOVO 
+						soldadosAtacante++;
+						soldadosAtacante++;
+						
+						tabuleiro.getTerritorio(idTerritorioDefensor).removerpecas(2);     // e retira uma peça do territorio que ganhou **NOVO
+						soldadosDefensor--;
+						soldadosDefensor--;
+						Platform.runLater(new Runnable() {
+						    @Override
+						    public void run() {
+						    	b.colocarPecaTabuleiro(defensor, soldadosDefensor);  // tira peça do outro territorio ** NOVO
+						    	
+						    	b.colocarPecaTabuleiro(atacante, soldadosAtacante);   
+						    }
+						});
+						
+						}
+					
 					}
 				
-				else if (tabuleiro.getTerritorio(idTerritorioDefensivo).getpecas()==0){
-					vencedor = nomeAtacante;
-					tabuleiro.getTerritorio(idTerritorioDefensivo).setOcupante(vencedor);
+				else if (tabuleiro.getTerritorio(idTerritorioDefensor).getpecas()==0){  // se o terr. defensor chegar a 0 peças entao ganhou o atacante
+					vencedor = nomeAtacante;   // atacante vencedor
+					tabuleiro.getTerritorio(idTerritorioDefensor).setOcupante(vencedor);   // troca o territorio defendido pela cor do atacante vencedor
 					
-					b.preencherTabuleiro(defender, vencedor);
-					System.out.println("TERRITORIO ATAQQQ+++++++++: "+atacar);
+					b.preencherTabuleiro(defensor, vencedor); // vencedor
+
 					
 					// ** NOVO *** 
 					
-					tabuleiro.getTerritorio(idTerritorioDefensivo).addpecas(1);
-					soldadosDefesa++;
+					if (tabuleiro.getTerritorio(idTerritorioAtacante).getpecas()==1){
+						System.out.println("SO TEM UMA PEÇA ---------------------");
+						
+						// vai buscar os adjacentes iguais a ele
+						/*System.out.println(tabuleiro.getTerritorio(idTerritorioAtacante).getAdjacentes());
+						if(tabuleiro.getTerritorio(idTerritorioAtacante).getAdjacentes().equals(idTerritorioAtacante){						
+							System.out.println("NUMERO ADJACENTES: "+y2);
+						}
+						(int j = 0; j <y2; j++){
+							
+							int pecas= tabuleiro.getTerritorio(j).getpecas();
+							System.out.println("PECAAS DOS ADJACENTES"+pecas);
+						}*/
+						
+					}
 					
-					tabuleiro.getTerritorio(idTerritorioAtaque).removerpecas(1);     // e retira uma peça do territorio que ganhou **NOVO
-					soldadosAtaque--;
+					
+					if (tabuleiro.getTerritorio(idTerritorioAtacante).getpecas()==2){
+					
+						System.out.println("ENVIAR 1 TROPA!!");
+					
+					tabuleiro.getTerritorio(idTerritorioDefensor).addpecas(1);
+					soldadosDefensor++;
+					
+					tabuleiro.getTerritorio(idTerritorioAtacante).removerpecas(1);     // e retira uma peça do territorio que ganhou **NOVO
+					soldadosAtacante--;
+					
+				
 					
 					Platform.runLater(new Runnable() {
 					    @Override
 					    public void run() {
-					    	b.colocarPecaTabuleiro(defender, soldadosDefesa);   // retira um soldado do vencedor e poe no novo territorio
-					    	b.colocarPecaTabuleiro(atacar, soldadosAtaque);
+					    	b.colocarPecaTabuleiro(atacante, soldadosAtacante);   // retira um soldado do vencedor e poe no novo territorio
+					    	b.colocarPecaTabuleiro(defensor, soldadosDefensor);
 					    }
 					});
 					}
+					
+					else if (tabuleiro.getTerritorio(idTerritorioAtacante).getpecas()>2){
+						
+						System.out.println("ENVIAR 2 TROPAS!!");
+						
+						tabuleiro.getTerritorio(idTerritorioDefensor).addpecas(2);
+						soldadosDefensor++;
+						soldadosDefensor++;
+						tabuleiro.getTerritorio(idTerritorioAtacante).removerpecas(2);     // e retira uma peça do territorio que ganhou **NOVO
+						soldadosAtacante--;
+						soldadosAtacante--;
+					
+						
+						Platform.runLater(new Runnable() {
+						    @Override
+						    public void run() {
+						    	b.colocarPecaTabuleiro(atacante, soldadosAtacante);   // retira um soldado do vencedor e poe no novo territorio
+						    	b.colocarPecaTabuleiro(defensor, soldadosDefensor);
+						    }
+						});
+						}
 				
+				}
 				
 				break outerloop;
 			}
@@ -251,57 +351,57 @@ public class AgenteCoordenador extends Agent{
 	
 	
 	
-	public ArrayList<Integer> dadosAtaque(int numSoldados){
-		ArrayList<Integer> dadosAtaque = new ArrayList<Integer>();
-	
-		if(numSoldados==1){
+	public ArrayList<Integer> dadosAtacante(int numSoldados){ 
+		ArrayList<Integer> dadosAtacante = new ArrayList<Integer>();
+		// se ficar com 1 soldado no ataque, é terminado o ataque
+		if(numSoldados==2){
 			int x = (int) (Math.random()*6)+1;
-			dadosAtaque.add(x);
-			System.out.println("dados ataque: "+dadosAtaque);
+			dadosAtacante.add(x);
+			System.out.println("dados atacante: "+dadosAtacante);
 		}
-		else if(numSoldados==2){
+		else if(numSoldados==3){
 			int x = (int) (Math.random()*6)+1;
 			int y = (int) (Math.random()*6)+1;
-			dadosAtaque.add(x);
-			dadosAtaque.add(y);
-			Collections.sort(dadosAtaque, Collections.reverseOrder());
-			System.out.println("dados ataque: "+dadosAtaque);
+			dadosAtacante.add(x);
+			dadosAtacante.add(y);
+			Collections.sort(dadosAtacante, Collections.reverseOrder());
+			System.out.println("dados atacante: "+dadosAtacante);
 			
 		}
-		else if(numSoldados>=3){
+		else if(numSoldados>=4){
 			int x = (int) (Math.random()*6)+1;
 			int y = (int) (Math.random()*6)+1;
 			int z = (int) (Math.random()*6)+1;
-			dadosAtaque.add(x);
-			dadosAtaque.add(y);
-			dadosAtaque.add(z);
-			Collections.sort(dadosAtaque, Collections.reverseOrder());
-			System.out.println("dados ataque: "+dadosAtaque);
+			dadosAtacante.add(x);
+			dadosAtacante.add(y);
+			dadosAtacante.add(z);
+			Collections.sort(dadosAtacante, Collections.reverseOrder());
+			System.out.println("dados atacante: "+dadosAtacante);
 		}
 		
-		return dadosAtaque;
+		return dadosAtacante;
 			
 	}
 	
-	public ArrayList<Integer> dadosSerAtacado(int numSoldados){
-		ArrayList<Integer> dadosDefesa = new ArrayList<Integer>();
+	public ArrayList<Integer> dadosDefensor(int numSoldados){
+		ArrayList<Integer> dadosDefensor = new ArrayList<Integer>();
 	
 		if(numSoldados==1){
 			int x = (int) (Math.random()*6)+1;
-			dadosDefesa.add(x);
-			System.out.println("dados defesa: "+dadosDefesa);
+			dadosDefensor.add(x);
+			System.out.println("dados defensor: "+dadosDefensor);
 			//return dadosSerAtacado;
 		}
 		else if(numSoldados>=2){
 			int x = (int) (Math.random()*6)+1;
 			int y = (int) (Math.random()*6)+1;
-			dadosDefesa.add(x);
-			dadosDefesa.add(y);
-			Collections.sort(dadosDefesa, Collections.reverseOrder());
-			System.out.println("dados defesa: "+dadosDefesa);
+			dadosDefensor.add(x);
+			dadosDefensor.add(y);
+			Collections.sort(dadosDefensor, Collections.reverseOrder());
+			System.out.println("dados defensor: "+dadosDefensor);
 			
 		}
-		return dadosDefesa;
+		return dadosDefensor;
 			
 	}
 	
@@ -356,7 +456,7 @@ public class AgenteCoordenador extends Agent{
 		private static final long serialVersionUID = 1L;
 		private int a=0;
 		public testeCoordenador(Agent a) {
-			super(a, 5000);
+			super(a, 3000);
 		}
 
 		/*@Override
