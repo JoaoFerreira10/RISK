@@ -142,6 +142,7 @@ public class AgenteCoordenador extends Agent{
 			send(reply);	
 			System.out.println("coordenador: " +reply.getContent());
 		}
+
 		 else if(msg.getContent().contains("Nao vou atacar")){
 
 				ACLMessage reply = msg.createReply();
@@ -157,6 +158,7 @@ public class AgenteCoordenador extends Agent{
 			}
 		 
 		
+
 		
 	}
 
@@ -409,14 +411,20 @@ public class AgenteCoordenador extends Agent{
 		ACLMessage msg = blockingReceive();
 		
 		if(msg!=null){
+<<<<<<< HEAD
 			
 			
 			
 			ACLMessage reply = msg.createReply();
+=======
+						
+			/*ACLMessage reply = msg.createReply();
+>>>>>>> 591dce272c9fff6b1b6035706895a091be67ade7
 			reply.setContent("pong");
 			send(reply);
 			System.out.println("coordenador envia -->" +reply.getContent());*/
 			
+
 			/*if(msg.getContent().equals("red")){
 				sendMessage("green-Aleatorio@Risk");
 			}
@@ -429,10 +437,12 @@ public class AgenteCoordenador extends Agent{
 			else if(msg.getContent().equals("yellow")){
 				sendMessage("red-Aleatorio@Risk");
 			}
+
 			
 		}else{
 			System.out.println("nao recebeu");
 		}
+<<<<<<< HEAD
 		}*/
 	
 	private void receiveMessage() {
@@ -499,6 +509,7 @@ public class AgenteCoordenador extends Agent{
 		}else{
 			System.out.println("nao recebeu");
 		}
+
 		
 	}
 	
@@ -507,6 +518,7 @@ public class AgenteCoordenador extends Agent{
 		System.out.println("\n\n**** AGENTE "+agente+" GANHOU ****\n");
 		System.out.println("Prima qualquer tecla para fechar o jogo");
 		
+
 		
 		if(Singleton.getInstance().isGreenAlive()==false){
 			controlador.grT.setText(" X ");
@@ -528,6 +540,7 @@ public class AgenteCoordenador extends Agent{
 		 scaner.next();
 		 System.exit(0);
 		 
+
 		 
 	}
 	

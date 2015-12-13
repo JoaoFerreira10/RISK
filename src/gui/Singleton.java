@@ -7,6 +7,7 @@ public class Singleton {
 	public static final int GAME_RUNNING = 1;
 	public static final int GAME_END = 2;
 	
+	
 	public Singleton() {
 		this.state = GAME_START;
 	}
@@ -20,6 +21,8 @@ public class Singleton {
     private String vermelho, verde, amarelo, azul;
     private int state;
     private String vencedor;
+    
+
     
     
     
@@ -57,9 +60,8 @@ public class Singleton {
 
 	private boolean redAlive=true, greenAlive=true, blueAlive=true, yellowAlive=true;
     
-    
-    
 
+    
     public int getState() {
 		return state;
 	}
