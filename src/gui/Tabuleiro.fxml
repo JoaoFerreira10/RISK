@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -124,10 +125,22 @@
                   <Image url="@../../imgs/amarelo.png" />
                </image>
             </ImageView>
-            <Label fx:id="vmT" layoutX="215.0" layoutY="650.0" />
-            <Label fx:id="grT" layoutX="500.0" layoutY="650.0" />
-            <Label fx:id="blT" layoutX="781.0" layoutY="650.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
-            <Label fx:id="ywT" layoutX="1054.0" layoutY="650.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
+            <Label fx:id="vmT" layoutX="215.0" layoutY="650.0">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
+            <Label fx:id="grT" layoutX="500.0" layoutY="650.0">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
+            <Label fx:id="blT" layoutX="781.0" layoutY="650.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
+            <Label fx:id="ywT" layoutX="1054.0" layoutY="650.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+               <font>
+                  <Font size="26.0" />
+               </font></Label>
             <ImageView fitHeight="46.0" fitWidth="38.0" layoutX="164.0" layoutY="648.0">
                <image>
                   <Image url="@../../imgs/flag.png" />

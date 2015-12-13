@@ -53,23 +53,87 @@ public class AgenteCoordenador extends Agent{
 		   this.send(aclMessage);
 		}
 	
+	/*
+	 * Recebe as tropas e o territorio de um agente e as distribui pelo territorio respetivo
+	 */
+	private void sendTroops(TabuleiroLogica tabuleiro, BoardController b, String nomeTerritorio, String qnt){
+
+		//conversao de qtd para int
+		Integer x= Integer.parseInt(qnt);
+
+		
+		for (int j = 0; j < tabuleiro.getNumTerritorios(); j++) {
+			
+				if(tabuleiro.getTerritorio(j).getNome().equals(nomeTerritorio)){
+					
+					tabuleiro.getTerritorio(j).addpecas(x);
+					int nPecas=tabuleiro.getTerritorio(j).getpecas();
+					
+					
+					Platform.runLater(new Runnable() {
+
+						@Override
+						public void run() {
+							b.colocarPecaTabuleiro(nomeTerritorio, nPecas);				
+						}
+
+					});
+					
+					break;
+				}
+		}
 	
-	private void receiveOrderAtack(){
+	}
+	
+	private void receiveOrderTroops(){
+		
 		ACLMessage msg = blockingReceive();
 		String mensagem= msg.getContent().toString();   // ATAQUE: e1-e2
-		
-	
-
-		String mensagemFinal = mensagem.substring(7, mensagem.length());
+	    String mensagemFinal = mensagem.substring(7, mensagem.length());
 		
 		String[] parts = mensagemFinal.split("-");
+		
 		String ataque = parts[0]; // e1
 		String defesa = parts[1]; // e2
 		
-		System.out.println("ataque: "+ataque + " || defesa: "+defesa);
-		if(msg.getContent().contains("ATAQUE")){
-	 
-
+		//Mensagem do agente a pedir para distribuir tropas
+		if(msg.getContent().contains("TROPAS")){
+			
+			ACLMessage reply = msg.createReply();
+			
+			System.out.println("territorio: "+ataque + " || tropas a colocar: "+defesa);
+			sendTroops(tabuleiro,controlador,ataque,defesa);
+			reply.setContent("tropas inseridas. Permissao para atacar");
+			send(reply);	
+			System.out.println("coordenador: " +reply.getContent());
+			
+			
+		}else{
+			
+			System.out.println("nao recebeu ordem para distribuir tropas");
+		}
+	}
+	
+	
+	
+ 	private void receiveOrder(){
+ 		
+		ACLMessage msg = blockingReceive();
+		String mensagem= msg.getContent().toString();   // ATAQUE: e1-e2
+	    String mensagemFinal = mensagem.substring(7, mensagem.length());
+		
+		String[] parts = mensagemFinal.split("-");
+		
+		String ataque = parts[0]; // e1
+		String defesa = parts[1]; // e2
+		
+	
+		
+		//mensagem do agente a pedir para efetuar um ataque
+		 if(msg.getContent().contains("ATAQUE")){
+			
+			System.out.println("ataque: "+ataque + " || defesa: "+defesa);
+			
 			ACLMessage reply = msg.createReply();
 			
 			//parser para decifrar mensagem com territorio e territorio pa atque
@@ -77,7 +141,8 @@ public class AgenteCoordenador extends Agent{
 			reply.setContent("ataque efetuado");
 			send(reply);	
 			System.out.println("coordenador: " +reply.getContent());
-		}else{
+		}
+		else{
 			System.out.println("nao entrou");
 		}
 		
@@ -95,32 +160,32 @@ public class AgenteCoordenador extends Agent{
 		String nomeDefensivo = null;
 		String vencedor = null;
 		
-		//do{
+
 		
 		for (int i = 0; i < tabuleiro.getNumTerritorios(); i++) {
 			
-		String territorio = tabuleiro.getTerritorio(i).getNome();		
+			String territorio = tabuleiro.getTerritorio(i).getNome();		
 		
-			if(territorio.equals(atacar)){
-				
-				soldadosAtaque= tabuleiro.getTerritorio(i).getpecas();
-				System.out.println("SOLDADOS ATAQUE+++++++++++++: "+soldadosAtaque);
-
-				idTerritorioAtaque=i;
-				
-				
-				nomeAtacante = tabuleiro.getTerritorio(i).getOcupante();
-				System.out.println("nome atacante: "+nomeAtacante);
-			}else if(territorio.equals(defender)){
-				
-				soldadosDefesa = tabuleiro.getTerritorio(i).getpecas();
-				System.out.println("SOLDADOS DEFESA+++++++++++++: "+soldadosDefesa);
-				
-				idTerritorioDefensivo=i;
-				
-				nomeDefensivo = tabuleiro.getTerritorio(i).getOcupante();
-				System.out.println("nome defensivo: "+nomeDefensivo);
-			}	
+				if(territorio.equals(atacar)){
+					
+					soldadosAtaque= tabuleiro.getTerritorio(i).getpecas();
+					System.out.println("SOLDADOS ATAQUE+++++++++++++: "+soldadosAtaque);
+	
+					idTerritorioAtaque=i;
+					
+					
+					nomeAtacante = tabuleiro.getTerritorio(i).getOcupante();
+					System.out.println("nome atacante: "+nomeAtacante);
+				}else if(territorio.equals(defender)){
+					
+					soldadosDefesa = tabuleiro.getTerritorio(i).getpecas();
+					System.out.println("SOLDADOS DEFESA+++++++++++++: "+soldadosDefesa);
+					
+					idTerritorioDefensivo=i;
+					
+					nomeDefensivo = tabuleiro.getTerritorio(i).getOcupante();
+					System.out.println("nome defensivo: "+nomeDefensivo);
+				}	
 		//b.preencherTabuleiro(serAtacado, agente);   // ganha o agente que ataca	
 		}
 		
@@ -197,9 +262,11 @@ public class AgenteCoordenador extends Agent{
 					tabuleiro.getTerritorio(idTerritorioDefensivo).getpecas()==0 )
 			{
 				
+				//Se so tiver 1 peca no territorio que esta a atacar, nao podera atacar mais
 					if(tabuleiro.getTerritorio(idTerritorioAtaque).getpecas()==1){
 						
-						vencedor = nomeDefensivo;
+						System.out.println("TERMINOU O ATAQUE- num de soldados para atacar=1");
+						/*vencedor = nomeDefensivo;
 						tabuleiro.getTerritorio(idTerritorioAtaque).setOcupante(vencedor);
 						
 						b.preencherTabuleiro(atacar, vencedor);
@@ -219,9 +286,9 @@ public class AgenteCoordenador extends Agent{
 						    	
 						    	b.colocarPecaTabuleiro(defender, soldadosDefesa);   // tira pe�a do outro territorio ** NOVO
 						    }
-						});
+						});*/
 						}
-				
+				//se territorio que esta a defender ficar sem trocas, o atacante conquistou o territorio
 				else if (tabuleiro.getTerritorio(idTerritorioDefensivo).getpecas()==0){
 					
 					vencedor = nomeAtacante;
@@ -249,6 +316,8 @@ public class AgenteCoordenador extends Agent{
 					    	b.colocarPecaTabuleiro(atacar, soldadosAtaque);
 					    }
 					});
+					
+					System.out.println("VENCEDOR!!!! ++++++++++++: "+vencedor);
 					}
 				
 				
@@ -260,7 +329,7 @@ public class AgenteCoordenador extends Agent{
 			}while(true);
 		
 		
-		System.out.println("VENCEDOR!!!! ++++++++++++: "+vencedor);
+
 		
 	}
 	
@@ -374,25 +443,12 @@ public class AgenteCoordenador extends Agent{
 			super(a, 3000);
 		}
 
-		/*@Override
-		public void action() { 
-			a++;
-			//System.out.println("coordenador: enviar msg");
-			receiveOrderAtack();
-			receiveMessage();
-			
-			
-		}
-
-		@Override
-		public boolean done() {
-			// TODO Auto-generated method stub
-			return a==5;
-		}*/
 
 		@Override
 		protected void onTick() {
-			receiveOrderAtack();
+			
+			receiveOrderTroops();
+			receiveOrder();
 			receiveMessage();
 			
 			
@@ -400,6 +456,5 @@ public class AgenteCoordenador extends Agent{
 		
 	}
 	
-	
-	
+		
 }

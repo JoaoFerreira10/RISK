@@ -11,6 +11,7 @@ import jade.core.behaviours.SimpleBehaviour;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
+import javafx.application.Platform;
 import logica.TabuleiroLogica;
 import logica.Territorio;
 
@@ -85,6 +86,21 @@ public class AgenteAleatorio extends AgenteRisk {
 		
 	}
 
+	
+	
+	public String distribuirExercitoRecebido(){
+		
+		int territorios= tabuleiro.getTerritoriosPorAgente(getCor()).size();
+		int soldadosRecebidos= (int) Math.ceil(territorios / 3); //cada agente recebe 1 soldado por cada 3 territorios no inicio de cada ronda
+		
+		int z = (int) (Math.random()*territorios);
+		
+		String escolhido= tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getNome();
+		 
+		return "TROPAS:"+escolhido +"-"+soldadosRecebidos;
+		
+	}
+	
 	public String selecionarAtaque() {
 		String escolhido = null;
 		String t=null;
@@ -166,7 +182,7 @@ public class AgenteAleatorio extends AgenteRisk {
 
 if(Singleton.getInstance().getPrimeiroJogar().equals(getCor())){
 	
-	System.out.println("\n******Ronda**********\n");
+	//System.out.println("\n******Ronda**********\n");
 }
 
 		if (Singleton.getInstance().getPrimeiroJogar().equals(getCor()) 
@@ -180,24 +196,48 @@ if(Singleton.getInstance().getPrimeiroJogar().equals(getCor())){
 
 			
 				if(msg.getContent().contains("ataque efetuado")){
+					
 					ACLMessage reply = msg.createReply();
-					reply.setContent(getCor());  // envia territorio que vai atacar
+					reply.setContent(getCor());
 					send(reply);
-					System.out.println(getCor() +": Passo a vez.");
+					System.out.println(getCor() +": Passo a vez. \n\n\n");
 					
 					
 				}else if(msg.getContent().contains("permissao para jogar")){
 					
 					System.out.println(getCor()+": permissao recebida");
-					board.atualizaEstadoJogo(getCor());
-					System.out.println(getCor()+": tenho " +tabuleiro.getTerritoriosPorAgente(getCor()).size() +" territorios");
-					ACLMessage reply = msg.createReply();
-					reply.setContent(selecionarAtaque());  // envia territorio que vai atacar
-					send(reply);
-					System.out.println(getCor() +": envio --> vou atacar o territorio " +reply.getContent());   // ataque - defesa
 					
-				}else{
+					//Atualiza o numero de soldados para a gui
+					Platform.runLater(new Runnable() {
+
+						@Override
+						public void run() {
+							board.atualizaEstadoJogo(getCor());
+							
+						}
+					});
+						
+				
+					ACLMessage reply = msg.createReply();
+					
+					reply.setContent(distribuirExercitoRecebido());  //TROPAS: escolhido -soldadosRecebidos;
+					send(reply);
+					System.out.println(getCor() +":Quero colocar tropas no seguinte territorio " +reply.getContent());   // ataque - defesa
+					
+				}
+				else if(msg.getContent().contains("tropas inseridas. Permissao para atacar")){
+					
+					System.out.println(getCor()+": permissao para atacar recebida");
+					
+					ACLMessage reply = msg.createReply();
+					reply.setContent(selecionarAtaque()); // envia territorio que vai atacar
+					send(reply);
+					System.out.println(getCor() +": vou atacar o territorio " +reply.getContent());   // ataque - defesa
+					
+				}
+				else{
 					System.out.println("nao recebeu");
+					
 				}
 				
 			}	

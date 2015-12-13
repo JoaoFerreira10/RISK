@@ -51,26 +51,28 @@ public class BoardController implements EventHandler<ActionEvent>{
 	}
 	
 	public void atualizaEstadoJogo(String cor){
-		System.out.println("ATUALIZA ESTADO");
+		
+		Integer territorios= tabuleiro.getTerritoriosPorAgente(cor).size();
 		
 		if(cor.equals("red")){
-			System.out.println("entrou");
-		Integer territoriosVermelho= tabuleiro.getTerritoriosPorAgente(cor).size();
-		vmT.setText(territoriosVermelho.toString());
+
+			vmT.setText("   "+territorios.toString());
+		}
+				
+		if(cor.equals("blue")){
+
+			blT.setText("   "+territorios.toString());
 		}
 		
-		
-		
-		
-		/*Integer territoriosVerde= tabuleiro.getTerritoriosPorAgente(verde.getCor()).size();
-		Integer territoriosAzul= tabuleiro.getTerritoriosPorAgente(azul.getCor()).size();
-		Integer territoriosAmarelo= tabuleiro.getTerritoriosPorAgente(amarelo.getCor()).size();
-		
-		vmT.setText(territoriosVermelho.toString());
-		grT.setText(territoriosVerde.toString());
-		blT.setText(territoriosAzul.toString());
-		ywT.setText(territoriosAmarelo.toString());*/
-		System.out.println("ATUALIZADO ESTADO");
+		if(cor.equals("green")){
+
+			grT.setText("   "+territorios.toString());
+		}
+		if(cor.equals("yellow")){
+
+			ywT.setText("   "+territorios.toString());
+		}
+
 	}
 	
 	/*
