@@ -93,6 +93,7 @@ public class AgenteAleatorio extends AgenteRisk {
 			
 			int random = tabuleiro.getTerritoriosPorAgente(this.getCor()).size();
 			
+
 			int z;
 			
 				do{
@@ -100,7 +101,7 @@ public class AgenteAleatorio extends AgenteRisk {
 				
 				}while( tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getpecas()<=1);
 			
-			System.out.println("soldados a enviar-------> "+tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getpecas() );
+
 			
 			int y2=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getAdjacentes().size();
 			
@@ -110,14 +111,17 @@ public class AgenteAleatorio extends AgenteRisk {
 
 			if(!tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getAdjacentes().get(y).getOcupante().equals(getCor()))
 			{
+				
 			
 			
 			escolhido = tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getAdjacentes().get(y).getNome();
 			t=tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getNome();
+			// territorio que vai fazer o ataque nao pode ter so 1 soldado
 			
-			
-			return "ATAQUE:"+t+"-"+escolhido;
+
+			return "ATAQUE:"+escolhido+"-"+t;     // ataque(outro agente) - defesa(proprio agente)
 			}
+
 			
 			
 		}
