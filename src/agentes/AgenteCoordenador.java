@@ -138,12 +138,52 @@ public class AgenteCoordenador extends Agent{
 			
 			//parser para decifrar mensagem com territorio e territorio pa atque
 			doAtack(tabuleiro,controlador,ataque,defesa);
-			reply.setContent("ataque efetuado");
+			reply.setContent("ataque efetuado -> jogada concluída");
 			send(reply);	
 			System.out.println("coordenador: " +reply.getContent());
 		}
+		
 		else{
-			System.out.println("nao entrou");
+			ACLMessage reply = msg.createReply();
+			
+			
+			reply.setContent("jogada concluída");
+			send(reply);	
+			System.out.println("coordenador: " +reply.getContent());
+		}
+		 
+		/* if(msg.getContent().equals("concluo a jogada, passo a vez")){
+				
+				ACLMessage reply = msg.createReply();
+				
+				
+				reply.setContent("jogada concluída");
+				send(reply);	
+				System.out.println("coordenador: " +reply.getContent());
+			}else{
+				System.out.println("nao entrou em passo a vez");
+			}*/
+		
+	}
+ 	
+private void receivePassoVez(){
+ 		
+		ACLMessage msg = blockingReceive();
+		
+		
+		//mensagem do agente a pedir para efetuar um ataque
+		 if(msg.getContent().equals("concluo a jogada, passo a vez")){
+			
+			ACLMessage reply = msg.createReply();
+			
+			
+			reply.setContent("jogada concluída");
+			send(reply);	
+			System.out.println("coordenador: " +reply.getContent());
+		}
+		 
+		else{
+			System.out.println("nao entrou em passo a vez");
 		}
 		
 	}
@@ -440,7 +480,7 @@ public class AgenteCoordenador extends Agent{
 		private static final long serialVersionUID = 1L;
 		private int a=0;
 		public testeCoordenador(Agent a) {
-			super(a, 3000);
+			super(a, 500);
 		}
 
 
@@ -450,6 +490,7 @@ public class AgenteCoordenador extends Agent{
 			receiveOrderTroops();
 			receiveOrder();
 			receiveMessage();
+			//receivePassoVez();
 			
 			
 		}

@@ -84,38 +84,38 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 		//Vermelho
 		if(agente1.equals("Aleatorio")){
-			 vermelho= new AgenteAleatorio("red", 50, tabuleiro, this);
+			 vermelho= new AgenteAleatorio("red", 20, tabuleiro, this);
 		}else if(agente1.equals("Atacante")){
-			 vermelho = new AgenteAtacante("red",50);
+			 vermelho = new AgenteAtacante("red",20);
 		}else{
-			 vermelho = new AgenteDefensivo("red", 50);
+			 vermelho = new AgenteDefensivo("red", 20);
 		}
 		
 		//Verde
 		if(agente2.equals("Aleatorio")){
-			 verde= new AgenteAleatorio("green",50, tabuleiro, this);
+			 verde= new AgenteAleatorio("green",20, tabuleiro, this);
 		}else if(agente2.equals("Atacante")){
-			 verde = new AgenteAtacante("green",50);
+			 verde = new AgenteAtacante("green",20);
 		}else{
-			 verde = new AgenteDefensivo("green", 50);
+			 verde = new AgenteDefensivo("green", 20);
 		}
 		
 		//Azul
 		if(agente3.equals("Aleatorio")){
-			 azul = new AgenteAleatorio("blue",50, tabuleiro, this);
+			 azul = new AgenteAleatorio("blue",20, tabuleiro, this);
 		}else if(agente3.equals("Atacante")){
-			 azul = new AgenteAtacante("blue",50);
+			 azul = new AgenteAtacante("blue",20);
 		}else{
-			 azul = new AgenteDefensivo("blue",50);
+			 azul = new AgenteDefensivo("blue",20);
 		}
 		
 		//Amarelo
 		if(agente4.equals("Aleatorio")){
-			 amarelo = new AgenteAleatorio("yellow",50, tabuleiro, this);
+			 amarelo = new AgenteAleatorio("yellow",20, tabuleiro, this);
 		}else if(agente4.equals("Atacante")){
-			 amarelo  = new AgenteAtacante("yellow",50);
+			 amarelo  = new AgenteAtacante("yellow",20);
 		}else{
-			 amarelo  = new AgenteDefensivo("yellow",50);
+			 amarelo  = new AgenteDefensivo("yellow",20);
 		}
 				
 		escolherTerritorios(vermelho, verde, azul, amarelo);
