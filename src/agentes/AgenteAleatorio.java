@@ -91,6 +91,12 @@ public class AgenteAleatorio extends AgenteRisk {
 	public String distribuirExercitoRecebido(){
 		
 		int territorios= tabuleiro.getTerritoriosPorAgente(getCor()).size();
+		
+		//Se  já nao tiver territorios
+		if(territorios==0){
+			//return 
+		}
+		
 		int soldadosRecebidos= (int) Math.ceil(territorios / 3); //cada agente recebe 1 soldado por cada 3 territorios no inicio de cada ronda
 		
 		int z = (int) (Math.random()*territorios);
@@ -112,11 +118,15 @@ public class AgenteAleatorio extends AgenteRisk {
 			
 
 			int z;
-			
+			int x=0;
 				do{
+					x++;
+					if(x==42){
+						return "Passo a vez";
+					}
 					z = (int) (Math.random()*random);   // escolhe um territorio aleatoriamente dos teus territorios
 				
-				}while( tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getpecas()<=1);
+				}while( tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getpecas()<=1 );
 			
 
 			

@@ -2,6 +2,7 @@ package agentes;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 import javax.swing.plaf.TableUI;
 
@@ -142,7 +143,11 @@ public class AgenteCoordenador extends Agent{
 			System.out.println("coordenador: " +reply.getContent());
 		}
 		else if(msg.getContent().contains("Nao vou atacar")){
-			System.out.println("entrou no receive order---");
+			
+			ACLMessage reply = msg.createReply();
+			reply.setContent("ataque efetuado");
+			send(reply);			
+			System.out.println("coordenador: vai passar a vez");
 		}
 		else{
 			System.out.println("sda");
@@ -397,31 +402,79 @@ public class AgenteCoordenador extends Agent{
 		ACLMessage msg = blockingReceive();
 		
 		if(msg!=null){
-			
-			
-			
+						
 			/*ACLMessage reply = msg.createReply();
 			reply.setContent("pong");
 			send(reply);
 			System.out.println("coordenador envia -->" +reply.getContent());*/
 			
-			if(msg.getContent().equals("red")){
-				sendMessage("green-Aleatorio@Risk");
-			}
-			else if(msg.getContent().equals("green")){
-				sendMessage("blue-Aleatorio@Risk");
-			}
-			else if(msg.getContent().equals("blue")){
-				sendMessage("yellow-Aleatorio@Risk");
-			}
-			else if(msg.getContent().equals("yellow")){
-				sendMessage("red-Aleatorio@Risk");
-			}
+				if(msg.getContent().equals("red")){
+					
+					if(Singleton.getInstance().isGreenAlive()){
+						sendMessage("green-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isBlueAlive()){
+						sendMessage("blue-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isYellowAlive()){
+						sendMessage("yellow-Aleatorio@Risk");
+					}else{
+						endGame("yellow");
+					}					
+				}
+				else if(msg.getContent().equals("green")){
+
+					 if(Singleton.getInstance().isBlueAlive()){
+						sendMessage("blue-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isYellowAlive()){
+						sendMessage("yellow-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isRedAlive()){
+						sendMessage("red-Aleatorio@Risk");
+					}else{
+						endGame("yellow");
+					}
+				}
+				else if(msg.getContent().equals("blue")){
+					
+					 if(Singleton.getInstance().isYellowAlive()){
+							sendMessage("yellow-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isRedAlive()){
+						sendMessage("red-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isGreenAlive()){
+						sendMessage("green-Aleatorio@Risk");
+					}else{
+						endGame("yellow");
+					}
+				}
+				else if(msg.getContent().equals("yellow")){
+					
+					if(Singleton.getInstance().isRedAlive()){
+						sendMessage("red-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isGreenAlive()){
+						sendMessage("green-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isBlueAlive()){
+						sendMessage("blue-Aleatorio@Risk");
+					}else{
+						endGame("yellow");
+					}
+				}
 			
 		}else{
 			System.out.println("nao recebeu");
 		}
-		}
+		
+	}
+	
+	public void endGame(String agente){
+		Scanner scaner = new Scanner(System.in);
+		System.out.println("\n\n**** AGENTE "+agente+" GANHOU ****\n");
+		System.out.println("Prima qualquer tecla para fechar o jogo");
+		
+		 scaner.next();
+		 System.exit(0);
+		 
+		
+		 
+		 
+	}
 	
  
 	public void setup(){
