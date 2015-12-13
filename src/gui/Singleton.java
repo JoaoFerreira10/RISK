@@ -19,6 +19,45 @@ public class Singleton {
     private String primeiroJogar;   // variavel a ser usada entre controladores
     private String vermelho, verde, amarelo, azul;
     private int state;
+    private String vencedor;
+    
+    
+    
+    public boolean isRedAlive() {
+		return redAlive;
+	}
+
+	public void setRedAlive(boolean redAlive) {
+		this.redAlive = redAlive;
+	}
+
+	public boolean isGreenAlive() {
+		return greenAlive;
+	}
+
+	public void setGreenAlive(boolean greenAlive) {
+		this.greenAlive = greenAlive;
+	}
+
+	public boolean isBlueAlive() {
+		return blueAlive;
+	}
+
+	public void setBlueAlive(boolean blueAlive) {
+		this.blueAlive = blueAlive;
+	}
+
+	public boolean isYellowAlive() {
+		return yellowAlive;
+	}
+
+	public void setYellowAlive(boolean yellowAlive) {
+		this.yellowAlive = yellowAlive;
+	}
+
+	private boolean redAlive=true, greenAlive=true, blueAlive=true, yellowAlive=true;
+    
+    
     
 
     public int getState() {
@@ -68,5 +107,13 @@ public class Singleton {
    public void setPrimeiroJogar(String primeiroJogar) {
        this.primeiroJogar = primeiroJogar;
    }
+   
+   
+   public void setVencedorDoJogo (String vencedor) {
+       this.vencedor = vencedor;
+   }
+   public String getVencedorDoJogo() {
+		return vencedor;
+	}
 
 }

@@ -2,6 +2,7 @@ package agentes;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 import javax.swing.plaf.TableUI;
 
@@ -117,20 +118,19 @@ public class AgenteCoordenador extends Agent{
 	
 	
  	private void receiveOrder(){
- 		
+
 		ACLMessage msg = blockingReceive();
-		String mensagem= msg.getContent().toString();   // ATAQUE: e1-e2
-	    String mensagemFinal = mensagem.substring(7, mensagem.length());
-		
-		String[] parts = mensagemFinal.split("-");
-		
-		String ataque = parts[0]; // e1
-		String defesa = parts[1]; // e2
-		
 	
-		
 		//mensagem do agente a pedir para efetuar um ataque
 		 if(msg.getContent().contains("ATAQUE")){
+			 
+			 
+				String mensagem= msg.getContent().toString();   // ATAQUE: e1-e2
+			    String mensagemFinal = mensagem.substring(7, mensagem.length());
+				String[] parts = mensagemFinal.split("-");
+				
+				String ataque = parts[0]; // e1
+				String defesa = parts[1]; // e2
 			
 			System.out.println("ataque: "+ataque + " || defesa: "+defesa);
 			
@@ -142,51 +142,25 @@ public class AgenteCoordenador extends Agent{
 			send(reply);	
 			System.out.println("coordenador: " +reply.getContent());
 		}
-		
-		else{
-			ACLMessage reply = msg.createReply();
-			
-			
-			reply.setContent("jogada concluída");
-			send(reply);	
-			System.out.println("coordenador: " +reply.getContent());
-		}
-		 
-		/* if(msg.getContent().equals("concluo a jogada, passo a vez")){
-				
+		 else if(msg.getContent().contains("Nao vou atacar")){
+
 				ACLMessage reply = msg.createReply();
-				
-				
-				reply.setContent("jogada concluída");
-				send(reply);	
-				System.out.println("coordenador: " +reply.getContent());
-			}else{
-				System.out.println("nao entrou em passo a vez");
-			}*/
-		
-	}
- 	
-private void receivePassoVez(){
- 		
-		ACLMessage msg = blockingReceive();
-		
-		
-		//mensagem do agente a pedir para efetuar um ataque
-		 if(msg.getContent().equals("concluo a jogada, passo a vez")){
-			
-			ACLMessage reply = msg.createReply();
-			
-			
-			reply.setContent("jogada concluída");
-			send(reply);	
-			System.out.println("coordenador: " +reply.getContent());
-		}
+				reply.setContent("ataque efetuado -> jogada concluída");
+				send(reply);
+				System.out.println("coordenador: vai passar a vez");
+			}
+			else{
+				System.out.println("sda");
+				ACLMessage reply = msg.createReply();
+				reply.setContent("ataque efetuado -> jogada concluída");
+				send(reply);
+			}
 		 
-		else{
-			System.out.println("nao entrou em passo a vez");
-		}
+		
 		
 	}
+
+
 	
 	int soldadosAtaque = 0, soldadosDefesa = 0;
 	private void doAtack(TabuleiroLogica tabuleiro, BoardController b, String atacar, String defender){
@@ -429,7 +403,7 @@ private void receivePassoVez(){
 			
 	}
 	
-	private void receiveMessage() {
+	/*private void receiveMessage() {
 		   //AID r = new AID ("red-Aleatorio@MyMainPlatform", AID.ISGUID);
 		   
 		ACLMessage msg = blockingReceive();
@@ -438,12 +412,12 @@ private void receivePassoVez(){
 			
 			
 			
-			/*ACLMessage reply = msg.createReply();
+			ACLMessage reply = msg.createReply();
 			reply.setContent("pong");
 			send(reply);
 			System.out.println("coordenador envia -->" +reply.getContent());*/
 			
-			if(msg.getContent().equals("red")){
+			/*if(msg.getContent().equals("red")){
 				sendMessage("green-Aleatorio@Risk");
 			}
 			else if(msg.getContent().equals("green")){
@@ -459,7 +433,103 @@ private void receivePassoVez(){
 		}else{
 			System.out.println("nao recebeu");
 		}
+		}*/
+	
+	private void receiveMessage() {
+		   //AID r = new AID ("red-Aleatorio@MyMainPlatform", AID.ISGUID);
+		   
+		ACLMessage msg = blockingReceive();
+		
+		if(msg!=null){
+						
+			/*ACLMessage reply = msg.createReply();
+			reply.setContent("pong");
+			send(reply);
+			System.out.println("coordenador envia -->" +reply.getContent());*/
+			
+				if(msg.getContent().equals("red")){
+					
+					if(Singleton.getInstance().isGreenAlive()){
+						sendMessage("green-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isBlueAlive()){
+						sendMessage("blue-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isYellowAlive()){
+						sendMessage("yellow-Aleatorio@Risk");
+					}else{
+						endGame("red");
+					}					
+				}
+				else if(msg.getContent().equals("green")){
+
+					 if(Singleton.getInstance().isBlueAlive()){
+						sendMessage("blue-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isYellowAlive()){
+						sendMessage("yellow-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isRedAlive()){
+						sendMessage("red-Aleatorio@Risk");
+					}else{
+						endGame("green");
+					}
+				}
+				else if(msg.getContent().equals("blue")){
+					
+					 if(Singleton.getInstance().isYellowAlive()){
+							sendMessage("yellow-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isRedAlive()){
+						sendMessage("red-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isGreenAlive()){
+						sendMessage("green-Aleatorio@Risk");
+					}else{
+						endGame("blue");
+					}
+				}
+				else if(msg.getContent().equals("yellow")){
+					
+					if(Singleton.getInstance().isRedAlive()){
+						sendMessage("red-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isGreenAlive()){
+						sendMessage("green-Aleatorio@Risk");
+					}else if(Singleton.getInstance().isBlueAlive()){
+						sendMessage("blue-Aleatorio@Risk");
+					}else{
+						endGame("yellow");
+					}
+				}
+			
+		}else{
+			System.out.println("nao recebeu");
 		}
+		
+	}
+	
+	public void endGame(String agente){
+		Scanner scaner = new Scanner(System.in);
+		System.out.println("\n\n**** AGENTE "+agente+" GANHOU ****\n");
+		System.out.println("Prima qualquer tecla para fechar o jogo");
+		
+		
+		if(Singleton.getInstance().isGreenAlive()==false){
+			controlador.grT.setText(" X ");
+			
+		}
+		else if(Singleton.getInstance().isYellowAlive()==false){
+			controlador.ywT.setText(" X ");
+			
+		}
+		else if(Singleton.getInstance().isRedAlive()==false){
+			controlador.vmT.setText(" X ");
+			
+		}
+		else if(Singleton.getInstance().isBlueAlive()==false){
+			controlador.blT.setText(" X ");
+			}
+		
+		
+		 scaner.next();
+		 System.exit(0);
+		 
+		 
+	}
 	
  
 	public void setup(){
@@ -480,7 +550,24 @@ private void receivePassoVez(){
 		private static final long serialVersionUID = 1L;
 		private int a=0;
 		public testeCoordenador(Agent a) {
-			super(a, 500);
+
+			super(a, 10);
+			/*if(Singleton.getInstance().isGreenAlive()==false){
+				 System.out.println("ENTRA AQUIIIIIIIIIIII");
+				 controlador.getGrT().setText(" X ");
+					
+				}
+				else if(Singleton.getInstance().isYellowAlive()==false){
+					controlador.getYwT().setText(" X ");
+					
+				}
+				else if(Singleton.getInstance().isRedAlive()==false){
+					controlador.getVmT().setText(" X ");
+					
+				}
+				else if(Singleton.getInstance().isBlueAlive()==false){
+					controlador.getBlT().setText(" X ");
+					}*/
 		}
 
 
@@ -490,7 +577,7 @@ private void receivePassoVez(){
 			receiveOrderTroops();
 			receiveOrder();
 			receiveMessage();
-			//receivePassoVez();
+			
 			
 			
 		}

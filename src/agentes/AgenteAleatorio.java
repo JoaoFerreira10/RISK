@@ -90,13 +90,57 @@ public class AgenteAleatorio extends AgenteRisk {
 	
 	public String distribuirExercitoRecebido(){
 		
+		String escolhido=null;
 		int territorios= tabuleiro.getTerritoriosPorAgente(getCor()).size();
-		int soldadosRecebidos= (int) Math.ceil(territorios / 3); //cada agente recebe 1 soldado por cada 3 territorios no inicio de cada ronda
+		int soldadosRecebidos = 0;
+		
 		
 		int z = (int) (Math.random()*territorios);
 		
-		String escolhido= tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getNome();
-		 
+		/*if(territorios==0){
+			
+			if(getCor().equals("blue"))
+			Singleton.getInstance().setBlueAlive(false);
+			else if (getCor().equals("red"))
+				Singleton.getInstance().setRedAlive(false);
+			else if (getCor().equals("yellow"))
+			Singleton.getInstance().setYellowAlive(false);
+			else if (getCor().equals("green"))
+				Singleton.getInstance().setGreenAlive(false);
+					
+		}*/
+		
+		
+		
+		if(territorios<=2){
+		
+		/*for (int i = 0; i < territorios; i++) {
+						
+						int soldados= tabuleiro.getTerritorio(i).getpecas();
+						
+			if(soldados==1 && territorios<=2){*/
+			escolhido= tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getNome();
+			soldadosRecebidos=1;
+			System.out.println("SOLDADOS QUANDO SO TEM UM TERRITORIO COM 1 TROPA: "+soldadosRecebidos);
+			
+		
+			//}
+			
+		//}
+		}
+		else {
+			soldadosRecebidos= (int) Math.ceil(territorios / 3); //cada agente recebe 1 soldado por cada 3 territorios no inicio de cada ronda
+			
+			if(  tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getpecas()==1 ){
+			
+			escolhido= tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getNome();
+			}
+			
+			
+			
+			
+		}
+		
 		return "TROPAS:"+escolhido +"-"+soldadosRecebidos;
 		
 	}
@@ -105,7 +149,7 @@ public class AgenteAleatorio extends AgenteRisk {
 		String escolhido = null;
 		String t=null;
 		
-		do{
+
 		
 		for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(this.getCor()).size(); i++) {
 			
@@ -139,14 +183,11 @@ public class AgenteAleatorio extends AgenteRisk {
 
 			return "ATAQUE:"+escolhido+"-"+t;     // ataque(outro agente) - defesa(proprio agente)
 			}
-				
-			
-			
+
+						
 		}
-		
-		}while(!tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getAdjacentes().get(y).getOcupante().equals(getCor()))
-		
-		return "fim";
+		return "Passo a vez";
+
 	}
 
 	
@@ -184,6 +225,25 @@ public class AgenteAleatorio extends AgenteRisk {
 		@Override
 		public void action(){
 
+			
+			int territorios= tabuleiro.getTerritoriosPorAgente(getCor()).size();
+			if(territorios==0){    // quando um agente perde 
+				
+				if(getCor().equals("blue")){
+				Singleton.getInstance().setBlueAlive(false);
+				doDelete();}
+				else if (getCor().equals("red")){
+					Singleton.getInstance().setRedAlive(false);
+				doDelete();}
+				else if (getCor().equals("yellow")){
+				Singleton.getInstance().setYellowAlive(false);
+				doDelete();}
+				else if (getCor().equals("green")){
+					Singleton.getInstance().setGreenAlive(false);
+				doDelete();}
+						
+			}
+			
 
 if(Singleton.getInstance().getPrimeiroJogar().equals(getCor())){
 	
@@ -235,12 +295,19 @@ if(Singleton.getInstance().getPrimeiroJogar().equals(getCor())){
 					System.out.println(getCor()+": permissao para atacar recebida");
 					
 					ACLMessage reply = msg.createReply();
-					reply.setContent(selecionarAtaque()); // envia territorio que vai atacar
+					
+					if(selecionarAtaque().equals("Passo a vez")){
+						reply.setContent("Nao vou atacar");
+						System.out.println("entrou------------------------------------------------------");
+					}else{
+						reply.setContent(selecionarAtaque()); // envia territorio que vai atacar
+					}
 					send(reply);
-					System.out.println(getCor() +": vou atacar o territorio " +reply.getContent());   // ataque - defesa
+					System.out.println(getCor() +":NAO VOU ATACAR  " +reply.getContent());   // ataque - defesa
 					
 				}
 				else{
+					
 					System.out.println("nao recebeu");
 					
 				}
