@@ -100,6 +100,54 @@
             <Label id="terr" fx:id="Mexico" layoutX="203.0" layoutY="311.0" text="0" />
             
             <Button fx:id="jogar" layoutX="27.0" layoutY="44.0" onAction="#iniciarJogo" text="Jogar" />
+            <Rectangle fx:id="vm" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="63.0" layoutY="637.0" stroke="BLACK" strokeType="INSIDE" width="284.0" />
+            <Rectangle fx:id="gr" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="63.0" layoutX="283.0" layoutY="637.0" stroke="BLACK" strokeType="INSIDE" width="281.0" />
+            <Rectangle fx:id="bl" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="63.0" layoutX="562.0" layoutY="637.0" stroke="BLACK" strokeType="INSIDE" width="281.0" />
+            <Rectangle fx:id="yl" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="63.0" layoutX="842.0" layoutY="637.0" stroke="BLACK" strokeType="INSIDE" width="280.0" />
+            <ImageView fitHeight="52.0" fitWidth="42.0" layoutX="26.0" layoutY="642.0">
+               <image>
+                  <Image url="@../../imgs/vermelho.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="42.0" layoutX="591.0" layoutY="642.0">
+               <image>
+                  <Image url="@../../imgs/azul.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="42.0" layoutX="308.0" layoutY="642.0">
+               <image>
+                  <Image url="@../../imgs/verde.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="42.0" layoutX="869.0" layoutY="642.0">
+               <image>
+                  <Image url="@../../imgs/amarelo.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="vmT" layoutX="215.0" layoutY="650.0" />
+            <Label fx:id="grT" layoutX="500.0" layoutY="650.0" />
+            <Label fx:id="blT" layoutX="781.0" layoutY="650.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
+            <Label fx:id="ywT" layoutX="1054.0" layoutY="650.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
+            <ImageView fitHeight="46.0" fitWidth="38.0" layoutX="164.0" layoutY="648.0">
+               <image>
+                  <Image url="@../../imgs/flag.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="46.0" fitWidth="38.0" layoutX="458.0" layoutY="648.0">
+               <image>
+                  <Image url="@../../imgs/flag.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="46.0" fitWidth="38.0" layoutX="733.0" layoutY="648.0">
+               <image>
+                  <Image url="@../../imgs/flag.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="46.0" fitWidth="38.0" layoutX="1008.0" layoutY="648.0">
+               <image>
+                  <Image url="@../../imgs/flag.png" />
+               </image>
+            </ImageView>
            
             
             

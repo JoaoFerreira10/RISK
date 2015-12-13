@@ -26,3 +26,10 @@
 -fx-pref-height: 30px;
 -fx-text-align:center;
 }
+
+#vmT, #blT, #grT, #ywT{
+-fx-background-color: white;
+-fx-pref-width: 50px;
+-fx-pref-height: 40px;
+-fx-background-radius: 8px;
+}

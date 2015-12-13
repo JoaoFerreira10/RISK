@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import logica.TabuleiroLogica;
 
 
+
 public class BoardController implements EventHandler<ActionEvent>{
 
 	//Stage primaryStage;
@@ -38,6 +39,8 @@ public class BoardController implements EventHandler<ActionEvent>{
 	af1, af2, af3, af4, af5, af6, Gronelandia, Alasca, EsteCanada, NorteCanada, SulCanada, OesteCanada, OesteEUA, EsteEUA, Mexico,
 	Colombia, Brasil, Peru, Argentina;
 
+	@FXML
+	private Label vmT, grT, blT, ywT;
 	
 	//botao jogar
 	public void iniciarJogo(ActionEvent ev){
@@ -47,6 +50,28 @@ public class BoardController implements EventHandler<ActionEvent>{
 		//setupJADE(agentes);
 	}
 	
+	public void atualizaEstadoJogo(String cor){
+		System.out.println("ATUALIZA ESTADO");
+		
+		if(cor.equals("red")){
+			System.out.println("entrou");
+		Integer territoriosVermelho= tabuleiro.getTerritoriosPorAgente(cor).size();
+		vmT.setText(territoriosVermelho.toString());
+		}
+		
+		
+		
+		
+		/*Integer territoriosVerde= tabuleiro.getTerritoriosPorAgente(verde.getCor()).size();
+		Integer territoriosAzul= tabuleiro.getTerritoriosPorAgente(azul.getCor()).size();
+		Integer territoriosAmarelo= tabuleiro.getTerritoriosPorAgente(amarelo.getCor()).size();
+		
+		vmT.setText(territoriosVermelho.toString());
+		grT.setText(territoriosVerde.toString());
+		blT.setText(territoriosAzul.toString());
+		ywT.setText(territoriosAmarelo.toString());*/
+		System.out.println("ATUALIZADO ESTADO");
+	}
 	
 	/*
 	 * Método que instancia os 4 agentes
@@ -57,42 +82,43 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 		//Vermelho
 		if(agente1.equals("Aleatorio")){
-			 vermelho= new AgenteAleatorio("red", 30, tabuleiro, this);
+			 vermelho= new AgenteAleatorio("red", 50, tabuleiro, this);
 		}else if(agente1.equals("Atacante")){
-			 vermelho = new AgenteAtacante("red",30);
+			 vermelho = new AgenteAtacante("red",50);
 		}else{
-			 vermelho = new AgenteDefensivo("red", 0);
+			 vermelho = new AgenteDefensivo("red", 50);
 		}
 		
 		//Verde
 		if(agente2.equals("Aleatorio")){
-			 verde= new AgenteAleatorio("green",30, tabuleiro, this);
+			 verde= new AgenteAleatorio("green",50, tabuleiro, this);
 		}else if(agente2.equals("Atacante")){
-			 verde = new AgenteAtacante("green",30);
+			 verde = new AgenteAtacante("green",50);
 		}else{
-			 verde = new AgenteDefensivo("green", 0);
+			 verde = new AgenteDefensivo("green", 50);
 		}
 		
 		//Azul
 		if(agente3.equals("Aleatorio")){
-			 azul = new AgenteAleatorio("blue",30, tabuleiro, this);
+			 azul = new AgenteAleatorio("blue",50, tabuleiro, this);
 		}else if(agente3.equals("Atacante")){
-			 azul = new AgenteAtacante("blue",30);
+			 azul = new AgenteAtacante("blue",50);
 		}else{
-			 azul = new AgenteDefensivo("blue",10);
+			 azul = new AgenteDefensivo("blue",50);
 		}
 		
 		//Amarelo
 		if(agente4.equals("Aleatorio")){
-			 amarelo = new AgenteAleatorio("yellow",30, tabuleiro, this);
+			 amarelo = new AgenteAleatorio("yellow",50, tabuleiro, this);
 		}else if(agente4.equals("Atacante")){
-			 amarelo  = new AgenteAtacante("yellow",30);
+			 amarelo  = new AgenteAtacante("yellow",50);
 		}else{
-			 amarelo  = new AgenteDefensivo("yellow",10);
+			 amarelo  = new AgenteDefensivo("yellow",50);
 		}
 				
 		escolherTerritorios(vermelho, verde, azul, amarelo);
-
+		
+				
 	}
 	
 	
@@ -102,6 +128,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 	 */	
 	public void escolherTerritorios(AgenteRisk a1, AgenteRisk a2, AgenteRisk a3, AgenteRisk a4){
 
+		
 		int territoriosOcupados=0;
 		
 		AgenteRisk[] agentes= new AgenteRisk[4];
@@ -127,6 +154,8 @@ public class BoardController implements EventHandler<ActionEvent>{
 									colocarPecaTabuleiro(tabuleiro.getTerritorio(x).getNome(), 1);
 									tabuleiro.ocuparTerritorio(x, a.getCor());
 									territoriosOcupados++;
+									
+									
 									break;
 								}
 						}
@@ -160,8 +189,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		System.out.println("Territorios acupados.");
 		
 		distribuirExercitos(agentes);
-		
-		
+
 		
 		setupJADE(agentes, new AgenteCoordenador(tabuleiro, this)); // JADE
 		
@@ -223,7 +251,6 @@ public class BoardController implements EventHandler<ActionEvent>{
 	 */	
 	public void colocarPecaTabuleiro(String territorio, Integer pecas){
 		
-		System.out.println("ENTROU EM COLOCARPECA--->" +territorio +" peca--> "+pecas.toString());
 		if(territorio.equals("e1"))
 			e1.setText(pecas.toString());
 		else if(territorio.equals("e2"))

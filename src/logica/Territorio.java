@@ -52,10 +52,8 @@ public class Territorio {
 	public void addpecas(int pecas) {
 		this.pecas += pecas;
 	}
-	
-	public void removerPecas(int pecas) {
+
+	public void removerpecas(int pecas) {
 		this.pecas -= pecas;
 	}
-	
-	
 }
