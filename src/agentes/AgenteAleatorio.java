@@ -105,6 +105,7 @@ public class AgenteAleatorio extends AgenteRisk {
 		String escolhido = null;
 		String t=null;
 		
+		
 		for (int i = 0; i < tabuleiro.getTerritoriosPorAgente(this.getCor()).size(); i++) {
 			
 			int random = tabuleiro.getTerritoriosPorAgente(this.getCor()).size();
@@ -137,11 +138,9 @@ public class AgenteAleatorio extends AgenteRisk {
 
 			return "ATAQUE:"+escolhido+"-"+t;     // ataque(outro agente) - defesa(proprio agente)
 			}
-
-			
-			
+						
 		}
-		return "ganhei o jogo";
+		return "Passo a vez";
 	}
 
 	
@@ -230,12 +229,19 @@ if(Singleton.getInstance().getPrimeiroJogar().equals(getCor())){
 					System.out.println(getCor()+": permissao para atacar recebida");
 					
 					ACLMessage reply = msg.createReply();
-					reply.setContent(selecionarAtaque()); // envia territorio que vai atacar
+					
+					if(selecionarAtaque().equals("Passo a vez")){
+						reply.setContent("Nao vou atacar");
+						System.out.println("entrou------------------------------------------------------");
+					}else{
+						reply.setContent(selecionarAtaque()); // envia territorio que vai atacar
+					}
 					send(reply);
-					System.out.println(getCor() +": vou atacar o territorio " +reply.getContent());   // ataque - defesa
+					System.out.println(getCor() +":NAO VOU ATACAR  " +reply.getContent());   // ataque - defesa
 					
 				}
 				else{
+					
 					System.out.println("nao recebeu");
 					
 				}

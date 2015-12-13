@@ -117,20 +117,19 @@ public class AgenteCoordenador extends Agent{
 	
 	
  	private void receiveOrder(){
- 		
+
 		ACLMessage msg = blockingReceive();
-		String mensagem= msg.getContent().toString();   // ATAQUE: e1-e2
-	    String mensagemFinal = mensagem.substring(7, mensagem.length());
-		
-		String[] parts = mensagemFinal.split("-");
-		
-		String ataque = parts[0]; // e1
-		String defesa = parts[1]; // e2
-		
 	
-		
 		//mensagem do agente a pedir para efetuar um ataque
 		 if(msg.getContent().contains("ATAQUE")){
+			 
+			 
+				String mensagem= msg.getContent().toString();   // ATAQUE: e1-e2
+			    String mensagemFinal = mensagem.substring(7, mensagem.length());
+				String[] parts = mensagemFinal.split("-");
+				
+				String ataque = parts[0]; // e1
+				String defesa = parts[1]; // e2
 			
 			System.out.println("ataque: "+ataque + " || defesa: "+defesa);
 			
@@ -142,8 +141,11 @@ public class AgenteCoordenador extends Agent{
 			send(reply);	
 			System.out.println("coordenador: " +reply.getContent());
 		}
+		else if(msg.getContent().contains("Nao vou atacar")){
+			System.out.println("entrou no receive order---");
+		}
 		else{
-			System.out.println("nao entrou");
+			System.out.println("sda");
 		}
 		
 	}
@@ -440,7 +442,7 @@ public class AgenteCoordenador extends Agent{
 		private static final long serialVersionUID = 1L;
 		private int a=0;
 		public testeCoordenador(Agent a) {
-			super(a, 3000);
+			super(a, 2000);
 		}
 
 

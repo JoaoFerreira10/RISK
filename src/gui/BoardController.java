@@ -56,21 +56,21 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 		if(cor.equals("red")){
 
-			vmT.setText("   "+territorios.toString());
+			vmT.setText("  "+territorios.toString());
 		}
 				
 		if(cor.equals("blue")){
 
-			blT.setText("   "+territorios.toString());
+			blT.setText("  "+territorios.toString());
 		}
 		
 		if(cor.equals("green")){
 
-			grT.setText("   "+territorios.toString());
+			grT.setText("  "+territorios.toString());
 		}
 		if(cor.equals("yellow")){
 
-			ywT.setText("   "+territorios.toString());
+			ywT.setText("  "+territorios.toString());
 		}
 
 	}
