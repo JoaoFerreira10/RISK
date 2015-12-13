@@ -40,8 +40,30 @@ public class BoardController implements EventHandler<ActionEvent>{
 	Colombia, Brasil, Peru, Argentina;
 
 	@FXML
-	private Label vmT, grT, blT, ywT;
+	public Label vmT;
+	@FXML
+	public Label grT;
+	@FXML
+	public Label blT;
+	@FXML
+	public Label ywT;
 	
+	public Label getVmT() {
+		return vmT;
+	}
+
+	public Label getGrT() {
+		return grT;
+	}
+
+	public Label getBlT() {
+		return blT;
+	}
+
+	public Label getYwT() {
+		return ywT;
+	}
+
 	//botao jogar
 	public void iniciarJogo(ActionEvent ev){
 		
@@ -55,23 +77,53 @@ public class BoardController implements EventHandler<ActionEvent>{
 		Integer territorios= tabuleiro.getTerritoriosPorAgente(cor).size();
 		
 		if(cor.equals("red")){
-
-			vmT.setText("  "+territorios.toString());
+			if(Singleton.getInstance().isRedAlive()){
+				vmT.setText("  "+territorios.toString());
+				
+			}	
+			
+			
 		}
 				
 		if(cor.equals("blue")){
-
-			blT.setText("  "+territorios.toString());
+			if(Singleton.getInstance().isBlueAlive()){
+				blT.setText("  "+territorios.toString());
+				
+			} 
+			
 		}
 		
 		if(cor.equals("green")){
-
-			grT.setText("  "+territorios.toString());
+			if(Singleton.getInstance().isGreenAlive()){
+				grT.setText("  "+territorios.toString());
+				
+			}
+			
 		}
 		if(cor.equals("yellow")){
-
-			ywT.setText("  "+territorios.toString());
+			if(Singleton.getInstance().isYellowAlive()){
+				ywT.setText("  "+territorios.toString());
+			
+			}
+			
 		}
+		
+		if(Singleton.getInstance().isGreenAlive()==false){
+			grT.setText(" X ");
+			
+		}
+		else if(Singleton.getInstance().isYellowAlive()==false){
+			ywT.setText(" X ");
+			
+		}
+		else if(Singleton.getInstance().isRedAlive()==false){
+			vmT.setText(" X ");
+			
+		}
+		else if(Singleton.getInstance().isBlueAlive()==false){
+			blT.setText(" X ");
+			}
+		
 
 	}
 	
@@ -84,38 +136,38 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 		//Vermelho
 		if(agente1.equals("Aleatorio")){
-			 vermelho= new AgenteAleatorio("red", 50, tabuleiro, this);
+			 vermelho= new AgenteAleatorio("red", 30, tabuleiro, this);
 		}else if(agente1.equals("Atacante")){
-			 vermelho = new AgenteAtacante("red",50);
+			 vermelho = new AgenteAtacante("red",30);
 		}else{
-			 vermelho = new AgenteDefensivo("red", 50);
+			 vermelho = new AgenteDefensivo("red", 30);
 		}
 		
 		//Verde
 		if(agente2.equals("Aleatorio")){
-			 verde= new AgenteAleatorio("green",50, tabuleiro, this);
+			 verde= new AgenteAleatorio("green",30, tabuleiro, this);
 		}else if(agente2.equals("Atacante")){
-			 verde = new AgenteAtacante("green",50);
+			 verde = new AgenteAtacante("green",30);
 		}else{
-			 verde = new AgenteDefensivo("green", 50);
+			 verde = new AgenteDefensivo("green", 30);
 		}
 		
 		//Azul
 		if(agente3.equals("Aleatorio")){
-			 azul = new AgenteAleatorio("blue",50, tabuleiro, this);
+			 azul = new AgenteAleatorio("blue",30, tabuleiro, this);
 		}else if(agente3.equals("Atacante")){
-			 azul = new AgenteAtacante("blue",50);
+			 azul = new AgenteAtacante("blue",30);
 		}else{
-			 azul = new AgenteDefensivo("blue",50);
+			 azul = new AgenteDefensivo("blue",30);
 		}
 		
 		//Amarelo
 		if(agente4.equals("Aleatorio")){
-			 amarelo = new AgenteAleatorio("yellow",50, tabuleiro, this);
+			 amarelo = new AgenteAleatorio("yellow",30, tabuleiro, this);
 		}else if(agente4.equals("Atacante")){
-			 amarelo  = new AgenteAtacante("yellow",50);
+			 amarelo  = new AgenteAtacante("yellow",30);
 		}else{
-			 amarelo  = new AgenteDefensivo("yellow",50);
+			 amarelo  = new AgenteDefensivo("yellow",30);
 		}
 				
 		escolherTerritorios(vermelho, verde, azul, amarelo);

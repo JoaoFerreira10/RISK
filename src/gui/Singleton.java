@@ -20,6 +20,11 @@ public class Singleton {
     private String primeiroJogar;   // variavel a ser usada entre controladores
     private String vermelho, verde, amarelo, azul;
     private int state;
+    private String vencedor;
+    
+
+    
+    
     
     public boolean isRedAlive() {
 		return redAlive;
@@ -104,5 +109,13 @@ public class Singleton {
    public void setPrimeiroJogar(String primeiroJogar) {
        this.primeiroJogar = primeiroJogar;
    }
+   
+   
+   public void setVencedorDoJogo (String vencedor) {
+       this.vencedor = vencedor;
+   }
+   public String getVencedorDoJogo() {
+		return vencedor;
+	}
 
 }

@@ -138,22 +138,31 @@ public class AgenteCoordenador extends Agent{
 			
 			//parser para decifrar mensagem com territorio e territorio pa atque
 			doAtack(tabuleiro,controlador,ataque,defesa);
-			reply.setContent("ataque efetuado");
+			reply.setContent("ataque efetuado -> jogada concluída");
 			send(reply);	
 			System.out.println("coordenador: " +reply.getContent());
 		}
-		else if(msg.getContent().contains("Nao vou atacar")){
-			
-			ACLMessage reply = msg.createReply();
-			reply.setContent("ataque efetuado");
-			send(reply);			
-			System.out.println("coordenador: vai passar a vez");
-		}
-		else{
-			System.out.println("sda");
-		}
+
+		 else if(msg.getContent().contains("Nao vou atacar")){
+
+				ACLMessage reply = msg.createReply();
+				reply.setContent("ataque efetuado -> jogada concluída");
+				send(reply);
+				System.out.println("coordenador: vai passar a vez");
+			}
+			else{
+				System.out.println("sda");
+				ACLMessage reply = msg.createReply();
+				reply.setContent("ataque efetuado -> jogada concluída");
+				send(reply);
+			}
+		 
+		
+
 		
 	}
+
+
 	
 	int soldadosAtaque = 0, soldadosDefesa = 0;
 	private void doAtack(TabuleiroLogica tabuleiro, BoardController b, String atacar, String defender){
@@ -396,6 +405,46 @@ public class AgenteCoordenador extends Agent{
 			
 	}
 	
+	/*private void receiveMessage() {
+		   //AID r = new AID ("red-Aleatorio@MyMainPlatform", AID.ISGUID);
+		   
+		ACLMessage msg = blockingReceive();
+		
+		if(msg!=null){
+<<<<<<< HEAD
+			
+			
+			
+			ACLMessage reply = msg.createReply();
+=======
+						
+			/*ACLMessage reply = msg.createReply();
+>>>>>>> 591dce272c9fff6b1b6035706895a091be67ade7
+			reply.setContent("pong");
+			send(reply);
+			System.out.println("coordenador envia -->" +reply.getContent());*/
+			
+
+			/*if(msg.getContent().equals("red")){
+				sendMessage("green-Aleatorio@Risk");
+			}
+			else if(msg.getContent().equals("green")){
+				sendMessage("blue-Aleatorio@Risk");
+			}
+			else if(msg.getContent().equals("blue")){
+				sendMessage("yellow-Aleatorio@Risk");
+			}
+			else if(msg.getContent().equals("yellow")){
+				sendMessage("red-Aleatorio@Risk");
+			}
+
+			
+		}else{
+			System.out.println("nao recebeu");
+		}
+<<<<<<< HEAD
+		}*/
+	
 	private void receiveMessage() {
 		   //AID r = new AID ("red-Aleatorio@MyMainPlatform", AID.ISGUID);
 		   
@@ -417,7 +466,7 @@ public class AgenteCoordenador extends Agent{
 					}else if(Singleton.getInstance().isYellowAlive()){
 						sendMessage("yellow-Aleatorio@Risk");
 					}else{
-						endGame("yellow");
+						endGame("red");
 					}					
 				}
 				else if(msg.getContent().equals("green")){
@@ -429,7 +478,7 @@ public class AgenteCoordenador extends Agent{
 					}else if(Singleton.getInstance().isRedAlive()){
 						sendMessage("red-Aleatorio@Risk");
 					}else{
-						endGame("yellow");
+						endGame("green");
 					}
 				}
 				else if(msg.getContent().equals("blue")){
@@ -441,7 +490,7 @@ public class AgenteCoordenador extends Agent{
 					}else if(Singleton.getInstance().isGreenAlive()){
 						sendMessage("green-Aleatorio@Risk");
 					}else{
-						endGame("yellow");
+						endGame("blue");
 					}
 				}
 				else if(msg.getContent().equals("yellow")){
@@ -460,6 +509,7 @@ public class AgenteCoordenador extends Agent{
 		}else{
 			System.out.println("nao recebeu");
 		}
+
 		
 	}
 	
@@ -468,11 +518,29 @@ public class AgenteCoordenador extends Agent{
 		System.out.println("\n\n**** AGENTE "+agente+" GANHOU ****\n");
 		System.out.println("Prima qualquer tecla para fechar o jogo");
 		
+
+		
+		if(Singleton.getInstance().isGreenAlive()==false){
+			controlador.grT.setText(" X ");
+			
+		}
+		else if(Singleton.getInstance().isYellowAlive()==false){
+			controlador.ywT.setText(" X ");
+			
+		}
+		else if(Singleton.getInstance().isRedAlive()==false){
+			controlador.vmT.setText(" X ");
+			
+		}
+		else if(Singleton.getInstance().isBlueAlive()==false){
+			controlador.blT.setText(" X ");
+			}
+		
+		
 		 scaner.next();
 		 System.exit(0);
 		 
-		
-		 
+
 		 
 	}
 	
@@ -495,7 +563,24 @@ public class AgenteCoordenador extends Agent{
 		private static final long serialVersionUID = 1L;
 		private int a=0;
 		public testeCoordenador(Agent a) {
-			super(a, 2000);
+
+			super(a, 10);
+			/*if(Singleton.getInstance().isGreenAlive()==false){
+				 System.out.println("ENTRA AQUIIIIIIIIIIII");
+				 controlador.getGrT().setText(" X ");
+					
+				}
+				else if(Singleton.getInstance().isYellowAlive()==false){
+					controlador.getYwT().setText(" X ");
+					
+				}
+				else if(Singleton.getInstance().isRedAlive()==false){
+					controlador.getVmT().setText(" X ");
+					
+				}
+				else if(Singleton.getInstance().isBlueAlive()==false){
+					controlador.getBlT().setText(" X ");
+					}*/
 		}
 
 
@@ -505,6 +590,7 @@ public class AgenteCoordenador extends Agent{
 			receiveOrderTroops();
 			receiveOrder();
 			receiveMessage();
+			
 			
 			
 		}
