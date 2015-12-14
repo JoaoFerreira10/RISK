@@ -6,42 +6,49 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="329.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MenuController">
-   <children>
-      <ImageView fitHeight="307.0" fitWidth="600.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../imgs/menu.jpg" />
-         </image>
-      </ImageView>
-      <MenuBar prefHeight="29.0" prefWidth="600.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <TitledPane layoutX="200.0" layoutY="235.0" prefHeight="80.0" prefWidth="180.0" text="Bem Vindo!">
-         <content>
-            <Pane prefHeight="252.0" prefWidth="198.0">
-               <children>
-                  <Button layoutX="25.0" layoutY="13.0" mnemonicParsing="false" onAction="#goToBoard" text="Jogar" />
-                  <Pane layoutX="65.0" layoutY="94.0" />
-                  <Button layoutX="110.0" layoutY="13.0" mnemonicParsing="false" onAction="#goExit" prefHeight="27.0" prefWidth="53.0" text="Sair" />
-               </children>
-            </Pane>
-         </content>
-      </TitledPane>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="329.0"
+	prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="gui.MenuController">
+	<children>
+		<ImageView fitHeight="307.0" fitWidth="600.0" layoutY="24.0"
+			pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@../../imgs/menu.jpg" />
+			</image>
+		</ImageView>
+		<MenuBar prefHeight="29.0" prefWidth="600.0">
+			<menus>
+				<Menu mnemonicParsing="false" text="File">
+					<items>
+						<MenuItem mnemonicParsing="false" text="Close" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Edit">
+					<items>
+						<MenuItem mnemonicParsing="false" text="Delete" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Help">
+					<items>
+						<MenuItem mnemonicParsing="false" text="About" />
+					</items>
+				</Menu>
+			</menus>
+		</MenuBar>
+		<TitledPane layoutX="200.0" layoutY="235.0" prefHeight="80.0"
+			prefWidth="180.0" text="Bem Vindo!">
+			<content>
+				<Pane prefHeight="252.0" prefWidth="198.0">
+					<children>
+						<Button layoutX="25.0" layoutY="13.0" mnemonicParsing="false"
+							onAction="#goToBoard" text="Jogar" />
+						<Pane layoutX="65.0" layoutY="94.0" />
+						<Button layoutX="110.0" layoutY="13.0" mnemonicParsing="false"
+							onAction="#goExit" prefHeight="27.0" prefWidth="53.0" text="Sair" />
+					</children>
+				</Pane>
+			</content>
+		</TitledPane>
+	</children>
 </AnchorPane>

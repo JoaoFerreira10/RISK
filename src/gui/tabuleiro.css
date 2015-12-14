@@ -33,3 +33,13 @@
 -fx-pref-height: 40px;
 -fx-background-radius: 8px;
 }
+
+#vencedor{
+-fx-background-color: white;
+-fx-background-radius: 8px;
+}
+#vencedor_text{
+ -fx-text-fill: white;
+ -fx-font-size: 22pt;
+ -fx-font-family: bold  "Verdana"
+}

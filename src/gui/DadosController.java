@@ -75,21 +75,6 @@ public class DadosController implements Initializable{
 	@FXML
 	public void selecionarAgente(){
 	
-	/*	comboVermelho.setValue("Aleatório");
-		comboVerde.setValue("Aleatório");
-		comboAmarelo.setValue("Aleatório");
-		comboAzul.setValue("Aleatório");*/
-		
-		/*
-		Singleton.getInstance().setVermelho(comboVermelho.getValue());
-		Singleton.getInstance().setVerde(comboVerde.getValue());
-		Singleton.getInstance().setAzul(comboAzul.getValue());
-		Singleton.getInstance().setAmarelo(comboAmarelo.getValue());
-		*/
-		
-		if(comboVermelho.getValue()!=null && comboVerde.getValue()!=null && comboAzul.getValue()!=null && 
-				comboAmarelo.getValue()!=null)   // so deixa lançar dados após todos os tipos de agente serem selecionados
-		dados.setDisable(false);
 	}
 	
 	ObservableList<String> list = FXCollections.observableArrayList(
@@ -100,7 +85,11 @@ public class DadosController implements Initializable{
 	@FXML
 	public void goLancarDados(ActionEvent e){
 		
-
+		comboAmarelo.setDisable(true);
+		comboAzul.setDisable(true);
+		comboVerde.setDisable(true);
+		comboVermelho.setDisable(true);
+		
 		dado.setVisible(true);
 		dado2.setVisible(false);
 		    
@@ -138,7 +127,6 @@ public class DadosController implements Initializable{
 		Entry<String,Integer>[] test = new Entry[maplength];
 	    greatest.toArray(test);
 	 
-	   
 	    
 	    if(test[3].getValue() == test[2].getValue()){
 	    	 log("EMPATE ENTRE:"+test[2].getKey() + " E "+test[3].getKey());
@@ -169,12 +157,6 @@ public class DadosController implements Initializable{
 	       dados.setDisable(true);
 	       avancar.setDisable(false);
 	    
-	/*    for(Integer i = 0; i < test.length; i++) {
-	      //  if(test[i] == test[i - 1]) {
-	    	log("DUPLICATE"+test[i]);	
-	    	//log("DUPLICATE"+test[i.intValue()-1]);
-	      //  }
-	    }*/
 	    	   
 	    	
 	}

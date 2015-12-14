@@ -9,162 +9,182 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <StackPane id="map" prefHeight="700" prefWidth="1120" stylesheets="@../../bin/gui/tabuleiro.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BoardController">
-   <children>
-      <AnchorPane>
-         <children>
-            <ImageView fitHeight="610.0" fitWidth="1122.0" layoutY="27.0">
-               <image>
-                  <Image url="@../../imgs/mapa.jpg" />
-               </image>
-            </ImageView>
-        
-              <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1120.0">
-              <menus>
-                <Menu text="File">
-                  <items>
-                    <MenuItem text="Close" />
-                  </items>
-                </Menu>
-                <Menu text="Edit">
-                  <items>
-                    <MenuItem text="Delete" />
-                  </items>
-                </Menu>
-                <Menu text="Help">
-                  <items>
-                    <MenuItem text="About" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-        
-        
-         <!-- Europa -->
-        	
-            <Label id="terr" fx:id="e1" layoutX="454.0" layoutY="274.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="e2" layoutX="521.0" layoutY="139.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="e3" layoutX="545.0" layoutY="270.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="e4" layoutX="629.0" layoutY="185.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="e5" layoutX="459.0" layoutY="200.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="e6" layoutX="521.0" layoutY="216.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="e7" layoutX="459.0" layoutY="146.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            
-             <!-- Asia -->
-            
-            <Label id="terr" fx:id="a1" layoutX="819.0" layoutY="285.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="a2" layoutX="1021.0" layoutY="134.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="a3" layoutX="907.0" layoutY="124.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="a4" layoutX="870.0" layoutY="185.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="a5" layoutX="804.0" layoutY="154.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="a6" layoutX="730.0" layoutY="169.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="a7" layoutX="629.0" layoutY="335.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="a8" layoutX="905.0" layoutY="231.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="a9" layoutX="751.0" layoutY="351.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="a10" layoutX="701.0" layoutY="249.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="a11" layoutX="848.0" layoutY="374.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="a12" layoutX="974.0" layoutY="255.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            
-            <!-- Oceania -->
-            
-            <Label id="terr" fx:id="o1" layoutX="870.0" layoutY="436.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="o2" layoutX="981.0" layoutY="436.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="o3" layoutX="863.0" layoutY="524.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="o4" layoutX="965.0" layoutY="521.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            
-            
-             <!-- Africa -->
-            
-            <Label id="terr" fx:id="af1" layoutX="469.0" layoutY="369.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="af2" layoutX="547.0" layoutY="346.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="af3" layoutX="599.0" layoutY="415.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="af4" layoutX="545.0" layoutY="462.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="af5" layoutX="536.0" layoutY="553.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="af6" layoutX="631.0" layoutY="536.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            
-            <!-- America sul -->
-            
-            <Label id="terr" fx:id="Colombia" layoutX="232.0" layoutY="369.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="Brasil" layoutX="331.0" layoutY="425.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="Peru" layoutX="247.0" layoutY="447.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="Argentina" layoutX="254.0" layoutY="538.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            
-            <!-- America norte -->
-            
-            <Label id="terr" fx:id="Alasca" layoutX="56.0" layoutY="126.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="NorteCanada" layoutX="183.0" layoutY="124.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="Gronelandia" layoutX="411.0" layoutY="74.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="OesteCanada" layoutX="168.0" layoutY="177.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="SulCanada" layoutX="247.0" layoutY="185.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="EsteCanada" layoutX="322.0" layoutY="193.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="OesteEUA" layoutX="174.0" layoutY="244.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="EsteEUA" layoutX="259.0" layoutY="255.0" prefHeight="31.0" prefWidth="27.0" text="0" />
-            <Label id="terr" fx:id="Mexico" layoutX="203.0" layoutY="311.0" text="0" />
-            
-            <Button fx:id="jogar" layoutX="27.0" layoutY="44.0" onAction="#iniciarJogo" text="Jogar" />
-            <Rectangle fx:id="vm" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="63.0" layoutY="637.0" stroke="BLACK" strokeType="INSIDE" width="284.0" />
-            <Rectangle fx:id="gr" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="63.0" layoutX="283.0" layoutY="637.0" stroke="BLACK" strokeType="INSIDE" width="281.0" />
-            <Rectangle fx:id="bl" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="63.0" layoutX="562.0" layoutY="637.0" stroke="BLACK" strokeType="INSIDE" width="281.0" />
-            <Rectangle fx:id="yl" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="63.0" layoutX="842.0" layoutY="637.0" stroke="BLACK" strokeType="INSIDE" width="280.0" />
-            <ImageView fitHeight="52.0" fitWidth="42.0" layoutX="26.0" layoutY="642.0">
-               <image>
-                  <Image url="@../../imgs/vermelho.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="52.0" fitWidth="42.0" layoutX="591.0" layoutY="642.0">
-               <image>
-                  <Image url="@../../imgs/azul.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="52.0" fitWidth="42.0" layoutX="308.0" layoutY="642.0">
-               <image>
-                  <Image url="@../../imgs/verde.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="52.0" fitWidth="42.0" layoutX="869.0" layoutY="642.0">
-               <image>
-                  <Image url="@../../imgs/amarelo.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="vmT" layoutX="215.0" layoutY="650.0">
-               <font>
-                  <Font size="26.0" />
-               </font></Label>
-            <Label fx:id="grT" layoutX="500.0" layoutY="650.0">
-               <font>
-                  <Font size="26.0" />
-               </font></Label>
-            <Label fx:id="blT" layoutX="781.0" layoutY="650.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
-               <font>
-                  <Font size="26.0" />
-               </font></Label>
-            <Label fx:id="ywT" layoutX="1054.0" layoutY="650.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
-               <font>
-                  <Font size="26.0" />
-               </font></Label>
-            <ImageView fitHeight="46.0" fitWidth="38.0" layoutX="164.0" layoutY="648.0">
-               <image>
-                  <Image url="@../../imgs/flag.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="46.0" fitWidth="38.0" layoutX="458.0" layoutY="648.0">
-               <image>
-                  <Image url="@../../imgs/flag.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="46.0" fitWidth="38.0" layoutX="733.0" layoutY="648.0">
-               <image>
-                  <Image url="@../../imgs/flag.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="46.0" fitWidth="38.0" layoutX="1008.0" layoutY="648.0">
-               <image>
-                  <Image url="@../../imgs/flag.png" />
-               </image>
-            </ImageView>
-           
-            
-            
-         </children>
-      </AnchorPane>
-   </children>
+	<children>
+		<AnchorPane>
+			<children>
+				<ImageView fitHeight="610.0" fitWidth="1122.0" layoutY="27.0">
+					<image>
+						<Image url="@../../imgs/mapa.jpg" />
+					</image>
+				</ImageView>
+
+				<MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="1120.0">
+					<menus>
+						<Menu text="File">
+							<items>
+								<MenuItem text="Close" />
+							</items>
+						</Menu>
+						<Menu text="Edit">
+							<items>
+								<MenuItem text="Delete" />
+							</items>
+						</Menu>
+						<Menu text="Help">
+							<items>
+								<MenuItem text="About" />
+							</items>
+						</Menu>
+					</menus>
+				</MenuBar>
+
+
+				<!-- Europa -->
+
+				<Label id="terr" fx:id="e1" layoutX="454.0" layoutY="274.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="e2" layoutX="521.0" layoutY="139.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="e3" layoutX="545.0" layoutY="270.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="e4" layoutX="629.0" layoutY="185.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="e5" layoutX="459.0" layoutY="200.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="e6" layoutX="521.0" layoutY="216.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="e7" layoutX="459.0" layoutY="146.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+
+				<!-- Asia -->
+
+				<Label id="terr" fx:id="a1" layoutX="819.0" layoutY="285.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="a2" layoutX="1021.0" layoutY="134.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="a3" layoutX="907.0" layoutY="124.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="a4" layoutX="870.0" layoutY="185.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="a5" layoutX="804.0" layoutY="154.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="a6" layoutX="730.0" layoutY="169.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="a7" layoutX="629.0" layoutY="335.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="a8" layoutX="905.0" layoutY="231.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="a9" layoutX="751.0" layoutY="351.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="a10" layoutX="701.0" layoutY="249.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="a11" layoutX="848.0" layoutY="374.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="a12" layoutX="974.0" layoutY="255.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+
+				<!-- Oceania -->
+
+				<Label id="terr" fx:id="o1" layoutX="870.0" layoutY="436.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="o2" layoutX="981.0" layoutY="436.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="o3" layoutX="863.0" layoutY="524.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="o4" layoutX="965.0" layoutY="521.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+
+
+				<!-- Africa -->
+
+				<Label id="terr" fx:id="af1" layoutX="469.0" layoutY="369.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="af2" layoutX="547.0" layoutY="346.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="af3" layoutX="599.0" layoutY="415.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="af4" layoutX="545.0" layoutY="462.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="af5" layoutX="536.0" layoutY="553.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="af6" layoutX="631.0" layoutY="536.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+
+				<!-- America sul -->
+
+				<Label id="terr" fx:id="Colombia" layoutX="232.0" layoutY="369.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="Brasil" layoutX="331.0" layoutY="425.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="Peru" layoutX="247.0" layoutY="447.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="Argentina" layoutX="254.0" layoutY="538.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+
+				<!-- America norte -->
+
+				<Label id="terr" fx:id="Alasca" layoutX="56.0" layoutY="126.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="NorteCanada" layoutX="183.0" layoutY="124.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="Gronelandia" layoutX="411.0" layoutY="74.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="OesteCanada" layoutX="168.0" layoutY="177.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="SulCanada" layoutX="247.0" layoutY="185.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="EsteCanada" layoutX="322.0" layoutY="193.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="OesteEUA" layoutX="174.0" layoutY="244.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="EsteEUA" layoutX="259.0" layoutY="255.0" prefHeight="31.0" prefWidth="27.0" text="0" />
+				<Label id="terr" fx:id="Mexico" layoutX="203.0" layoutY="311.0" text="0" />
+
+				<Button fx:id="btn_jogar" layoutX="27.0" layoutY="44.0" onAction="#iniciarJogo" text="Jogar" />
+				<Rectangle fx:id="vm" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="63.0" layoutY="637.0" stroke="BLACK" strokeType="INSIDE" width="284.0" />
+				<Rectangle fx:id="gr" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="63.0" layoutX="283.0" layoutY="637.0" stroke="BLACK" strokeType="INSIDE" width="281.0" />
+				<Rectangle fx:id="bl" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="63.0" layoutX="562.0" layoutY="637.0" stroke="BLACK" strokeType="INSIDE" width="281.0" />
+				<Rectangle fx:id="yl" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="63.0" layoutX="842.0" layoutY="637.0" stroke="BLACK" strokeType="INSIDE" width="280.0" />
+				<ImageView fitHeight="52.0" fitWidth="42.0" layoutX="26.0" layoutY="642.0">
+					<image>
+						<Image url="@../../imgs/vermelho.png" />
+					</image>
+				</ImageView>
+				<ImageView fitHeight="52.0" fitWidth="42.0" layoutX="591.0" layoutY="642.0">
+					<image>
+						<Image url="@../../imgs/azul.png" />
+					</image>
+				</ImageView>
+				<ImageView fitHeight="52.0" fitWidth="42.0" layoutX="308.0" layoutY="642.0">
+					<image>
+						<Image url="@../../imgs/verde.png" />
+					</image>
+				</ImageView>
+				<ImageView fitHeight="52.0" fitWidth="42.0" layoutX="869.0" layoutY="642.0">
+					<image>
+						<Image url="@../../imgs/amarelo.png" />
+					</image>
+				</ImageView>
+				<Label fx:id="vmT" layoutX="215.0" layoutY="650.0">
+					<font>
+						<Font size="26.0" />
+					</font>
+				</Label>
+				<Label fx:id="grT" layoutX="500.0" layoutY="650.0">
+					<font>
+						<Font size="26.0" />
+					</font>
+				</Label>
+				<Label fx:id="blT" layoutX="781.0" layoutY="650.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+					<font>
+						<Font size="26.0" />
+					</font>
+				</Label>
+				<Label fx:id="ywT" layoutX="1054.0" layoutY="650.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+					<font>
+						<Font size="26.0" />
+					</font>
+				</Label>
+				<ImageView fitHeight="46.0" fitWidth="38.0" layoutX="164.0" layoutY="648.0">
+					<image>
+						<Image url="@../../imgs/flag.png" />
+					</image>
+				</ImageView>
+				<ImageView fitHeight="46.0" fitWidth="38.0" layoutX="458.0" layoutY="648.0">
+					<image>
+						<Image url="@../../imgs/flag.png" />
+					</image>
+				</ImageView>
+				<ImageView fitHeight="46.0" fitWidth="38.0" layoutX="733.0" layoutY="648.0">
+					<image>
+						<Image url="@../../imgs/flag.png" />
+					</image>
+				</ImageView>
+				<ImageView fitHeight="46.0" fitWidth="38.0" layoutX="1008.0" layoutY="648.0">
+					<image>
+						<Image url="@../../imgs/flag.png" />
+					</image>
+				</ImageView>
+				<AnchorPane fx:id="placarVencedor" layoutX="375.0" layoutY="146.0" prefHeight="331.0" prefWidth="420.0" visible="false">
+					<children>
+						<Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="301.0" layoutX="97.0" stroke="BLACK" strokeType="INSIDE" width="236.0" />
+						<Label fx:id="vencedor" layoutX="170.0" layoutY="243.0" prefHeight="38.0" prefWidth="88.0">
+							<font>
+								<Font size="26.0" />
+							</font>
+						</Label>
+						<ImageView fitHeight="160.0" fitWidth="172.0" layoutX="127.0" layoutY="20.0">
+							<image>
+								<Image url="@../../imgs/vencedor.png" />
+							</image>
+						</ImageView>
+						<Label fx:id="vencedor_text" layoutX="155.0" layoutY="191.0" prefHeight="43.0" prefWidth="143.0" text="Vencedor" />
+					</children>
+				</AnchorPane>
+
+
+
+			</children>
+		</AnchorPane>
+	</children>
 </StackPane>

@@ -14,11 +14,13 @@ import jade.core.Runtime;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import logica.TabuleiroLogica;
 
 
@@ -38,7 +40,16 @@ public class BoardController implements EventHandler<ActionEvent>{
 	private Label e1, e2, e3, e4, e5, e6, e7, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, o1, o2, o3, o4,
 	af1, af2, af3, af4, af5, af6, Gronelandia, Alasca, EsteCanada, NorteCanada, SulCanada, OesteCanada, OesteEUA, EsteEUA, Mexico,
 	Colombia, Brasil, Peru, Argentina;
+	
+	@FXML
+	public Button btn_jogar;
 
+	@FXML
+	public Label vencedor;
+	
+	@FXML
+	public AnchorPane placarVencedor;
+	
 	@FXML
 	public Label vmT;
 	@FXML
@@ -68,8 +79,24 @@ public class BoardController implements EventHandler<ActionEvent>{
 	public void iniciarJogo(ActionEvent ev){
 		
 		criarAgentes(primeiro,agente1, agente2, agente3,agente4);
-			
-		//setupJADE(agentes);
+		
+		//btn_jogar.setVisible(false);
+		/*Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				btn_jogar.setDisable(true);
+				
+			}
+		});*/
+		
+		/* @Override
+			public void run() 
+			{
+
+				btn_jogar.setDisable(true);
+			}
+		});*/
 	}
 	
 	public void atualizaEstadoJogo(String cor){
@@ -138,7 +165,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		if(agente1.equals("Aleatorio")){
 			 vermelho= new AgenteAleatorio("red", 30, tabuleiro, this);
 		}else if(agente1.equals("Atacante")){
-			 vermelho = new AgenteAtacante("red",30, tabuleiro, this);
+			 vermelho = new AgenteAtacante("red",30);
 		}else{
 			 vermelho = new AgenteDefensivo("red", 30);
 		}
@@ -147,7 +174,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		if(agente2.equals("Aleatorio")){
 			 verde= new AgenteAleatorio("green",30, tabuleiro, this);
 		}else if(agente2.equals("Atacante")){
-			 verde = new AgenteAtacante("green",30, tabuleiro, this);
+			 verde = new AgenteAtacante("green",30);
 		}else{
 			 verde = new AgenteDefensivo("green", 30);
 		}
@@ -156,7 +183,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		if(agente3.equals("Aleatorio")){
 			 azul = new AgenteAleatorio("blue",30, tabuleiro, this);
 		}else if(agente3.equals("Atacante")){
-			 azul = new AgenteAtacante("blue",30, tabuleiro, this);
+			 azul = new AgenteAtacante("blue",30);
 		}else{
 			 azul = new AgenteDefensivo("blue",30);
 		}
@@ -165,7 +192,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		if(agente4.equals("Aleatorio")){
 			 amarelo = new AgenteAleatorio("yellow",30, tabuleiro, this);
 		}else if(agente4.equals("Atacante")){
-			 amarelo  = new AgenteAtacante("yellow",30, tabuleiro, this);
+			 amarelo  = new AgenteAtacante("yellow",30);
 		}else{
 			 amarelo  = new AgenteDefensivo("yellow",30);
 		}

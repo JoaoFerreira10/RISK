@@ -42,6 +42,10 @@ public class AgenteAleatorio extends AgenteRisk {
 		return (int) (Math.random()*42);	
 	}
 	
+	public void addTerritorio(Territorio t){
+		
+		//territorios.add(t);
+	}
 	
 	
 	/*
@@ -94,14 +98,37 @@ public class AgenteAleatorio extends AgenteRisk {
 
 		
 		int z = (int) (Math.random()*territorios);
-				
 		
+		/*if(territorios==0){
+			
+			if(getCor().equals("blue"))
+			Singleton.getInstance().setBlueAlive(false);
+			else if (getCor().equals("red"))
+				Singleton.getInstance().setRedAlive(false);
+			else if (getCor().equals("yellow"))
+			Singleton.getInstance().setYellowAlive(false);
+			else if (getCor().equals("green"))
+				Singleton.getInstance().setGreenAlive(false);
+					
+		}*/
+		
+		
+		// quando só tem dois ou menos territorios poe os reforços lá
 		if(territorios<=2){
 		
+		/*for (int i = 0; i < territorios; i++) {
+						
+						int soldados= tabuleiro.getTerritorio(i).getpecas();
+						
+			if(soldados==1 && territorios<=2){*/
 			escolhido= tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getNome();
 			soldadosRecebidos=1;
 			System.out.println("SOLDADOS QUANDO SO TEM UM TERRITORIO COM 1 TROPA: "+soldadosRecebidos);
 			
+
+			//}
+			
+		//}
 		}
 		else {
 			soldadosRecebidos= (int) Math.ceil(territorios / 3); //cada agente recebe 1 soldado por cada 3 territorios no inicio de cada ronda
@@ -110,10 +137,14 @@ public class AgenteAleatorio extends AgenteRisk {
 			
 			escolhido= tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getNome();
 			}
-	
+			
+			
+			
+			
 		}
 		
-		return "TROPAS:"+escolhido +"-"+soldadosRecebidos;	
+		return "TROPAS:"+escolhido +"-"+soldadosRecebidos;
+		
 	}
 	
 	public String selecionarAtaque() {
