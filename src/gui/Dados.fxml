@@ -43,7 +43,7 @@
             <Label fx:id="green" layoutX="169.0" layoutY="86.0" prefHeight="21.0" prefWidth="57.0" />
             <Label fx:id="blue" layoutX="292.0" layoutY="86.0" prefHeight="21.0" prefWidth="57.0" />
             <Label fx:id="yellow" layoutX="410.0" layoutY="86.0" prefHeight="21.0" prefWidth="57.0" />
-            <Label layoutX="269.0" layoutY="189.0" prefHeight="17.0" prefWidth="101.0" text="Primeiro a jogar:" />
+            <Label layoutX="250.0" layoutY="189.0" prefHeight="17.0" prefWidth="101.0" text="Primeiro a jogar:" />
             <Label fx:id="lblV" layoutX="384.0" layoutY="187.0" prefHeight="21.0" prefWidth="108.0" />
             <ImageView fitHeight="51.0" fitWidth="39.0" layoutX="62.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -80,10 +80,10 @@
             
            
             <Text layoutX="28.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecione os tipos de agente:" />
-            <ComboBox fx:id="comboVermelho" layoutX="28.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3"/>
-            <ComboBox fx:id="comboVerde" layoutX="163.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3"/>
-            <ComboBox fx:id="comboAzul" layoutX="277.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3"/>
-            <ComboBox fx:id="comboAmarelo" layoutX="384.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3"/>
+            <ComboBox fx:id="comboVermelho" layoutX="28.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3" />
+            <ComboBox fx:id="comboVerde" layoutX="163.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3" />
+            <ComboBox fx:id="comboAzul" layoutX="277.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3" />
+            <ComboBox fx:id="comboAmarelo" layoutX="384.0" layoutY="141.0" onAction="#selecionarAgente" prefHeight="31.0" prefWidth="89.0" visibleRowCount="3" />
             
             
            
