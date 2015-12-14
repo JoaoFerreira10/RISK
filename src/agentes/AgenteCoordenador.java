@@ -138,7 +138,7 @@ public class AgenteCoordenador extends Agent{
 			
 			//parser para decifrar mensagem com territorio e territorio pa atque
 			doAtack(tabuleiro,controlador,ataque,defesa);
-			reply.setContent("ataque efetuado -> jogada concluída");
+			reply.setContent("ataque efetuado -> jogada concluï¿½da");
 			send(reply);	
 			System.out.println("coordenador: " +reply.getContent());
 		}
@@ -146,14 +146,14 @@ public class AgenteCoordenador extends Agent{
 		 else if(msg.getContent().contains("Nao vou atacar")){
 
 				ACLMessage reply = msg.createReply();
-				reply.setContent("ataque efetuado -> jogada concluída");
+				reply.setContent("ataque efetuado -> jogada concluï¿½da");
 				send(reply);
 				System.out.println("coordenador: vai passar a vez");
 			}
 			else{
 				System.out.println("sda");
 				ACLMessage reply = msg.createReply();
-				reply.setContent("ataque efetuado -> jogada concluída");
+				reply.setContent("ataque efetuado -> jogada concluï¿½da");
 				send(reply);
 			}
 		 
@@ -411,15 +411,9 @@ public class AgenteCoordenador extends Agent{
 		ACLMessage msg = blockingReceive();
 		
 		if(msg!=null){
-<<<<<<< HEAD
-			
-			
-			
-			ACLMessage reply = msg.createReply();
-=======
+
 						
 			/*ACLMessage reply = msg.createReply();
->>>>>>> 591dce272c9fff6b1b6035706895a091be67ade7
 			reply.setContent("pong");
 			send(reply);
 			System.out.println("coordenador envia -->" +reply.getContent());*/
@@ -442,7 +436,6 @@ public class AgenteCoordenador extends Agent{
 		}else{
 			System.out.println("nao recebeu");
 		}
-<<<<<<< HEAD
 		}*/
 	
 	private void receiveMessage() {
