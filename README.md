@@ -1,2 +1,2 @@
 # RISK
-Risk game developed with Jade
+Risk game developed with Jade (Java Agent Development).
