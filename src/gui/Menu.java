@@ -41,41 +41,5 @@ public class Menu extends Application {
 	
 
 	
-	/*static ContainerController myContainer;
-	private static AgentContainer container;
-		
-	private static void setupJADE() {
-			Profile profile=new ProfileImpl("localhost", 1099,
-			Profile.PLATFORM_ID);
-			
-			profile.setParameter(Profile.PLATFORM_ID, "MyMainPlatform");
-			profile.setParameter("gui", "ture");
-			
-			AgenteAleatorio randomAg;
-			AgentController aleatorio;
-			
-			container=Runtime.instance().createMainContainer(profile);
-
-			        try
-
-			        {
-
-			            container.start();
-			            container.createNewAgent("rma", "jade.tools.rma.rma",null).start();
-
-			            randomAg = new AgenteAleatorio("Verde", 30);
-			            aleatorio = container.acceptNewAgent("aleatorio", randomAg);
-			            //randomAg = (AgenteAleatorio) container.acceptNewAgent("randomAgent", randomAg);
-			            aleatorio.start();
-			        }
-
-			        catch(Exception ex)
-
-			        {
-
-			        }	
-	}*/
-	
-	
 	
 }

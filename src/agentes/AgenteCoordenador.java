@@ -32,6 +32,11 @@ public class AgenteCoordenador extends Agent{
 	TabuleiroLogica tabuleiro;
 	BoardController controlador;
 	
+	String red = Singleton.getInstance().getVermelho(); 
+	String green = Singleton.getInstance().getVerde(); 
+	String blue = Singleton.getInstance().getAzul(); 
+	String yellow = Singleton.getInstance().getAmarelo(); 
+	
 	public AgenteCoordenador(TabuleiroLogica tabuleiro, BoardController controlador){
 		
 		this.controlador=controlador;
@@ -50,7 +55,7 @@ public class AgenteCoordenador extends Agent{
 		   ACLMessage aclMessage = new ACLMessage(ACLMessage.REQUEST);
 		   aclMessage.addReceiver(r);
 		   aclMessage.setContent(id+" tem permissao para jogar");
-		   System.out.println("\n");
+		   System.out.println("*** NOVA RONDA ***\n");
 		   System.out.println("coordenador: agente "+aclMessage.getContent());
 		   this.send(aclMessage);
 		}
@@ -103,7 +108,7 @@ public class AgenteCoordenador extends Agent{
 			
 			ACLMessage reply = msg.createReply();
 			
-			System.out.println("territorio: "+ataque + " || tropas a colocar: "+defesa);
+			//System.out.println("territorio: "+ataque + " || tropas a colocar: "+defesa);
 			sendTroops(tabuleiro,controlador,ataque,defesa);
 			reply.setContent("tropas inseridas. Permissao para atacar");
 			send(reply);	
@@ -186,24 +191,24 @@ public class AgenteCoordenador extends Agent{
 				if(territorio.equals(atacar)){
 					
 					soldadosAtaque= tabuleiro.getTerritorio(i).getpecas();
-					System.out.println("SOLDADOS ATAQUE+++++++++++++: "+soldadosAtaque);
+					System.out.println("Soldados do atacante: "+soldadosAtaque);
 	
 					idTerritorioAtaque=i;
 					
 					
 					nomeAtacante = tabuleiro.getTerritorio(i).getOcupante();
-					System.out.println("nome atacante: "+nomeAtacante);
+					
 				}else if(territorio.equals(defender)){
 					
 					soldadosDefesa = tabuleiro.getTerritorio(i).getpecas();
-					System.out.println("SOLDADOS DEFESA+++++++++++++: "+soldadosDefesa);
+					System.out.println("Soldados do defensor: "+soldadosDefesa);
 					
 					idTerritorioDefensivo=i;
 					
 					nomeDefensivo = tabuleiro.getTerritorio(i).getOcupante();
-					System.out.println("nome defensivo: "+nomeDefensivo);
+					
 				}	
-		//b.preencherTabuleiro(serAtacado, agente);   // ganha o agente que ataca	
+		
 		}
 		
 		
@@ -213,7 +218,7 @@ public class AgenteCoordenador extends Agent{
 			dadosAtaque= dadosAtaque(soldadosAtaque);
 			dadosDefesa= dadosSerAtacado(soldadosDefesa);
 			
-				 System.out.println("loooop" +soldadosAtaque +"   "+soldadosDefesa);
+			
 				 System.out.println();
 			int a = dadosAtaque.size();
 			int aa = dadosDefesa.size();
@@ -240,7 +245,8 @@ public class AgenteCoordenador extends Agent{
 					tabuleiro.getTerritorio(idTerritorioDefensivo).removerpecas(1);
 					
 					soldadosDefesa--;
-					System.out.println("PERDEU O DEFENSOR: "+soldadosDefesa);
+					
+					System.out.println("Perdeu um soldado defensor: "+soldadosDefesa);
 					Platform.runLater(new Runnable() {
 					    @Override
 					    public void run() {
@@ -257,7 +263,7 @@ public class AgenteCoordenador extends Agent{
 					
 					soldadosAtaque--;
 					
-					System.out.println("PERDEU O ATACANTES: "+soldadosAtaque);
+					System.out.println("Perdeu um soldado atacante: "+soldadosAtaque);
 					Platform.runLater(new Runnable() {
 					    @Override
 					    public void run() {
@@ -270,7 +276,7 @@ public class AgenteCoordenador extends Agent{
 					//b.preencherTabuleiro(defender, nomeDefensivo);
 					
 				}
-				System.out.println("pecas ->" +tabuleiro.getTerritorio(idTerritorioAtaque).getpecas());		
+						
 			}
 			
 			//este if saiu do ciclo for
@@ -282,37 +288,17 @@ public class AgenteCoordenador extends Agent{
 				//Se so tiver 1 peca no territorio que esta a atacar, nao podera atacar mais
 					if(tabuleiro.getTerritorio(idTerritorioAtaque).getpecas()==1){
 						
-						System.out.println("TERMINOU O ATAQUE- num de soldados para atacar=1");
-						/*vencedor = nomeDefensivo;
-						tabuleiro.getTerritorio(idTerritorioAtaque).setOcupante(vencedor);
+						System.out.println("Terminou o ataque, numero de soldados = 1");
 						
-						b.preencherTabuleiro(atacar, vencedor);
-						System.out.println("TERRITORIO DEFESA+++++++++: "+defender);
-						
-						// ** NOVO *** 
-						
-						tabuleiro.getTerritorio(idTerritorioAtaque).addpecas(1);     // ao ganhar poe uma pe�a no territorio que ficou vazio **NOVO 
-						soldadosAtaque++;
-						
-						tabuleiro.getTerritorio(idTerritorioDefensivo).removerpecas(1);     // e retira uma pe�a do territorio que ganhou **NOVO
-						soldadosDefesa--;
-						Platform.runLater(new Runnable() {
-						    @Override
-						    public void run() {
-						    	b.colocarPecaTabuleiro(atacar, soldadosAtaque);
-						    	
-						    	b.colocarPecaTabuleiro(defender, soldadosDefesa);   // tira pe�a do outro territorio ** NOVO
-						    }
-						});*/
 						}
 				//se territorio que esta a defender ficar sem trocas, o atacante conquistou o territorio
 				else if (tabuleiro.getTerritorio(idTerritorioDefensivo).getpecas()==0){
 					
 					vencedor = nomeAtacante;
 					tabuleiro.getTerritorio(idTerritorioDefensivo).setOcupante(vencedor);
-					
+					System.out.println("Venceu o ataque. Territorio conquistado!");
 					b.preencherTabuleiro(defender, vencedor);
-					System.out.println("TERRITORIO ATAQQQ+++++++++: "+atacar);
+				
 					
 					// ** NOVO *** 
 					
@@ -323,7 +309,7 @@ public class AgenteCoordenador extends Agent{
 					soldadosAtaque--;
 					
 					if (tabuleiro.getTerritorio(idTerritorioDefensivo).getpecas()==1){
-						System.out.println("AGORA TEM SO UMA PECA!!!!");
+					
 					}
 					
 					Platform.runLater(new Runnable() {
@@ -334,7 +320,7 @@ public class AgenteCoordenador extends Agent{
 					    }
 					});
 					
-					System.out.println("VENCEDOR!!!! ++++++++++++: "+vencedor);
+				
 					}
 				
 				
@@ -409,7 +395,7 @@ public class AgenteCoordenador extends Agent{
 
 	
 	private void receiveMessage() {
-		   //AID r = new AID ("red-Aleatorio@MyMainPlatform", AID.ISGUID);
+		   //AID r = new AID ("red@MyMainPlatform", AID.ISGUID);
 		   
 		ACLMessage msg = blockingReceive();
 		
@@ -421,13 +407,12 @@ public class AgenteCoordenador extends Agent{
 			System.out.println("coordenador envia -->" +reply.getContent());*/
 			
 				if(msg.getContent().equals("red")){
-					
 					if(Singleton.getInstance().isGreenAlive()){
-						sendMessage("green-Aleatorio@Risk");
+						sendMessage("green@Risk");
 					}else if(Singleton.getInstance().isBlueAlive()){
-						sendMessage("blue-Aleatorio@Risk");
+						sendMessage("blue@Risk");
 					}else if(Singleton.getInstance().isYellowAlive()){
-						sendMessage("yellow-Aleatorio@Risk");
+						sendMessage("yellow@Risk");
 					}else{
 						endGame("red");
 					}					
@@ -435,11 +420,11 @@ public class AgenteCoordenador extends Agent{
 				else if(msg.getContent().equals("green")){
 
 					 if(Singleton.getInstance().isBlueAlive()){
-						sendMessage("blue-Aleatorio@Risk");
+						sendMessage("blue@Risk");
 					}else if(Singleton.getInstance().isYellowAlive()){
-						sendMessage("yellow-Aleatorio@Risk");
+						sendMessage("yellow@Risk");
 					}else if(Singleton.getInstance().isRedAlive()){
-						sendMessage("red-Aleatorio@Risk");
+						sendMessage("red@Risk");
 					}else{
 						endGame("green");
 					}
@@ -447,11 +432,11 @@ public class AgenteCoordenador extends Agent{
 				else if(msg.getContent().equals("blue")){
 					
 					 if(Singleton.getInstance().isYellowAlive()){
-							sendMessage("yellow-Aleatorio@Risk");
+							sendMessage("yellow@Risk");
 					}else if(Singleton.getInstance().isRedAlive()){
-						sendMessage("red-Aleatorio@Risk");
+						sendMessage("red@Risk");
 					}else if(Singleton.getInstance().isGreenAlive()){
-						sendMessage("green-Aleatorio@Risk");
+						sendMessage("green@Risk");
 					}else{
 						endGame("blue");
 					}
@@ -459,11 +444,11 @@ public class AgenteCoordenador extends Agent{
 				else if(msg.getContent().equals("yellow")){
 					
 					if(Singleton.getInstance().isRedAlive()){
-						sendMessage("red-Aleatorio@Risk");
+						sendMessage("red@Risk");
 					}else if(Singleton.getInstance().isGreenAlive()){
-						sendMessage("green-Aleatorio@Risk");
+						sendMessage("green@Risk");
 					}else if(Singleton.getInstance().isBlueAlive()){
-						sendMessage("blue-Aleatorio@Risk");
+						sendMessage("blue@Risk");
 					}else{
 						endGame("yellow");
 					}
@@ -480,14 +465,28 @@ public class AgenteCoordenador extends Agent{
 		Scanner scaner = new Scanner(System.in);
 		System.out.println("\n\n**** AGENTE "+agente+" GANHOU ****\n");
 		System.out.println("Prima qualquer tecla para fechar o jogo");
+		
+
+		
 		Platform.runLater(new Runnable() {
 
 			@Override
 			public void run() 
 			{
-				controlador.vencedor.setText(" "+agente);
+				if(agente.equals("red"))
+				controlador.vencedor.setText(" "+agente + " "+red);
+				else if(agente.equals("yellow"))
+				controlador.vencedor.setText(" "+agente + " "+yellow);
+				else if(agente.equals("green"))
+					controlador.vencedor.setText(" "+agente + " "+green);
+				else if(agente.equals("blue"))
+					controlador.vencedor.setText(" "+agente + " "+blue);
+				
+				
+				
 				controlador.placarVencedor.setVisible(true);
 				controlador.btn_jogar.setDisable(true);
+				
 			}
 		});
 		
@@ -526,7 +525,7 @@ public class AgenteCoordenador extends Agent{
 		 
 		
 		 addBehaviour(x);
-		 sendMessage(primeiro+"-Aleatorio@Risk");   // envia mensagem para o primeiro a jogar
+		 sendMessage(primeiro+"@Risk");   // envia mensagem para o primeiro a jogar
 	 }
 
 

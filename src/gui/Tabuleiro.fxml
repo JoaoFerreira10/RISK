@@ -167,8 +167,8 @@
 				</ImageView>
 				<AnchorPane fx:id="placarVencedor" layoutX="375.0" layoutY="146.0" prefHeight="331.0" prefWidth="420.0" visible="false">
 					<children>
-						<Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="301.0" layoutX="97.0" stroke="BLACK" strokeType="INSIDE" width="236.0" />
-						<Label fx:id="vencedor" layoutX="170.0" layoutY="243.0" prefHeight="38.0" prefWidth="88.0">
+						<Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="301.0" layoutX="83.0" stroke="BLACK" strokeType="INSIDE" width="280.0" />
+						<Label fx:id="vencedor" layoutX="101.0" layoutY="245.0" prefHeight="39.0" prefWidth="245.0">
 							<font>
 								<Font size="26.0" />
 							</font>

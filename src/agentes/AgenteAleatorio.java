@@ -99,18 +99,7 @@ public class AgenteAleatorio extends AgenteRisk {
 		
 		int z = (int) (Math.random()*territorios);
 		
-		/*if(territorios==0){
-			
-			if(getCor().equals("blue"))
-			Singleton.getInstance().setBlueAlive(false);
-			else if (getCor().equals("red"))
-				Singleton.getInstance().setRedAlive(false);
-			else if (getCor().equals("yellow"))
-			Singleton.getInstance().setYellowAlive(false);
-			else if (getCor().equals("green"))
-				Singleton.getInstance().setGreenAlive(false);
-					
-		}*/
+	
 		
 		
 		// quando só tem dois ou menos territorios poe os reforços lá
@@ -204,16 +193,7 @@ public class AgenteAleatorio extends AgenteRisk {
 	
 
 	
-	
-//	private void sendMessage() {
-//		   AID r = new AID ("red-Aleatorio@MyMainPlatform", AID.ISGUID);
-//		   
-//		   r.addAddresses("http://localhost:7778/acc");
-//		   ACLMessage aclMessage = new ACLMessage(ACLMessage.REQUEST);
-//		   aclMessage.addReceiver(r);
-//		   aclMessage.setContent("ping");
-//		   this.send(aclMessage);
-//		}
+
 	
 
 	public class testBehaviour extends SimpleBehaviour{
@@ -293,7 +273,7 @@ if(Singleton.getInstance().getPrimeiroJogar().equals(getCor())){
 					
 					reply.setContent(distribuirExercitoRecebido());  //TROPAS: escolhido -soldadosRecebidos;
 					send(reply);
-					System.out.println(getCor() +":Quero colocar tropas no seguinte territorio " +reply.getContent());   // ataque - defesa
+					System.out.println(getCor() +": quero colocar tropas no seguinte territorio " +reply.getContent());   // ataque - defesa
 					
 				}
 				else if(msg.getContent().contains("tropas inseridas. Permissao para atacar")){
@@ -304,12 +284,13 @@ if(Singleton.getInstance().getPrimeiroJogar().equals(getCor())){
 					
 					if(selecionarAtaque().equals("Passo a vez")){
 						reply.setContent("Nao vou atacar");
-						System.out.println("entrou------------------------------------------------------");
+						
 					}else{
 						reply.setContent(selecionarAtaque()); // envia territorio que vai atacar
+						System.out.println(getCor() +": quero atacar o seguinte territorio " +reply.getContent());   // ataque - defesa
 					}
 					send(reply);
-					System.out.println(getCor() +":NAO VOU ATACAR  " +reply.getContent());   // ataque - defesa
+					//System.out.println(getCor() +":NAO VOU ATACAR  " +reply.getContent());   // ataque - defesa
 					
 				}
 				else{

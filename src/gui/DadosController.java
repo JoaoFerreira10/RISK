@@ -78,7 +78,7 @@ public class DadosController implements Initializable{
 	}
 	
 	ObservableList<String> list = FXCollections.observableArrayList(
-			"Aleatorio","Atacante","Defensivo"
+			"Aleatorio","Atacante"
 			);
 	
 	
@@ -94,7 +94,7 @@ public class DadosController implements Initializable{
 		dado2.setVisible(false);
 		    
 	    int START = 1;
-	    int END = 6;
+	    int END = 12;
 	    Random random = new Random();
 
 	    Integer value1= showRandomInteger(START, END, random);
@@ -114,13 +114,13 @@ public class DadosController implements Initializable{
 	    numbers.put(blue.getId(), value3);
 	    numbers.put(yellow.getId(), value4);
 	    
-	    log("Done.");
+	   
 	    
 	    
 	    List<Entry<String, Integer>> greatest = findGreatest(numbers, 4);
 	    for (Entry<String, Integer> entry : greatest)
         {
-            log(""+entry);
+            
         }
 	     int maplength = greatest.size();
 	     @SuppressWarnings("unchecked")
@@ -143,14 +143,14 @@ public class DadosController implements Initializable{
 	    }
 	   
 	    Integer maxValueInMap=(Collections.max(numbers.values()));
-	    log("MAX"+maxValueInMap);
+	    
 	    
 	    if(test[3].getValue()==maxValueInMap){
 	    	lblV.setText(test[3].getKey().toString());}
 	    else if (test[2].getValue()==maxValueInMap){
 	    	lblV.setText(test[2].getKey().toString());}
 	    
-	    System.out.println("label final:"+lblV.getText());
+	    System.out.println("Primeiro a jogar: "+lblV.getText());
 	    Singleton.getInstance().setPrimeiroJogar(lblV.getText());   //guardar o valor do vencedor para usar depois no jogo
 	   
 	   
@@ -179,7 +179,7 @@ public class DadosController implements Initializable{
 	    // compute a fraction of the range, 0 <= frac < range
 	    long fraction = (long)(range * aRandom.nextDouble());
 	    int randomNumber =  (int)(fraction + aStart);    
-	    log("Generated : " + randomNumber);
+	    
 	    return randomNumber;
 	  }
 	  

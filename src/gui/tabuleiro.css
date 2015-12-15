@@ -35,8 +35,10 @@
 }
 
 #vencedor{
--fx-background-color: white;
+ -fx-text-fill: white;
 -fx-background-radius: 8px;
+ -fx-font-size: 20pt;
+  -fx-font-family: bold  "Verdana"
 }
 #vencedor_text{
  -fx-text-fill: white;

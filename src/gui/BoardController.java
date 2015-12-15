@@ -80,23 +80,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 		criarAgentes(primeiro,agente1, agente2, agente3,agente4);
 		
-		//btn_jogar.setVisible(false);
-		/*Platform.runLater(new Runnable() {
-
-			@Override
-			public void run() {
-				btn_jogar.setDisable(true);
-				
-			}
-		});*/
 		
-		/* @Override
-			public void run() 
-			{
-
-				btn_jogar.setDisable(true);
-			}
-		});*/
 	}
 	
 	public void atualizaEstadoJogo(String cor){
@@ -165,7 +149,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		if(agente1.equals("Aleatorio")){
 			 vermelho= new AgenteAleatorio("red", 30, tabuleiro, this);
 		}else if(agente1.equals("Atacante")){
-			 vermelho = new AgenteAtacante("red",30);
+			 vermelho = new AgenteAtacante("red",30, tabuleiro, this);
 		}else{
 			 vermelho = new AgenteDefensivo("red", 30);
 		}
@@ -174,7 +158,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		if(agente2.equals("Aleatorio")){
 			 verde= new AgenteAleatorio("green",30, tabuleiro, this);
 		}else if(agente2.equals("Atacante")){
-			 verde = new AgenteAtacante("green",30);
+			 verde = new AgenteAtacante("green",30, tabuleiro, this);
 		}else{
 			 verde = new AgenteDefensivo("green", 30);
 		}
@@ -183,7 +167,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		if(agente3.equals("Aleatorio")){
 			 azul = new AgenteAleatorio("blue",30, tabuleiro, this);
 		}else if(agente3.equals("Atacante")){
-			 azul = new AgenteAtacante("blue",30);
+			 azul = new AgenteAtacante("blue",30, tabuleiro, this);
 		}else{
 			 azul = new AgenteDefensivo("blue",30);
 		}
@@ -192,7 +176,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		if(agente4.equals("Aleatorio")){
 			 amarelo = new AgenteAleatorio("yellow",30, tabuleiro, this);
 		}else if(agente4.equals("Atacante")){
-			 amarelo  = new AgenteAtacante("yellow",30);
+			 amarelo  = new AgenteAtacante("yellow",30, tabuleiro, this);
 		}else{
 			 amarelo  = new AgenteDefensivo("yellow",30);
 		}
@@ -228,7 +212,6 @@ public class BoardController implements EventHandler<ActionEvent>{
 								int x= ((AgenteAleatorio) a).escolherTerritorio();
 								
 								if(tabuleiro.territorioOcupado(x)==false){
-									new PingPong();
 									preencherTabuleiro(tabuleiro.getTerritorio(x).getNome(), a.getCor());
 									a.colocarExercitos(1);
 									tabuleiro.getTerritorio(x).addpecas(1);
@@ -523,32 +506,6 @@ public class BoardController implements EventHandler<ActionEvent>{
 	}
 	
 	
-	/*public void buttonClicked (Button b){
-		System.out.println(cl.getText());
-		  // vai buscar o valor guardado
-		cl.setText(str1);
-		System.out.println("dsadsd");
-		 System.out.println("String: "+str1);
-		 if(str1.contains("vermelho")){
-			 labeltext("red");
-		 } 
-		 else if(str1.contains("azul")){
-			 labeltext("blue");
-		 }
-		 else if(str1.contains("verde")){
-			 labeltext("green");
-		 }
-		 else if(str1.contains("amarelo")){
-			 labeltext("yellow");
-		 }
-		
-		Integer value=Integer.parseInt(b.getText());
-		System.out.println("ok...");
-		b.setStyle("-fx-background-color: blue;");
-		value++;
-		b.setText(value.toString());
-		//System.out.println(value);
-	}*/
 	
 	
 	static ContainerController myContainer;
@@ -578,11 +535,11 @@ public class BoardController implements EventHandler<ActionEvent>{
 			    			
 			            		
 			            		if(agentes[i] instanceof AgenteAleatorio){
-			    				agent = container.acceptNewAgent(agentes[i].getId(), agentes[i]);	
+			    				agent = container.acceptNewAgent(agentes[i].getCor(), agentes[i]);	
 			    				//agent.start();
 			            		}
 				    			if(agentes[i] instanceof AgenteAtacante){
-				    				agent = container.acceptNewAgent(agentes[i].getId(), agentes[i]);
+				    				agent = container.acceptNewAgent(agentes[i].getCor(), agentes[i]);
 				    				//agent.start();
 				    			}
 				    			
