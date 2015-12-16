@@ -147,7 +147,7 @@ public class BoardController implements EventHandler<ActionEvent>{
 		
 		//Vermelho
 		if(agente1.equals("Aleatorio")){
-			 vermelho= new AgenteAleatorio("red", 30, tabuleiro, this);
+			 vermelho= new AgenteAleatorio("red", 120, tabuleiro, this);
 		}else if(agente1.equals("Atacante")){
 			 vermelho = new AgenteAtacante("red",30, tabuleiro, this);
 		}else{

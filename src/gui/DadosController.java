@@ -139,7 +139,7 @@ public class DadosController implements Initializable{
      	    for (Entry<String, Integer> entry : greatest)
            {
                log("depois empate:"+entry); }
-     	 //  lblV.setText(test[3].toString());
+     	   lblV.setText(test[3].toString());
 	    }
 	   
 	    Integer maxValueInMap=(Collections.max(numbers.values()));

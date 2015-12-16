@@ -69,7 +69,7 @@ public class AgenteAtacante extends AgenteRisk {
 	}
 	
 	/*
-	 * Escolhe um territorio aleatorio da lista de territórios do agente e retorna o indice do 
+	 * Escolhe um territorio aleatorio da lista de territï¿½rios do agente e retorna o indice do 
 	 * territorio a colocar o exercito
 	 */
 	public int distribuirExercito(TabuleiroLogica tabuleiro, int numExercitos){
@@ -91,28 +91,45 @@ public class AgenteAtacante extends AgenteRisk {
 	
 	
 	public String distribuirExercitoRecebido(){
-		
+
 		String escolhido=null;
-		int territorios= tabuleiro.getTerritoriosPorAgente(getCor()).size();
+		int territorios= tabuleiro.getTerritoriosPorAgente(getCor()).size()*2;
 
 		int soldadosRecebidos = 0;
 		
-
+		int z;
 		
-		int z = (int) (Math.random()*territorios);
+outerloop:
+		do{
+			 z = (int) (Math.random()*territorios);
+			
+			int totAdjacentes=0;
 				
+				for(int i=0;i < tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getAdjacentes().size();i++){
+					
+					if(!tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getAdjacentes().get(i).getNome().equals(getCor())){
+						totAdjacentes++;
+					}
+				}
+			if(totAdjacentes!=0){
+				break outerloop;
+			}
+			territorios--;
+		}while(territorios!=0);		
+
 		
 		if(territorios<=2){
 		
 			escolhido= tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getNome();
 			soldadosRecebidos=1;
-			System.out.println("SOLDADOS QUANDO SO TEM UM TERRITORIO COM 1 TROPA: "+soldadosRecebidos);
+
 			
 		}
 		else {
+
 			soldadosRecebidos= (int) Math.ceil(territorios / 3); //cada agente recebe 1 soldado por cada 3 territorios no inicio de cada ronda
 			
-			if(  tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getpecas()==1 ){
+			if(  tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getpecas()<=10 ){
 			
 			escolhido= tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getNome();
 			}
