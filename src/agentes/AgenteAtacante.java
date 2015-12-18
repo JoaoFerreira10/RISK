@@ -93,7 +93,7 @@ public class AgenteAtacante extends AgenteRisk {
 	public String distribuirExercitoRecebido(){
 
 		String escolhido=null;
-		int territorios= tabuleiro.getTerritoriosPorAgente(getCor()).size()*2;
+		int territorios= tabuleiro.getTerritoriosPorAgente(getCor()).size();
 
 		int soldadosRecebidos = 0;
 		
@@ -129,7 +129,7 @@ outerloop:
 
 			soldadosRecebidos= (int) Math.ceil(territorios / 3); //cada agente recebe 1 soldado por cada 3 territorios no inicio de cada ronda
 			
-			if(  tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getpecas()<=10 ){
+			if(  tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getpecas()<=5 ){
 			
 			escolhido= tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getNome();
 			}

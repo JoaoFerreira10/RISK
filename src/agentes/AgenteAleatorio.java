@@ -74,7 +74,7 @@ public class AgenteAleatorio extends AgenteRisk {
 		testBehaviour t = new testBehaviour(this);
 		addBehaviour(t);
 				
-		
+		perdeuJogo();/*Nao funciona*/
 		// Registration with the DF 
 		DFAgentDescription dfd = new DFAgentDescription();
 		ServiceDescription sd = new ServiceDescription();   
@@ -118,7 +118,7 @@ public class AgenteAleatorio extends AgenteRisk {
 		else {
 			soldadosRecebidos= (int) Math.ceil(territorios / 3); //cada agente recebe 1 soldado por cada 3 territorios no inicio de cada ronda
 			
-			if(  tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getpecas()<=10 ){
+			if(  tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getpecas()<=5 ){
 			
 			escolhido= tabuleiro.getTerritorio(tabuleiro.getTerritoriosPorAgente(this.getCor()).get(z)).getNome();
 			}
@@ -208,14 +208,9 @@ public class AgenteAleatorio extends AgenteRisk {
 		public void action(){
 
 			
-			perdeuJogo();
+		
 			
-//		if (Singleton.getInstance().getPrimeiroJogar().equals(getCor()) 
-//					&& Singleton.getInstance().getState() == Singleton.GAME_START) {
-//						
-//				Singleton.getInstance().setState(Singleton.GAME_RUNNING);
-//			}
-//			else{
+
 
 			ACLMessage msg = blockingReceive();
 
@@ -273,33 +268,7 @@ public class AgenteAleatorio extends AgenteRisk {
 					System.out.println("nao recebeu");					
 				}
 				
-			//}	
-		}
-
-		/**
-		 * 
-		 */
-		private void perdeuJogo() {
 			
-			int territorios= tabuleiro.getTerritoriosPorAgente(getCor()).size();
-			System.out.println(territorios);
-				if(territorios==0){    // quando um agente perde 
-					System.out.println(getCor() + " TERMINEI O JOGO.");
-					
-					if(getCor().equals("blue")){
-					Singleton.getInstance().setBlueAlive(false);
-					doDelete();}
-					else if (getCor().equals("red")){
-						Singleton.getInstance().setRedAlive(false);
-					doDelete();}
-					else if (getCor().equals("yellow")){
-					Singleton.getInstance().setYellowAlive(false);
-					doDelete();}
-					else if (getCor().equals("green")){
-						Singleton.getInstance().setGreenAlive(false);
-					doDelete();}
-										
-				}
 		}
 		
 		
@@ -308,6 +277,32 @@ public class AgenteAleatorio extends AgenteRisk {
 			return false;
 		}
 
+	}
+	
+	/**
+	 * 
+	 */
+	private void perdeuJogo() {
+		
+		int territorios= tabuleiro.getTerritoriosPorAgente(getCor()).size();
+		System.out.println(territorios);
+			if(territorios==0){    // quando um agente perde 
+				System.out.println(getCor() + " TERMINEI O JOGO.");
+				
+				if(getCor().equals("blue")){
+				Singleton.getInstance().setBlueAlive(false);
+				doDelete();}
+				else if (getCor().equals("red")){
+					Singleton.getInstance().setRedAlive(false);
+				doDelete();}
+				else if (getCor().equals("yellow")){
+				Singleton.getInstance().setYellowAlive(false);
+				doDelete();}
+				else if (getCor().equals("green")){
+					Singleton.getInstance().setGreenAlive(false);
+				doDelete();}
+									
+			}
 	}
 	
 	
